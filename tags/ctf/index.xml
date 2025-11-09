@@ -6,8 +6,15 @@
     <description>Recent content in CTF on 0xDaveey</description>
     <generator>Hugo</generator>
     <language>es</language>
-    <lastBuildDate>Sat, 18 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Nov 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Publisher CTF</title>
+      <link>http://localhost:1313/posts/publisher/</link>
+      <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/publisher/</guid>
+      <description>&lt;h1 id=&#34;máquina-publisher&#34;&gt;&#xD;&#xA;  Máquina Publisher&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#m%c3%a1quina-publisher&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/posts/publisher/publisher.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Fácil&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Descripción&lt;/strong&gt;: La máquina Publisher del CTF es un entorno simulado que aloja algunos servicios. Mediante diversas técnicas de enumeración, como el fuzzing de directorios y la identificación de versiones, se descubre una vulnerabilidad que permite la ejecución remota de código (RCE). Los intentos de escalar privilegios mediante un binario personalizado se ven obstaculizados por el acceso restringido a archivos y directorios críticos del sistema, lo que exige un análisis más profundo del perfil de seguridad del sistema para, en última instancia, explotar una vulnerabilidad que permite la ejecución de una shell bash sin restricciones y lograr la escalada de privilegios.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Blueprint CTF</title>
       <link>http://localhost:1313/posts/blueprint/</link>
