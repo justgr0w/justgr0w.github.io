@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Window on 0xDaveey</title>
+    <link>http://localhost:1313/tags/window/</link>
+    <description>Recent content in Window on 0xDaveey</description>
+    <generator>Hugo</generator>
+    <language>es</language>
+    <lastBuildDate>Fri, 14 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/window/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Soupedecode 01 CTF</title>
+      <link>http://localhost:1313/posts/soupedecode01/</link>
+      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/soupedecode01/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/posts/soupedecode01/soupedecode01.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;máquina-soupedecode-01&#34;&gt;&#xD;&#xA;  Máquina Soupedecode 01&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#m%c3%a1quina-soupedecode-01&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Fácil&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Descripción&lt;/strong&gt;: Soupedecode es un desafío intenso y apasionante en el que los jugadores deben comprometer un controlador de dominio explotando la autenticación Kerberos, accediendo a recursos compartidos SMB, realizando ataques de fuerza bruta contra contraseñas y utilizando técnicas de Pass-the-Hash. Prepárate para poner a prueba tus habilidades y estrategias en esta aventura de ciberseguridad multifacética.&lt;/p&gt;&#xA;&lt;h1 id=&#34;enumeración&#34;&gt;&#xD;&#xA;  Enumeración&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#enumeraci%c3%b3n&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/gifs/a.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
