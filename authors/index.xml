@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Authors on 0xDaveey</title>
-    <link>http://localhost:1313/authors/</link>
-    <description>Recent content in Authors on 0xDaveey</description>
+    <title>Authors on 0xjustgr0w</title>
+    <link>http://daveey.github.io/authors/</link>
+    <description>Recent content in Authors on 0xjustgr0w</description>
     <generator>Hugo</generator>
     <language>es</language>
-    <lastBuildDate>Fri, 14 Nov 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/authors/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://daveey.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>0xDaveey</title>
-      <link>http://localhost:1313/authors/0xdaveey/</link>
-      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/authors/0xdaveey/</guid>
+      <title>0xjustgr0w</title>
+      <link>http://daveey.github.io/authors/0xjustgr0w/</link>
+      <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/authors/0xjustgr0w/</guid>
       <description></description>
     </item>
   </channel>

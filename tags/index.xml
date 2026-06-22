@@ -1,60 +1,95 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on 0xDaveey</title>
-    <link>http://localhost:1313/tags/</link>
-    <description>Recent content in Tags on 0xDaveey</description>
+    <title>Tags on 0xjustgr0w</title>
+    <link>http://daveey.github.io/tags/</link>
+    <description>Recent content in Tags on 0xjustgr0w</description>
     <generator>Hugo</generator>
     <language>es</language>
-    <lastBuildDate>Fri, 14 Nov 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://daveey.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CTF</title>
-      <link>http://localhost:1313/tags/ctf/</link>
-      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/ctf/</guid>
+      <link>http://daveey.github.io/tags/ctf/</link>
+      <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/ctf/</guid>
       <description></description>
     </item>
     <item>
-      <title>Easy</title>
-      <link>http://localhost:1313/tags/easy/</link>
-      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/easy/</guid>
+      <title>CVE-2025-47273</title>
+      <link>http://daveey.github.io/tags/cve-2025-47273/</link>
+      <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/cve-2025-47273/</guid>
       <description></description>
     </item>
     <item>
-      <title>TryHackMe</title>
-      <link>http://localhost:1313/tags/tryhackme/</link>
-      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/tryhackme/</guid>
+      <title>FontForge</title>
+      <link>http://daveey.github.io/tags/fontforge/</link>
+      <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/fontforge/</guid>
       <description></description>
     </item>
     <item>
-      <title>Window</title>
-      <link>http://localhost:1313/tags/window/</link>
-      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/window/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Hackthebox</title>
-      <link>http://localhost:1313/tags/hackthebox/</link>
-      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/hackthebox/</guid>
+      <title>HackTheBox</title>
+      <link>http://daveey.github.io/tags/hackthebox/</link>
+      <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/hackthebox/</guid>
       <description></description>
     </item>
     <item>
       <title>Medium</title>
-      <link>http://localhost:1313/tags/medium/</link>
-      <pubDate>Sun, 05 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/medium/</guid>
+      <link>http://daveey.github.io/tags/medium/</link>
+      <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/medium/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Pac4j-Jwt</title>
+      <link>http://daveey.github.io/tags/pac4j-jwt/</link>
+      <pubDate>Fri, 19 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/pac4j-jwt/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SSH CA</title>
+      <link>http://daveey.github.io/tags/ssh-ca/</link>
+      <pubDate>Fri, 19 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/ssh-ca/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hard</title>
+      <link>http://daveey.github.io/tags/hard/</link>
+      <pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/hard/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Easy</title>
+      <link>http://daveey.github.io/tags/easy/</link>
+      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/easy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>TryHackMe</title>
+      <link>http://daveey.github.io/tags/tryhackme/</link>
+      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/tryhackme/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Window</title>
+      <link>http://daveey.github.io/tags/window/</link>
+      <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/window/</guid>
       <description></description>
     </item>
     <item>
       <title>Códigos cortos</title>
-      <link>http://localhost:1313/tags/shortcodes/</link>
+      <link>http://daveey.github.io/tags/shortcodes/</link>
       <pubDate>Wed, 04 Jan 2023 11:51:36 +0100</pubDate>
-      <guid>http://localhost:1313/tags/shortcodes/</guid>
+      <guid>http://daveey.github.io/tags/shortcodes/</guid>
       <description></description>
     </item>
   </channel>

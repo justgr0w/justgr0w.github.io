@@ -2,89 +2,113 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://daveey.github.io/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/authors/0xjustgr0w/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/authors/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/categories/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/ctf/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/cve-2025-47273/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/fontforge/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/series/hackthebox/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/hackthebox/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/medium/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/categories/pentesting/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/posts/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/series/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/posts/variatype/</loc>
+    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/pac4j-jwt/</loc>
+    <lastmod>2026-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/posts/principal/</loc>
+    <lastmod>2026-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/ssh-ca/</loc>
+    <lastmod>2026-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/hard/</loc>
+    <lastmod>2026-05-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/posts/snapped/</loc>
+    <lastmod>2026-05-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/easy/</loc>
     <lastmod>2025-11-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/authors/0xdaveey/</loc>
+    <loc>http://daveey.github.io/posts/soupedecode01/</loc>
     <lastmod>2025-11-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/authors/</loc>
+    <loc>http://daveey.github.io/series/tryhackme/</loc>
     <lastmod>2025-11-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>http://daveey.github.io/tags/tryhackme/</loc>
     <lastmod>2025-11-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/ctf/</loc>
+    <loc>http://daveey.github.io/tags/window/</loc>
     <lastmod>2025-11-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/easy/</loc>
-    <lastmod>2025-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/pentesting/</loc>
-    <lastmod>2025-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2025-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/series/</loc>
-    <lastmod>2025-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/soupedecode01/</loc>
-    <lastmod>2025-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2025-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/series/tryhackme/</loc>
-    <lastmod>2025-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/tryhackme/</loc>
-    <lastmod>2025-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/window/</loc>
-    <lastmod>2025-11-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/billing/</loc>
+    <loc>http://daveey.github.io/posts/billing/</loc>
     <lastmod>2025-11-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/publisher/</loc>
+    <loc>http://daveey.github.io/posts/publisher/</loc>
     <lastmod>2025-11-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/blueprint/</loc>
+    <loc>http://daveey.github.io/posts/blueprint/</loc>
     <lastmod>2025-10-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/cap/</loc>
+    <loc>http://daveey.github.io/posts/cap/</loc>
     <lastmod>2025-10-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/hackthebox/</loc>
-    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/series/hackthebox/</loc>
-    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/medium/</loc>
+    <loc>http://daveey.github.io/posts/puppy/</loc>
     <lastmod>2025-10-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/puppy/</loc>
-    <lastmod>2025-10-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/bugged/</loc>
+    <loc>http://daveey.github.io/posts/bugged/</loc>
     <lastmod>2025-10-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>http://daveey.github.io/about/</loc>
     <lastmod>2025-09-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categoria/temas/</loc>
+    <loc>http://daveey.github.io/categoria/temas/</loc>
     <lastmod>2023-01-04T23:21:18+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categoria/sintaxis/</loc>
+    <loc>http://daveey.github.io/categoria/sintaxis/</loc>
     <lastmod>2023-01-04T23:21:06+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/shortcodes/</loc>
+    <loc>http://daveey.github.io/tags/shortcodes/</loc>
     <lastmod>2023-01-04T11:51:36+01:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/contact/</loc>
+    <loc>http://daveey.github.io/contact/</loc>
   </url><url>
-    <loc>http://localhost:1313/projects/</loc>
+    <loc>http://daveey.github.io/projects/</loc>
   </url>
 </urlset>

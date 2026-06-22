@@ -6,8 +6,22 @@
     <description>Recent content on 0xDaveey</description>
     <generator>Hugo</generator>
     <language>es</language>
-    <lastBuildDate>Fri, 14 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/authors/0xdaveey/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Principal</title>
+      <link>http://localhost:1313/posts/principal/</link>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/principal/</guid>
+      <description>&lt;h1 id=&#34;principal&#34;&gt;&#xD;&#xA;  Principal&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#principal&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/posts/principal/target.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Medium&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Plataforma&lt;/strong&gt;: &lt;em&gt;HackTheBox&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Flag&lt;/strong&gt;: &lt;code&gt;0f556e2c6de811d6afe3be60c3654a8e&lt;/code&gt; (user) / &lt;code&gt;fe347d72e5fb53a7386c23dfab4c1b4f&lt;/code&gt; (root)&lt;/p&gt;&#xA;&lt;h2 id=&#34;resumen&#34;&gt;&#xD;&#xA;  Resumen&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#resumen&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;Máquina Linux con un portal Java (Jetty + pac4j-jwt 6.0.3) vulnerable a &lt;strong&gt;CVE-2026-29000&lt;/strong&gt; que permite forjar tokens JWE y escalar a administrador. Esto expone credenciales de un usuario de servicio (&lt;code&gt;svc-deploy&lt;/code&gt;) con acceso SSH. Internamente, el usuario pertenece al grupo &lt;code&gt;deployers&lt;/code&gt; con permiso de lectura sobre la clave privada CA de SSH, lo que permite firmar un certificado para autenticarse como &lt;strong&gt;root&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Snapped CTF</title>
+      <link>http://localhost:1313/posts/snapped/</link>
+      <pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/snapped/</guid>
+      <description>&lt;h1 id=&#34;máquina-snapped&#34;&gt;&#xD;&#xA;  Máquina Snapped&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#m%c3%a1quina-snapped&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/posts/snapped/target.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Difícil&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Descripción&lt;/strong&gt;: El objetivo &lt;code&gt;snapped.htb&lt;/code&gt; aloja una aplicación &lt;strong&gt;NGINX UI v2.3.2&lt;/strong&gt; sobre Ubuntu. Mediante la vulnerabilidad de descarga de backups sin autenticación (&lt;strong&gt;CVE-2026-27944&lt;/strong&gt;) extraemos un backup cifrado, recuperamos credenciales de la base de datos y accedemos como &lt;code&gt;jonathan&lt;/code&gt;. La escalada de privilegios se logra explotando una condición de carrera TOCTOU en &lt;code&gt;snap-confine&lt;/code&gt; (v2.63) junto con &lt;code&gt;systemd-tmpfiles&lt;/code&gt; (&lt;strong&gt;CVE-2026-3888&lt;/strong&gt;), obteniendo shell como root.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Soupedecode 01 CTF</title>
       <link>http://localhost:1313/posts/soupedecode01/</link>

