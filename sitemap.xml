@@ -3,45 +3,60 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://daveey.github.io/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://daveey.github.io/authors/0xjustgr0w/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/posts/abducted/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://daveey.github.io/authors/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://daveey.github.io/categories/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://daveey.github.io/tags/ctf/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/cve-2026-4480/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/series/hackthebox/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/hackthebox/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/medium/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/categories/pentesting/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/posts/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/samba/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/series/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/symlink/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/systemd/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://daveey.github.io/tags/</loc>
+    <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://daveey.github.io/tags/cve-2025-47273/</loc>
     <lastmod>2026-06-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://daveey.github.io/tags/fontforge/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://daveey.github.io/series/hackthebox/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://daveey.github.io/tags/hackthebox/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://daveey.github.io/tags/medium/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://daveey.github.io/categories/pentesting/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://daveey.github.io/posts/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://daveey.github.io/series/</loc>
-    <lastmod>2026-06-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://daveey.github.io/tags/</loc>
     <lastmod>2026-06-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://daveey.github.io/posts/variatype/</loc>

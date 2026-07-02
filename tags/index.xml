@@ -6,13 +6,55 @@
     <description>Recent content in Tags on 0xjustgr0w</description>
     <generator>Hugo</generator>
     <language>es</language>
-    <lastBuildDate>Sun, 21 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://daveey.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CTF</title>
       <link>http://daveey.github.io/tags/ctf/</link>
-      <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
       <guid>http://daveey.github.io/tags/ctf/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CVE-2026-4480</title>
+      <link>http://daveey.github.io/tags/cve-2026-4480/</link>
+      <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/cve-2026-4480/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HackTheBox</title>
+      <link>http://daveey.github.io/tags/hackthebox/</link>
+      <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/hackthebox/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Medium</title>
+      <link>http://daveey.github.io/tags/medium/</link>
+      <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/medium/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Samba</title>
+      <link>http://daveey.github.io/tags/samba/</link>
+      <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/samba/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Symlink</title>
+      <link>http://daveey.github.io/tags/symlink/</link>
+      <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/symlink/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Systemd</title>
+      <link>http://daveey.github.io/tags/systemd/</link>
+      <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://daveey.github.io/tags/systemd/</guid>
       <description></description>
     </item>
     <item>
@@ -27,20 +69,6 @@
       <link>http://daveey.github.io/tags/fontforge/</link>
       <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
       <guid>http://daveey.github.io/tags/fontforge/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>HackTheBox</title>
-      <link>http://daveey.github.io/tags/hackthebox/</link>
-      <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>http://daveey.github.io/tags/hackthebox/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Medium</title>
-      <link>http://daveey.github.io/tags/medium/</link>
-      <pubDate>Sun, 21 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>http://daveey.github.io/tags/medium/</guid>
       <description></description>
     </item>
     <item>
