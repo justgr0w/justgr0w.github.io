@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hard on 0xjustgr0w</title>
-    <link>http://daveey.github.io/tags/hard/</link>
+    <link>https://justgr0w.github.io/tags/hard/</link>
     <description>Recent content in Hard on 0xjustgr0w</description>
     <generator>Hugo</generator>
     <language>es</language>
     <lastBuildDate>Tue, 19 May 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://daveey.github.io/tags/hard/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://justgr0w.github.io/tags/hard/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Snapped CTF</title>
-      <link>http://daveey.github.io/posts/snapped/</link>
+      <link>https://justgr0w.github.io/posts/snapped/</link>
       <pubDate>Tue, 19 May 2026 00:00:00 +0000</pubDate>
-      <guid>http://daveey.github.io/posts/snapped/</guid>
-      <description>&lt;h1 id=&#34;máquina-snapped&#34;&gt;&#xD;&#xA;  Máquina Snapped&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#m%c3%a1quina-snapped&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;http://daveey.github.io/images/posts/snapped/target.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Difícil&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Descripción&lt;/strong&gt;: El objetivo &lt;code&gt;snapped.htb&lt;/code&gt; aloja una aplicación &lt;strong&gt;NGINX UI v2.3.2&lt;/strong&gt; sobre Ubuntu. Mediante la vulnerabilidad de descarga de backups sin autenticación (&lt;strong&gt;CVE-2026-27944&lt;/strong&gt;) extraemos un backup cifrado, recuperamos credenciales de la base de datos y accedemos como &lt;code&gt;jonathan&lt;/code&gt;. La escalada de privilegios se logra explotando una condición de carrera TOCTOU en &lt;code&gt;snap-confine&lt;/code&gt; (v2.63) junto con &lt;code&gt;systemd-tmpfiles&lt;/code&gt; (&lt;strong&gt;CVE-2026-3888&lt;/strong&gt;), obteniendo shell como root.&lt;/p&gt;</description>
+      <guid>https://justgr0w.github.io/posts/snapped/</guid>
+      <description>&lt;h1 id=&#34;máquina-snapped&#34;&gt;&#xD;&#xA;  Máquina Snapped&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#m%c3%a1quina-snapped&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h1&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;https://justgr0w.github.io/images/posts/snapped/target.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Difícil&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Descripción&lt;/strong&gt;: El objetivo &lt;code&gt;snapped.htb&lt;/code&gt; aloja una aplicación &lt;strong&gt;NGINX UI v2.3.2&lt;/strong&gt; sobre Ubuntu. Mediante la vulnerabilidad de descarga de backups sin autenticación (&lt;strong&gt;CVE-2026-27944&lt;/strong&gt;) extraemos un backup cifrado, recuperamos credenciales de la base de datos y accedemos como &lt;code&gt;jonathan&lt;/code&gt;. La escalada de privilegios se logra explotando una condición de carrera TOCTOU en &lt;code&gt;snap-confine&lt;/code&gt; (v2.63) junto con &lt;code&gt;systemd-tmpfiles&lt;/code&gt; (&lt;strong&gt;CVE-2026-3888&lt;/strong&gt;), obteniendo shell como root.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

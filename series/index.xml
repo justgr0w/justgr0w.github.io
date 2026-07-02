@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Series on 0xjustgr0w</title>
-    <link>http://daveey.github.io/series/</link>
+    <link>https://justgr0w.github.io/series/</link>
     <description>Recent content in Series on 0xjustgr0w</description>
     <generator>Hugo</generator>
     <language>es</language>
     <lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://daveey.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://justgr0w.github.io/series/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HackTheBox</title>
-      <link>http://daveey.github.io/series/hackthebox/</link>
+      <link>https://justgr0w.github.io/series/hackthebox/</link>
       <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>http://daveey.github.io/series/hackthebox/</guid>
+      <guid>https://justgr0w.github.io/series/hackthebox/</guid>
       <description></description>
     </item>
     <item>
       <title>TryHackMe</title>
-      <link>http://daveey.github.io/series/tryhackme/</link>
+      <link>https://justgr0w.github.io/series/tryhackme/</link>
       <pubDate>Fri, 14 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://daveey.github.io/series/tryhackme/</guid>
+      <guid>https://justgr0w.github.io/series/tryhackme/</guid>
       <description></description>
     </item>
   </channel>

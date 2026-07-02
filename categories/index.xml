@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 0xjustgr0w</title>
-    <link>http://daveey.github.io/categories/</link>
+    <link>https://justgr0w.github.io/categories/</link>
     <description>Recent content in Categories on 0xjustgr0w</description>
     <generator>Hugo</generator>
     <language>es</language>
     <lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://daveey.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://justgr0w.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pentesting</title>
-      <link>http://daveey.github.io/categories/pentesting/</link>
+      <link>https://justgr0w.github.io/categories/pentesting/</link>
       <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>http://daveey.github.io/categories/pentesting/</guid>
+      <guid>https://justgr0w.github.io/categories/pentesting/</guid>
       <description></description>
     </item>
     <item>
       <title>temas</title>
-      <link>http://daveey.github.io/categoria/temas/</link>
+      <link>https://justgr0w.github.io/categoria/temas/</link>
       <pubDate>Wed, 04 Jan 2023 23:21:18 +0100</pubDate>
-      <guid>http://daveey.github.io/categoria/temas/</guid>
+      <guid>https://justgr0w.github.io/categoria/temas/</guid>
       <description></description>
     </item>
     <item>
       <title>sintaxis</title>
-      <link>http://daveey.github.io/categoria/sintaxis/</link>
+      <link>https://justgr0w.github.io/categoria/sintaxis/</link>
       <pubDate>Wed, 04 Jan 2023 23:21:06 +0100</pubDate>
-      <guid>http://daveey.github.io/categoria/sintaxis/</guid>
+      <guid>https://justgr0w.github.io/categoria/sintaxis/</guid>
       <description></description>
     </item>
   </channel>
