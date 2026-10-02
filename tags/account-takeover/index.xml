@@ -1,21 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Account Takeover on 0xjustgr0w</title><link>https://justgr0w.github.io/tags/account-takeover/</link><description>Recent content in Account Takeover on 0xjustgr0w</description><generator>Hugo</generator><language>es</language><lastBuildDate>Tue, 22 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://justgr0w.github.io/tags/account-takeover/index.xml" rel="self" type="application/rss+xml"/><item><title>Silentium</title><link>https://justgr0w.github.io/posts/silentium/</link><pubDate>Tue, 22 Sep 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/posts/silentium/</guid><description>&lt;h1 id="silentium--intrusión-completa"&gt;
- Silentium — Intrusión Completa
- &lt;a class="heading-link" href="#silentium--intrusi%c3%b3n-completa"&gt;
- &lt;i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"&gt;&lt;/i&gt;
- &lt;span class="sr-only"&gt;Link to heading&lt;/span&gt;
- &lt;/a&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Account Takeover on 0xjustgr0w</title><link>https://justgr0w.github.io/tags/account-takeover/</link><description>Recent content in Account Takeover on 0xjustgr0w</description><generator>Hugo -- gohugo.io</generator><language>es-ES</language><copyright>© 2026 David León</copyright><lastBuildDate>Tue, 22 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://justgr0w.github.io/tags/account-takeover/index.xml" rel="self" type="application/rss+xml"/><item><title>Silentium</title><link>https://justgr0w.github.io/writeups/silentium/</link><pubDate>Tue, 22 Sep 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/silentium/</guid><description>&lt;h1 class="relative group"&gt;Silentium — Intrusión Completa
+&lt;div id="silentium--intrusión-completa" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#silentium--intrusi%c3%b3n-completa" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
 &lt;/h1&gt;
-&lt;p&gt;&lt;img src="https://justgr0w.github.io/images/posts/silentium/target.png" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;figure&gt;
+&lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://justgr0w.github.io/images/posts/silentium/target.png"&gt;
+&lt;/figure&gt;
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Easy&lt;/em&gt;&lt;br&gt;
 &lt;strong&gt;Plataforma&lt;/strong&gt;: &lt;em&gt;HackTheBox&lt;/em&gt;&lt;br&gt;
 &lt;strong&gt;Flags&lt;/strong&gt;: &lt;code&gt;e26c9d6c678c4c109e3601813e8fea73&lt;/code&gt; (user) / &lt;code&gt;d9f482a1768b59840192e21b764a821e&lt;/code&gt; (root)&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="reconocimiento"&gt;
- Reconocimiento
- &lt;a class="heading-link" href="#reconocimiento"&gt;
- &lt;i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"&gt;&lt;/i&gt;
- &lt;span class="sr-only"&gt;Link to heading&lt;/span&gt;
- &lt;/a&gt;
+&lt;h2 class="relative group"&gt;Reconocimiento
+&lt;div id="reconocimiento" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#reconocimiento" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
 &lt;/h2&gt;
 &lt;p&gt;Comenzamos verificando conectividad con la máquina objetivo:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-ruby" data-lang="ruby"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c1&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;129&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;

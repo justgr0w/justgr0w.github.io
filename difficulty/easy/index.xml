@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Easy on 0xjustgr0w</title><link>https://justgr0w.github.io/difficulty/easy/</link><description>Recent content in Easy on 0xjustgr0w</description><generator>Hugo -- gohugo.io</generator><language>es-ES</language><copyright>© 2026 David León</copyright><lastBuildDate>Wed, 16 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://justgr0w.github.io/difficulty/easy/index.xml" rel="self" type="application/rss+xml"/><item><title>Management</title><link>https://justgr0w.github.io/writeups/management/</link><pubDate>Wed, 16 Sep 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/management/</guid><description>Writeup bloqueado. La maquina sigue activa en Hack The Box.</description></item><item><title>NeoVault</title><link>https://justgr0w.github.io/writeups/neovault/</link><pubDate>Fri, 11 Sep 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/neovault/</guid><description>NoSQL Injection en la consulta de usuario del formulario de transferencia: el parámetro username acepta un operador que devuelve el primer documento de la colección. Un endpoint v1 olvidado permite descargar las transacciones de cualquier usuario.</description></item><item><title>Criticalops</title><link>https://justgr0w.github.io/writeups/criticalops/</link><pubDate>Wed, 09 Sep 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/criticalops/</guid><description>El login devuelve el rol del usuario dentro de la propia respuesta. Cambiar role a admin en la petición de autenticación concede acceso al panel de administración.</description></item><item><title>MonitorsFour</title><link>https://justgr0w.github.io/writeups/monitorsfour/</link><pubDate>Wed, 09 Sep 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/monitorsfour/</guid><description>&lt;h1 class="relative group"&gt;MonitorsFour â€” Intrusion Completa
+&lt;div id="monitorsfour-â-intrusion-completa" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#monitorsfour-%c3%a2-intrusion-completa" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Easy&lt;/em&gt;
+&lt;strong&gt;Plataforma&lt;/strong&gt;: &lt;em&gt;HackTheBox&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;div class="writeup-badges"&gt;
+&lt;span class="writeup-badge writeup-badge--platform" title="Plataforma"&gt;HackTheBox&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--easy" title="Dificultad"&gt;easy&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--os" title="Sistema operativo"&gt;Windows&lt;/span&gt;
+&lt;/div&gt;
+&lt;figure&gt;
+&lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://justgr0w.github.io/images/posts/monitorsfour/logo%20machine.png"&gt;
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Machine: MonitorsFour - Windows
+Dificlty: Easy
+Plataform: HackTheBox
+Pentester: 0xjustgr0w&lt;/p&gt;
+&lt;h2 class="relative group"&gt;Recon
+&lt;div id="recon" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#recon" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;h3 class="relative group"&gt;ping
+&lt;div id="ping" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#ping" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ping -c1 10.129.10.17
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;PING 10.129.10.17 &lt;span class="o"&gt;(&lt;/span&gt;10.129.10.17&lt;span class="o"&gt;)&lt;/span&gt; 56&lt;span class="o"&gt;(&lt;/span&gt;84&lt;span class="o"&gt;)&lt;/span&gt; bytes of data.
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;--- 10.129.10.17 ping statistics ---
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="m"&gt;1&lt;/span&gt; packets transmitted, &lt;span class="m"&gt;0&lt;/span&gt; received, 100% packet loss, &lt;span class="nb"&gt;time&lt;/span&gt; 0ms
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;the machine not respond icmp&lt;/p&gt;</description></item><item><title>JinjaCare</title><link>https://justgr0w.github.io/writeups/jinjacare/</link><pubDate>Thu, 03 Sep 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/jinjacare/</guid><description>Server-Side Template Injection en la aplicación de certificados de vacunación: un payload SSTI de Jinja2 inyectado en el perfil se interpreta al generar el certificado y permite ejecutar comandos en el servidor.</description></item><item><title>ReactOOPS</title><link>https://justgr0w.github.io/writeups/reactoops/</link><pubDate>Thu, 03 Sep 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/reactoops/</guid><description>El package.json de la webapp nombra directamente la vulnerabilidad React2Shell (CVE-2025-55182), un RCE sin autenticación en React Server Components. Con el PoC se obtiene la flag.</description></item><item><title>Cohort</title><link>https://justgr0w.github.io/writeups/cohort/</link><pubDate>Wed, 19 Aug 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/cohort/</guid><description>Writeup bloqueado. La maquina sigue activa en Hack The Box.</description></item><item><title>WingData</title><link>https://justgr0w.github.io/writeups/wingdata/</link><pubDate>Fri, 07 Aug 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/wingdata/</guid><description>&lt;h1 class="relative group"&gt;WingData â€” Intrusion Completa
+&lt;div id="wingdata-â-intrusion-completa" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#wingdata-%c3%a2-intrusion-completa" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Easy&lt;/em&gt;
+&lt;strong&gt;Plataforma&lt;/strong&gt;: &lt;em&gt;HackTheBox&lt;/em&gt;&lt;/p&gt;
+&lt;h2 class="relative group"&gt;&lt;div class="writeup-badges"&gt;
+&lt;span class="writeup-badge writeup-badge--platform" title="Plataforma"&gt;HackTheBox&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--easy" title="Dificultad"&gt;easy&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--os" title="Sistema operativo"&gt;Linux&lt;/span&gt;
+&lt;/div&gt;
+&lt;div id="hahahugoshortcode43s0hbhb" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#hahahugoshortcode43s0hbhb" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;h2 class="relative group"&gt;machine: WingData
+ip: 10.129.53.205
+difficulty: Easy
+platform: Linux
+status: &amp;ldquo;#Completado&amp;rdquo;
+category: HackTheBox
+date: 04-05-2026
+&lt;div id="date-04-05-2026" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#date-04-05-2026" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;h3 class="relative group"&gt;CTF WriteUp
+&lt;div id="ctf-writeup" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#ctf-writeup" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!info] Información General
+&lt;strong&gt;Plataforma:&lt;/strong&gt; &lt;code&gt;$= dv.current().platform&lt;/code&gt;&lt;br&gt;
+&lt;strong&gt;Máquina/Reto:&lt;/strong&gt; &lt;code&gt;$= dv.current().machine&lt;/code&gt;
+&lt;strong&gt;Dificultad:&lt;/strong&gt; &lt;code&gt;$= dv.current().difficulty&lt;/code&gt;
+&lt;strong&gt;Categoría:&lt;/strong&gt; &lt;code&gt;$= dv.current().category&lt;/code&gt;&lt;br&gt;
+&lt;strong&gt;Fecha:&lt;/strong&gt; &lt;code&gt;$= dv.current().date&lt;/code&gt;&lt;br&gt;
+&lt;strong&gt;Estado:&lt;/strong&gt; &lt;code&gt;$= dv.current().status&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Enigma</title><link>https://justgr0w.github.io/writeups/enigma/</link><pubDate>Fri, 24 Jul 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/enigma/</guid><description>Writeup bloqueado. La maquina sigue activa en Hack The Box.</description></item><item><title>Nexus</title><link>https://justgr0w.github.io/writeups/nexus/</link><pubDate>Fri, 24 Jul 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/nexus/</guid><description>&lt;h1 class="relative group"&gt;Nexus â€” Intrusion Completa
+&lt;div id="nexus-â-intrusion-completa" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#nexus-%c3%a2-intrusion-completa" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Easy&lt;/em&gt;
+&lt;strong&gt;Plataforma&lt;/strong&gt;: &lt;em&gt;HackTheBox&lt;/em&gt;&lt;/p&gt;
+&lt;div class="writeup-badges"&gt;
+&lt;span class="writeup-badge writeup-badge--platform" title="Plataforma"&gt;HackTheBox&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--easy" title="Dificultad"&gt;easy&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--os" title="Sistema operativo"&gt;Linux&lt;/span&gt;
+&lt;/div&gt;
+&lt;h3 class="relative group"&gt;Nexus — Easy — HackTheBox — Linux
+&lt;div id="nexus--easy--hackthebox--linux" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#nexus--easy--hackthebox--linux" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+&lt;figure&gt;
+&lt;img class="my-0 rounded-md" loading="lazy" alt="Tarjeta del objetivo Nexus" src="CTF/HackTheBox/Easy/Nexus/assets/target.png"&gt;
+&lt;/figure&gt;
+&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 class="relative group"&gt;Reconocimiento
+&lt;div id="reconocimiento" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#reconocimiento" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;p&gt;Comenzamos realizando una fase de reconocimiento básico para verificar la disponibilidad del objetivo y determinar el sistema operativo subyacente.&lt;/p&gt;</description></item><item><title>Space Explorer</title><link>https://justgr0w.github.io/writeups/spaceexplorer/</link><pubDate>Sat, 18 Jul 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/spaceexplorer/</guid><description>El frontend en Go reenvía el body original al backend sin filtrarlo. Go resuelve la clave &amp;lsquo;Action&amp;rsquo; del JSON al campo exportado Action (que es el que usa el switch) mientras Python lee &amp;lsquo;action&amp;rsquo; en minúscula, de modo que una misma petición pasa los dos controles y devuelve la flag.</description></item><item><title>Paperwork</title><link>https://justgr0w.github.io/writeups/paperwork/</link><pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/paperwork/</guid><description>Writeup bloqueado. La maquina sigue activa en Hack The Box.</description></item><item><title>Orion</title><link>https://justgr0w.github.io/writeups/orion/</link><pubDate>Sun, 05 Jul 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/orion/</guid><description>&lt;h1 class="relative group"&gt;Orion â€” Intrusion Completa
+&lt;div id="orion-â-intrusion-completa" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#orion-%c3%a2-intrusion-completa" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Easy&lt;/em&gt;
+&lt;strong&gt;Plataforma&lt;/strong&gt;: &lt;em&gt;HackTheBox&lt;/em&gt;&lt;/p&gt;
+&lt;h2 class="relative group"&gt;&lt;div class="writeup-badges"&gt;
+&lt;span class="writeup-badge writeup-badge--platform" title="Plataforma"&gt;HackTheBox&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--easy" title="Dificultad"&gt;easy&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--os" title="Sistema operativo"&gt;Linux&lt;/span&gt;
+&lt;/div&gt;
+&lt;div id="hahahugoshortcode44s0hbhb" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#hahahugoshortcode44s0hbhb" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;h2 class="relative group"&gt;title: &amp;ldquo;HackTheBox: Orion Writeup&amp;rdquo;
+date: 2026-07-05
+categories: [CTF, HackTheBox]
+tags: [CraftCMS, Yii, Telnet, Privilege-Escalation, CVE-2025-32432, CVE-2026-24061]
+difficulty: Easy
+ports: [22, 80]
+&lt;div id="ports-22-80" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#ports-22-80" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;h3 class="relative group"&gt;Writeup: Orion (HackTheBox)
+&lt;div id="writeup-orion-hackthebox" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#writeup-orion-hackthebox" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h3&gt;
+&lt;p align="center"&gt;
+&lt;img src="assets/target.png" alt="Orion Logo" width="200" /&gt;
+&lt;/p&gt;</description></item><item><title>CCTV</title><link>https://justgr0w.github.io/writeups/cctv/</link><pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/cctv/</guid><description>ZoneMinder 1.37.63 con una blind SQL injection (CVE-2024-51482) que permite extraer los hashes bcrypt y entrar por SSH. Movimiento lateral con tcpdump y escalada a root vía MotionEye (CVE-2025-60787).</description></item><item><title>Connected</title><link>https://justgr0w.github.io/writeups/connected/</link><pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/connected/</guid><description>Writeup bloqueado. La maquina sigue activa en Hack The Box.</description></item><item><title>Reactor</title><link>https://justgr0w.github.io/writeups/reactor/</link><pubDate>Mon, 25 May 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/reactor/</guid><description>Writeup bloqueado. La maquina sigue activa en Hack The Box.</description></item><item><title>Facts</title><link>https://justgr0w.github.io/writeups/facts/</link><pubDate>Fri, 15 May 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/facts/</guid><description>Camaleon CMS con path traversal (CVE-2024-46987) que permite extraer la clave SSH del usuario, y escalada a root con sudo sobre facter y un SUID en bash.</description></item><item><title>Kobold</title><link>https://justgr0w.github.io/writeups/kobold/</link><pubDate>Thu, 14 May 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/kobold/</guid><description>&lt;h1 class="relative group"&gt;Kobold â€” Intrusion Completa
+&lt;div id="kobold-â-intrusion-completa" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#kobold-%c3%a2-intrusion-completa" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Easy&lt;/em&gt;
+&lt;strong&gt;Plataforma&lt;/strong&gt;: &lt;em&gt;HackTheBox&lt;/em&gt;&lt;/p&gt;
+&lt;h2 class="relative group"&gt;&lt;div class="writeup-badges"&gt;
+&lt;span class="writeup-badge writeup-badge--platform" title="Plataforma"&gt;HackTheBox&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--easy" title="Dificultad"&gt;easy&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--os" title="Sistema operativo"&gt;Windows&lt;/span&gt;
+&lt;/div&gt;
+&lt;div id="hahahugoshortcode25s0hbhb" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#hahahugoshortcode25s0hbhb" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;h2 class="relative group"&gt;title: &amp;ldquo;Informe de Penetracion - Hack The Box: Kobold&amp;rdquo;
+author: [&amp;ldquo;Anonimo&amp;rdquo;]
+date: &amp;ldquo;2026-05-12&amp;rdquo;
+subject: &amp;ldquo;Informe Tecnico de Pentesting&amp;rdquo;
+keywords: [OSCP, CTF, Pentest, Docker, LFI, RCE]
+subtitle: &amp;ldquo;Informe de Compromiso Completo - Kobold.HTB&amp;rdquo;
+lang: &amp;ldquo;es&amp;rdquo;
+titlepage: true
+titlepage-color: &amp;ldquo;1e1e2e&amp;rdquo;
+titlepage-text-color: &amp;ldquo;cdd6f4&amp;rdquo;
+titlepage-rule-color: &amp;ldquo;cba6f7&amp;rdquo;
+titlepage-rule-height: 2
+book: true
+classoption: oneside
+code-block-font-size: \scriptsize
+&lt;div id="code-block-font-size-scriptsize" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#code-block-font-size-scriptsize" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;h3 class="relative group"&gt;Informe de Evaluacion de Penetracion: Kobold.HTB
+&lt;div id="informe-de-evaluacion-de-penetracion-koboldhtb" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#informe-de-evaluacion-de-penetracion-koboldhtb" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h3&gt;
+&lt;h3 class="relative group"&gt;1. Introduccion
+&lt;div id="1-introduccion" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#1-introduccion" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h3&gt;
+&lt;p&gt;El presente informe documenta la evaluacion de penetracion realizada contra la maquina &lt;strong&gt;Kobold&lt;/strong&gt; de la plataforma Hack The Box. El objetivo fue obtener acceso completo al sistema mediante la explotacion ordenada de vulnerabilidades reales, documentando cada fase con pruebas de concepto, capturas de pantalla y recomendaciones de mitigacion.&lt;/p&gt;</description></item><item><title>Support</title><link>https://justgr0w.github.io/writeups/support/</link><pubDate>Sun, 10 May 2026 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/support/</guid><description>&lt;h1 class="relative group"&gt;Support â€” Intrusion Completa
+&lt;div id="support-â-intrusion-completa" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#support-%c3%a2-intrusion-completa" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Easy&lt;/em&gt;
+&lt;strong&gt;Plataforma&lt;/strong&gt;: &lt;em&gt;HackTheBox&lt;/em&gt;&lt;/p&gt;
+&lt;h2 class="relative group"&gt;&lt;div class="writeup-badges"&gt;
+&lt;span class="writeup-badge writeup-badge--platform" title="Plataforma"&gt;HackTheBox&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--easy" title="Dificultad"&gt;easy&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--os" title="Sistema operativo"&gt;Windows&lt;/span&gt;
+&lt;/div&gt;
+&lt;div id="hahahugoshortcode40s0hbhb" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#hahahugoshortcode40s0hbhb" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;p&gt;title: Offensive Security CTF Report
+author:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;0xDaveey&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;OSID: XXXX&amp;rdquo;
+date: 2025-12-05
+subject: Penetration Testing
+keywords:&lt;/li&gt;
+&lt;li&gt;HTB&lt;/li&gt;
+&lt;li&gt;Active Directory&lt;/li&gt;
+&lt;li&gt;Windows&lt;/li&gt;
+&lt;li&gt;OSCP&lt;/li&gt;
+&lt;li&gt;CTF
+subtitle: Internal Penetration Test Report
+lang: es
+titlepage: true
+titlepage-rule-color: DC143C
+titlepage-rule-height: 2
+book: true
+classoption: oneside
+code-block-font-size: \scriptsize
+header-includes:&lt;/li&gt;
+&lt;li&gt;\usepackage{booktabs}&lt;/li&gt;
+&lt;li&gt;\usepackage{longtable}&lt;/li&gt;
+&lt;li&gt;\usepackage{array}&lt;/li&gt;
+&lt;li&gt;\usepackage{multirow}&lt;/li&gt;
+&lt;li&gt;\usepackage{graphicx}&lt;/li&gt;
+&lt;li&gt;\usepackage{xcolor}&lt;/li&gt;
+&lt;li&gt;\usepackage{listings}&lt;/li&gt;
+&lt;li&gt;\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}&lt;/li&gt;
+&lt;li&gt;\usepackage{wrapfig}&lt;/li&gt;
+&lt;li&gt;\usepackage{float}&lt;/li&gt;
+&lt;li&gt;\usepackage{colortbl}&lt;/li&gt;
+&lt;li&gt;\usepackage{pdflscape}&lt;/li&gt;
+&lt;li&gt;\usepackage{threeparttable}&lt;/li&gt;
+&lt;li&gt;\usepackage{threeparttablex}&lt;/li&gt;
+&lt;li&gt;\usepackage[normalem]{ulem}&lt;/li&gt;
+&lt;li&gt;\usepackage{makecell}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 class="relative group"&gt;Offensive Security CTF Report
+&lt;div id="offensive-security-ctf-report" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#offensive-security-ctf-report" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h3&gt;
+&lt;h2 class="relative group"&gt;Introduction
+&lt;div id="introduction" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#introduction" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h2&gt;
+&lt;p&gt;This report documents the penetration testing activities performed against the &lt;strong&gt;HackTheBox Support&lt;/strong&gt; machine. The objective was to conduct a thorough security assessment simulating a real-world internal penetration test, identifying vulnerabilities, exploiting them, and documenting the full attack chain from initial access to complete domain compromise.&lt;/p&gt;</description></item><item><title>TwoMillion</title><link>https://justgr0w.github.io/writeups/twomillion/</link><pubDate>Thu, 04 Sep 2025 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/twomillion/</guid><description>API REST de una plataforma de_CTF donde un endpoint PUT sin autenticación permite escalada a administrador. Con admin se genera un VPN config que ejecuta código, y el privesc a root usa OverlayFS (CVE-2023-0386).</description></item><item><title>Dog</title><link>https://justgr0w.github.io/writeups/dog/</link><pubDate>Sat, 14 Jun 2025 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/dog/</guid><description>Backdrop CMS con el directorio .git expuesto: las credenciales de MySQL en settings.php y un usuario del panel permiten subir un módulo con reverse shell. El privesc viene de un SUID en el binario bee.</description></item><item><title>Nocturnal</title><link>https://justgr0w.github.io/writeups/nocturnal/</link><pubDate>Sat, 31 May 2025 00:00:00 +0000</pubDate><guid>https://justgr0w.github.io/writeups/nocturnal/</guid><description>&lt;h1 class="relative group"&gt;Nocturnal â€” Intrusion Completa
+&lt;div id="nocturnal-â-intrusion-completa" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#nocturnal-%c3%a2-intrusion-completa" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Dificultad&lt;/strong&gt;: &lt;em&gt;Easy&lt;/em&gt;
+&lt;strong&gt;Plataforma&lt;/strong&gt;: &lt;em&gt;HackTheBox&lt;/em&gt;&lt;/p&gt;
+&lt;div class="writeup-badges"&gt;
+&lt;span class="writeup-badge writeup-badge--platform" title="Plataforma"&gt;HackTheBox&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--easy" title="Dificultad"&gt;easy&lt;/span&gt;
+&lt;span class="writeup-badge writeup-badge--os" title="Sistema operativo"&gt;Linux&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;Nocturnal - Easy - Not Retired&lt;/p&gt;
+&lt;h3 class="relative group"&gt;Stage Recon
+&lt;div id="stage-recon" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#stage-recon" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h3&gt;
+&lt;h3 class="relative group"&gt;Escaneando Puertos con NMAP:
+&lt;div id="escaneando-puertos-con-nmap" class="anchor"&gt;&lt;/div&gt;
+&lt;span
+class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"&gt;
+&lt;a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#escaneando-puertos-con-nmap" aria-label="Ancla"&gt;#&lt;/a&gt;
+&lt;/span&gt;
+&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nmap -p- --open -sS --min-rate &lt;span class="m"&gt;5000&lt;/span&gt; &lt;span class="nv"&gt;$target&lt;/span&gt; -oG nmap/allPorts
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
+&lt;figure&gt;
+&lt;img class="my-0 rounded-md" loading="lazy" alt="" src="https://justgr0w.github.io/images/posts/nocturnal/Pasted%20image%2020250521151112.png"&gt;
+&lt;/figure&gt;
+&lt;/p&gt;</description></item></channel></rss>
